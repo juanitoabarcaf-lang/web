@@ -209,8 +209,9 @@ footer b{color:var(--papel)}
             <div class="unit"><input id="t" type="number" inputmode="numeric" min="0" step="1000" value="30000"><span>€</span></div>
           </div>
           <div class="field">
-            <label for="v">Ventas al año, todo el equipo</label>
+            <label for="v">Número de ventas al año</label>
             <input id="v" type="number" inputmode="numeric" min="0" value="40">
+            <small>Operaciones cerradas por todo el equipo, no euros.</small>
           </div>
           <div class="field">
             <label for="p">Ventas que cerráis por debajo de lo que vale</label>
@@ -220,7 +221,7 @@ footer b{color:var(--papel)}
           <div class="field">
             <label for="d">Cuánto por debajo, de media</label>
             <div class="unit"><input id="d" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="8"><span>%</span></div>
-            <small>El descuento que hacéis o, si no descontáis, cuánto más cobraríais si nadie os regateara.</small>
+            <small>El descuento que hacéis, o lo que cobráis de menos sobre lo que os gustaría cobrar.</small>
           </div>
           <div class="field" style="grid-column:1/-1">
             <label for="m">Vuestro margen bruto</label>
@@ -352,8 +353,8 @@ footer b{color:var(--papel)}
     </ul>
     <p style="color:#C9D5DA;max-width:62ch">Una condición: quien vende hoy en vuestra empresa no queda nunca en evidencia. Se trabaja con él, no contra él.</p>
     <div class="noprom">
-      <h3>Lo que no te voy a prometer: ni un 30 % más, ni plazos.</h3>
-      <p>Sin conocer vuestras operaciones, cualquier número es inventado. Lo que sí cambia: sabréis por qué se dio cada descuento, la explicación de por qué valéis más será la misma en todo el equipo, las objeciones tendrán respuesta preparada y las ventas grandes no dependerán de que entres tú. Si eso acaba en más margen, lo contaréis vosotros con vuestros números.</p>
+      <h3>Lo que no prometo: ni un 30 % más, ni plazos.</h3>
+      <p>Sin conocer vuestras operaciones, cualquier número es inventado. Lo que sí cambia: sabréis por qué se dio cada descuento, la explicación de por qué valéis más será la misma en todo el equipo, las objeciones tendrán respuesta preparada y las ventas grandes no dependerán de una sola persona. Si eso acaba en más margen, lo contaréis vosotros con vuestros números.</p>
     </div>
   </div>
 </section>
@@ -533,7 +534,7 @@ function resumen(){
   const lineas = [
     "AUTODIAGNÓSTICO · VENTA B2B POR VALOR",
     `Importe medio por venta: ${eur(c.t)}`,
-    `Ventas al año: ${c.v}`,
+    `Número de ventas al año: ${c.v}`,
     `Ventas por debajo de lo que vale: ${c.p} %`,
     `Cuánto por debajo, de media: ${c.d} %`,
     `Margen bruto: ${c.m} %`,
