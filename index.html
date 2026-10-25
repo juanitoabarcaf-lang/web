@@ -213,14 +213,14 @@ footer b{color:var(--papel)}
             <input id="v" type="number" inputmode="numeric" min="0" value="40">
           </div>
           <div class="field">
-            <label for="p">Ventas que se cierran con descuento</label>
+            <label for="p">Ventas que cerráis por debajo de lo que vale</label>
             <div class="unit"><input id="p" type="number" inputmode="decimal" min="0" max="100" value="50"><span>%</span></div>
-            <small>Si no lo sabes, pon tu mejor estimación.</small>
+            <small>Con descuento, o con un precio ya bajo de entrada. Si siempre vendéis barato, pon 100.</small>
           </div>
           <div class="field">
-            <label for="d">Descuento medio</label>
+            <label for="d">Cuánto por debajo, de media</label>
             <div class="unit"><input id="d" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="8"><span>%</span></div>
-            <small>Si nunca hacéis descuentos, pon 0.</small>
+            <small>El descuento que hacéis o, si no descontáis, cuánto más cobraríais si nadie os regateara.</small>
           </div>
           <div class="field" style="grid-column:1/-1">
             <label for="m">Vuestro margen bruto</label>
@@ -228,10 +228,10 @@ footer b{color:var(--papel)}
           </div>
         </div>
         <div class="cuenta" aria-live="polite">
-          <span class="label" style="color:var(--papel);font-size:15px">Lo que perdéis cada año:</span>
+          <span class="label" id="cifra-label" style="color:var(--papel);font-size:15px">Lo que perdéis cada año:</span>
           <div class="cifra"><span id="anual-cifra">48.000 €</span></div>
-          <div class="desglose" id="anual">En descuentos: 2.400 € en cada venta con descuento, en 20 ventas.</div>
-          <div class="desglose">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
+          <div class="desglose" id="anual">Son 2.400 € en cada venta por debajo de lo que vale, en 20 ventas.</div>
+          <div class="desglose" id="margen-txt">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
           <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
           <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
           <div class="abrir" id="abrir-wrap">
@@ -441,14 +441,29 @@ addEventListener("resize", ajustarCifra);
 function cuenta(){
   const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
   const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
-  const ac=$("#anual-cifra"); ac.textContent = eur(total); ajustarCifra();
+  // Si sale 0 (no descontáis o creéis cobrar lo que vale), enseñamos lo que vale cada punto de precio.
+  const cero = total<=0, punto=t*v/100, cinco=punto*5;
+  const ac=$("#anual-cifra"); ac.textContent = eur(cero ? punto : total); ajustarCifra();
+  $("#cifra-label").textContent = cero ? "Lo que vale cada 1 % de precio, al año:" : "Lo que perdéis cada año:";
   const a=$("#anual");
-  a.hidden = total<=0;
-  a.textContent = `Son ${eur(porventa)} en cada venta con descuento, en ${conDesc} ventas.`;
-  $("#recuperar").textContent = `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
-  const ct=$("#c-total"); if (ct) ct.textContent = eur(total);
-  const tt=$("#c-titulo"); if (tt) tt.hidden = total<=0;
-  const bt=$("#abrir"); if (bt) bt.textContent = total>0 ? `Ver por dónde se os van los ${eur(total)} →` : "Ver por dónde se os va el margen →";
+  a.hidden = cero && punto<=0;
+  a.textContent = cero
+    ? `Si de verdad cobráis lo que vale, sois de los pocos. Si no, un 5 % más en cada venta serían ${eur(cinco)} al año.`
+    : `Son ${eur(porventa)} en cada venta por debajo de lo que vale, en ${conDesc} ventas.`;
+  $("#margen-txt").textContent = cero
+    ? "Y entra entero en el margen: subir el precio no cuesta ni un euro más de producir ni de servir."
+    : "Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.";
+  $("#recuperar").textContent = cero
+    ? `Ganar esos ${eur(cinco)} vendiendo más, con un ${m} % de margen, exigiría facturar ${eur(cinco/(m/100))} más.`
+    : `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
+  const ct=$("#c-total"); if (ct) ct.textContent = eur(cero ? punto : total);
+  const tt=$("#c-titulo");
+  if (tt){
+    tt.hidden = cero && punto<=0;
+    tt.firstChild.textContent = cero ? "Cada 1 % de precio que no cobráis son " : "Este año se os van ";
+    tt.lastChild.textContent = cero ? " al año." : " por aquí, y el que viene igual.";
+  }
+  const bt=$("#abrir"); if (bt) bt.textContent = cero ? "Ver dónde se os queda el precio →" : `Ver por dónde se os van los ${eur(total)} →`;
   $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
   return {t,v,p,d,m,porventa,total,recuperar};
 }
@@ -519,10 +534,10 @@ function resumen(){
     "AUTODIAGNÓSTICO · VENTA B2B POR VALOR",
     `Importe medio por venta: ${eur(c.t)}`,
     `Ventas al año: ${c.v}`,
-    `Ventas con descuento: ${c.p} %`,
-    `Descuento medio: ${c.d} %`,
+    `Ventas por debajo de lo que vale: ${c.p} %`,
+    `Cuánto por debajo, de media: ${c.d} %`,
     `Margen bruto: ${c.m} %`,
-    `Pérdida por venta con descuento: ${eur(c.porventa)}`,
+    `Pérdida por venta: ${eur(c.porventa)}`,
     `Total al año: ${eur(c.total)}`,
     `Facturación extra para recuperarlo: ${eur(c.recuperar)}`,
     ""
