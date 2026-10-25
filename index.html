@@ -307,10 +307,6 @@ footer b{color:var(--papel)}
             <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" required></div>
             <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" autocomplete="tel" required></div>
           </div>
-          <div class="field">
-            <label for="c-caso">Piensa en la última venta que cerrasteis con descuento o que se llevó uno más barato. ¿De cuánto era y qué pasó? (opcional)</label>
-            <textarea id="c-caso"></textarea>
-          </div>
           <label class="check"><input id="c-llamada" type="checkbox"><span>Quiero que lo veamos veinte minutos por teléfono.</span></label>
           <label class="check"><input id="c-privacidad" type="checkbox" required><span>He leído la <a href="legal.html#privacidad" target="_blank">política de privacidad</a> y acepto que Juan Abarca Ferrando use mis datos para responder a mi solicitud. (Obligatoria)</span></label>
           <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
@@ -537,8 +533,7 @@ function resumen(){
     `Email: ${$("#c-email").value.trim()}`,
     `Teléfono: ${$("#c-tel").value.trim()}`,
     `Quiere llamada: ${$("#c-llamada").checked ? "Sí" : "No"}`,
-    `Acepta comunicaciones comerciales: ${$("#c-comercial").checked ? "Sí" : "No"}`,
-    `Caso: ${$("#c-caso").value.trim() || "—"}`);
+    `Acepta comunicaciones comerciales: ${$("#c-comercial").checked ? "Sí" : "No"}`);
   return lineas.join("\n");
 }
 
