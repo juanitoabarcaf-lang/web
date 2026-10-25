@@ -1,0 +1,573 @@
+<title>Juan Abarca · Venta B2B por valor</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Pymes B2B que venden algo mejor y más caro que su competencia y acaban en el descuento. Calcula cuánto margen se os va cada año.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: bandas a todo el ancho, alternando tinta (lo que se ve) y papel (lo que se lee); una columna de lectura de ~680px; el autodiagnóstico es la única pieza con caja. */
+:root{
+  --tinta:#10212A;
+  --ambar:#E9B44C;
+  --papel:#F4F7F8;
+  --gris:#8A9EA8;
+  --borde:#2A3E48;
+  --verde:#0A5C5C;
+  --blanco:#FFFFFF;
+  --texto:#1B2B33;
+  --texto-suave:#4E6470;
+  --linea:#D9E2E6;
+  --font:"Inter",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{background:var(--papel);color:var(--texto);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:72px}
+.band.tinta{background:var(--tinta);color:var(--papel)}
+.band.blanco{background:var(--blanco)}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.02em}
+h1{font-size:clamp(32px,6vw,52px);font-weight:800}
+h2{font-size:clamp(26px,4.4vw,36px);font-weight:700;color:var(--verde)}
+.tinta h2{color:var(--papel)}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:20px}
+.stack-s{display:flex;flex-direction:column;gap:12px}
+.label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.bar{width:90px;height:8px;background:var(--ambar)}
+mark{background:var(--ambar);color:var(--tinta);padding:0 .15em}
+a{color:inherit}
+
+/* Cabecera */
+.top{background:var(--tinta);color:var(--papel);border-bottom:1px solid var(--borde)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;flex-wrap:wrap}
+.firma{display:flex;flex-direction:column;line-height:1.25}
+.firma b{font-size:16px;font-weight:700}
+.firma span{font-size:13px;color:var(--gris)}
+.top a.mini{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar);padding-bottom:2px}
+
+/* Hero */
+.hero{padding-block:64px 80px}
+.hero .lead{font-size:19px;color:#C9D5DA;max-width:60ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:6px;padding:15px 22px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:var(--ambar);color:var(--tinta)}
+.btn.ghost{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1.5px var(--borde)}
+.btn.dark{background:var(--tinta);color:var(--papel)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--ambar);outline-offset:2px}
+.hero .nota{font-size:14px;color:var(--gris)}
+
+/* Frases literales */
+.frases{display:flex;flex-direction:column;gap:14px;margin:8px 0}
+.frase{font-size:20px;font-weight:600;color:var(--tinta);border-left:3px solid var(--ambar);padding-left:16px}
+.prose p{max-width:62ch}
+.prose p+p{margin-top:16px}
+
+/* Autodiagnóstico */
+.diag{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:32px}
+@media (max-width:480px){.diag{padding:20px}}
+.paso{display:flex;flex-direction:column;gap:18px}
+.paso-h{display:flex;gap:12px;align-items:baseline}
+.paso-n{font-size:13px;font-weight:700;color:var(--verde);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.q legend{font-size:15px;font-weight:600;color:var(--texto)}
+.field small{font-size:13px;color:var(--texto-suave)}
+input[type=number],input[type=text],input[type=email],textarea{font:inherit;font-size:17px;border:1.5px solid var(--linea);border-radius:6px;padding:12px 14px;background:var(--papel);color:var(--texto);width:100%;font-variant-numeric:tabular-nums}
+textarea{min-height:96px;resize:vertical}
+.unit{position:relative}
+.unit input{padding-right:44px}
+.unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--texto-suave);font-size:15px;pointer-events:none}
+.cuenta{background:var(--tinta);color:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.cuenta .cifra{font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.cuenta .cifra mark{padding:0 .1em}
+.cuenta .desglose{font-size:15px;color:#C9D5DA;font-variant-numeric:tabular-nums}
+.cuenta .aviso{font-size:13px;color:var(--gris)}
+.q{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.q legend{margin-bottom:10px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;font-size:15px;padding:10px 14px;border:1.5px solid var(--linea);border-radius:999px;cursor:pointer;background:var(--papel);line-height:1.3}
+.opt input:checked+span{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.opt span:hover{border-color:var(--gris)}
+.sep{height:1px;background:var(--linea)}
+
+.resultado{display:flex;flex-direction:column;gap:18px}
+.obs{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
+.obs li{border-left:3px solid var(--verde);padding-left:14px}
+.obs li b{display:block;font-size:16px;color:var(--tinta)}
+.obs li span{font-size:15px;color:var(--texto-suave)}
+.fuera{background:#FFF7E6;border:1px solid var(--ambar);border-radius:8px;padding:16px;font-size:15px}
+.vacio{font-size:15px;color:var(--texto-suave)}
+
+.contacto{background:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave)}
+.check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--verde)}
+.legal{font-size:12px;color:var(--texto-suave);line-height:1.5}
+.ok{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.resumen{font-family:ui-monospace,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:var(--papel);border-radius:6px;padding:14px;max-height:220px;overflow:auto;user-select:all}
+.err{color:#9A3B12;font-size:14px}
+
+/* Cómo trabajo */
+.lista{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--borde)}
+.lista li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:18px 0;border-bottom:1px solid var(--borde)}
+.lista li b{font-size:18px;color:var(--papel)}
+.lista li span{color:#C9D5DA;font-size:16px}
+.no-prometo{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.no-prometo li{padding-left:22px;position:relative}
+.no-prometo li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:2px;background:var(--verde)}
+.trayectoria{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600;color:var(--tinta)}
+.trayectoria span{white-space:nowrap}
+.servilleta{background:var(--blanco);border:1px dashed var(--gris);border-radius:8px;padding:18px;font-variant-numeric:tabular-nums}
+.servilleta .linea{display:flex;justify-content:space-between;gap:12px;font-size:16px;padding:4px 0}
+.servilleta .total{border-top:1.5px solid var(--tinta);margin-top:6px;padding-top:8px;font-weight:700}
+.filtros{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:600px){.filtros{grid-template-columns:1fr}}
+.filtros div{min-width:0}
+.filtros h3{margin-bottom:10px}
+.filtros ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px}
+footer{background:var(--tinta);color:var(--gris);font-size:14px}
+footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
+footer b{color:var(--papel)}
+.email-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.email-box code{font-family:var(--font);font-size:17px;color:var(--papel);user-select:all;font-weight:600}
+.copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ambar);border:1.5px solid var(--borde);border-radius:6px;padding:6px 10px;cursor:pointer}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="firma"><b>Juan Abarca Ferrando</b><span>Venta B2B por valor</span></div>
+    <a class="mini" href="#diagnostico">Autodiagnóstico</a>
+  </div>
+</header>
+
+<section class="band tinta hero">
+  <div class="wrap stack">
+    <div class="bar" aria-hidden="true"></div>
+    <h1>Lo vuestro es mejor y más caro. <mark>Y aun así acabáis en el descuento.</mark></h1>
+    <p class="lead">Trabajo con pymes B2B que venden directamente algo que vale más que lo de su competencia. Su equipo conoce el producto como nadie, pero lo explica por características, el cliente no ve por qué cuesta más y la venta se cierra con descuento, se pierde contra el más barato o la tiene que cerrar el dueño.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#diagnostico">Calcula cuánto os cuesta el descuento</a>
+      <a class="btn ghost" href="#contacto-final">Escríbeme</a>
+    </div>
+    <p class="nota">Cinco minutos. El resultado lo ves tú al momento y no hace falta dejar ningún dato.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack">
+    <span class="label">Lo que se oye en las reuniones</span>
+    <div class="frases">
+      <p class="frase">"El otro es más barato."</p>
+      <p class="frase">"Bueno, podemos ver qué margen tenemos."</p>
+      <p class="frase">"Las operaciones importantes las acabo cerrando yo."</p>
+    </div>
+    <div class="prose">
+      <p>Ninguna de las tres aparece como pérdida en las cuentas. El descuento figura como venta cerrada, la operación perdida como una que no era para vosotros, y la que rescató el dueño como un buen mes.</p>
+      <p>Pero un 8 % de descuento en la mitad de las ventas de un equipo de cuatro personas que factura 1,2 millones son <b>48.000 euros al año</b> que salen enteros del margen. Es el sueldo de una persona, repartido en decisiones de dos segundos que nadie apunta.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band blanco" id="diagnostico">
+  <div class="wrap stack">
+    <span class="label">Autodiagnóstico</span>
+    <h2>¿Cuánto margen se os va cada año en descuentos?</h2>
+    <p class="prose" style="max-width:62ch">Pon tus cifras y contesta seis preguntas sobre cómo vendéis. Al final ves la cuenta y lo que suele haber detrás de cada respuesta. Si quieres, me mandas el resultado y lo comentamos.</p>
+
+    <div class="diag">
+      <div class="paso">
+        <div class="paso-h"><span class="paso-n">Paso 1</span><h3>La cuenta del descuento</h3></div>
+        <div class="grid2">
+          <div class="field">
+            <label for="n">Personas que venden</label>
+            <input id="n" type="number" inputmode="numeric" min="1" max="50" value="4">
+          </div>
+          <div class="field">
+            <label for="f">Facturación media por persona</label>
+            <div class="unit"><input id="f" type="number" inputmode="numeric" min="0" step="10000" value="300000"><span>€</span></div>
+          </div>
+          <div class="field">
+            <label for="p">Ventas que se cierran con descuento</label>
+            <div class="unit"><input id="p" type="number" inputmode="decimal" min="0" max="100" value="50"><span>%</span></div>
+            <small>Si no lo sabes, pon tu mejor estimación.</small>
+          </div>
+          <div class="field">
+            <label for="d">Descuento medio</label>
+            <div class="unit"><input id="d" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="8"><span>%</span></div>
+          </div>
+        </div>
+        <div class="cuenta" aria-live="polite">
+          <span class="label" style="color:var(--gris)">Margen que se va en descuentos cada año</span>
+          <div class="cifra"><mark id="total">48.000 €</mark></div>
+          <div class="desglose" id="desglose">4 × 300.000 € = 1.200.000 € · 50 % con un 8 % de descuento</div>
+          <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
+        </div>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="paso">
+        <div class="paso-h"><span class="paso-n">Paso 2</span><h3>Cómo vendéis</h3></div>
+
+        <fieldset class="q" id="q-quien">
+          <legend>Cuando hay descuento, ¿de quién sale?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="quien" value="cliente"><span>Lo pide el cliente</span></label>
+            <label class="opt"><input type="radio" name="quien" value="comercial"><span>Lo ofrece el comercial antes de que lo pidan</span></label>
+            <label class="opt"><input type="radio" name="quien" value="nose"><span>No lo sé</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Cuando dais un descuento, ¿quitáis algo a cambio? (plazo, alcance, servicio…)</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="cambio" value="siempre"><span>Casi siempre</span></label>
+            <label class="opt"><input type="radio" name="cambio" value="aveces"><span>A veces</span></label>
+            <label class="opt"><input type="radio" name="cambio" value="nunca"><span>Casi nunca</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Las operaciones grandes, ¿quién las acaba cerrando?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="cierra" value="equipo"><span>El equipo, solo</span></label>
+            <label class="opt"><input type="radio" name="cierra" value="aveces"><span>Entro yo a menudo</span></label>
+            <label class="opt"><input type="radio" name="cierra" value="siempre"><span>Las cierro yo casi siempre</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Si pregunto a tres de tus comerciales por qué lo vuestro cuesta más, ¿qué me dicen?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="discurso" value="igual"><span>Lo mismo</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="parecido"><span>Algo parecido</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="distinto"><span>Cada uno lo suyo</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="nose"><span>No lo sé</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>Vuestro presupuesto, ¿qué enseña?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="presu" value="valor"><span>Lo que gana el cliente con nosotros</span></label>
+            <label class="opt"><input type="radio" name="presu" value="cifra"><span>Referencias, cantidades y el total</span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="q">
+          <legend>¿Cuándo perdisteis por última vez contra uno más barato siendo lo vuestro mejor?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="perdida" value="mes"><span>Este mes</span></label>
+            <label class="opt"><input type="radio" name="perdida" value="trimestre"><span>Este trimestre</span></label>
+            <label class="opt"><input type="radio" name="perdida" value="ano"><span>Este año</span></label>
+            <label class="opt"><input type="radio" name="perdida" value="no"><span>No me acuerdo</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="paso">
+        <div class="paso-h"><span class="paso-n">Paso 3</span><h3>Cómo os compran</h3></div>
+        <fieldset class="q">
+          <legend>Lo que vendéis, el cliente lo compra…</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="tipo" value="proyecto"><span>Como proyecto, a medida o llave en mano</span></label>
+            <label class="opt"><input type="radio" name="tipo" value="catalogo"><span>Por catálogo o comparando tres presupuestos</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>¿Quién vende al cliente final?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="canal" value="directo"><span>Nuestro propio equipo</span></label>
+            <label class="opt"><input type="radio" name="canal" value="distribuidor"><span>Distribuidores</span></label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="resultado" id="resultado">
+        <div class="paso-h"><span class="paso-n">Resultado</span><h3>Lo que suele haber detrás</h3></div>
+        <p class="vacio" id="vacio">Contesta las preguntas de arriba y aquí aparece la lectura de cada respuesta.</p>
+        <div class="fuera" id="fuera" hidden></div>
+        <ul class="obs" id="obs"></ul>
+        <p class="vacio" id="cierre-res" hidden>Esto no es un veredicto. Son los patrones que más se repiten. Lo que pasa en vuestro caso solo se ve mirando operaciones reales.</p>
+      </div>
+
+      <div class="contacto" id="contacto">
+        <h3>¿Me mandas tu resultado?</h3>
+        <p style="font-size:15px;color:var(--texto-suave)">Lo leo yo y te contesto con lo que veo. Si te viene bien, lo comentamos veinte minutos por teléfono. No es una llamada de venta: estoy hablando con gerentes de empresas como la tuya para entender cómo lo vivís.</p>
+        <form id="form" novalidate class="stack-s">
+          <div class="grid2">
+            <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="c-empresa">Empresa</label><input id="c-empresa" type="text" autocomplete="organization" required></div>
+            <div class="field"><label for="c-cargo">Cargo</label><input id="c-cargo" type="text" autocomplete="organization-title"></div>
+            <div class="field"><label for="c-contacto">Email o teléfono</label><input id="c-contacto" type="text" autocomplete="email" required></div>
+          </div>
+          <div class="field">
+            <label for="c-caso">¿Qué pasó la última vez que perdisteis una venta por precio, o la cerrasteis con descuento? (opcional)</label>
+            <textarea id="c-caso"></textarea>
+          </div>
+          <label class="check"><input id="c-llamada" type="checkbox"><span>Me vendría bien comentarlo veinte minutos.</span></label>
+          <label class="check"><input id="c-privacidad" type="checkbox" required><span>Acepto que Juan Abarca Ferrando use estos datos solo para responderme.</span></label>
+          <p class="legal">Responsable: Juan Abarca Ferrando. Finalidad: responder a tu consulta. No se ceden a terceros ni se usan para enviarte publicidad. Puedes pedir que se borren escribiendo a la dirección de contacto de esta página.</p>
+          <p class="err" id="err" hidden></p>
+          <div><button class="btn dark" type="submit">Enviar mi resultado</button></div>
+        </form>
+        <div class="ok" id="ok" hidden>
+          <h3 id="ok-t">Recibido. Te contesto en unos días.</h3>
+          <p id="ok-p" style="font-size:15px;color:var(--texto-suave)"></p>
+          <div class="resumen" id="resumen" hidden></div>
+          <div id="ok-acciones" hidden class="email-box"><button class="copy" type="button" id="copiar-res" style="color:var(--verde);border-color:var(--linea)">Copiar resultado</button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band tinta">
+  <div class="wrap stack">
+    <span class="label">Cómo trabajo</span>
+    <h2>Diseño con vosotros cómo vender ese valor, y lo implanto.</h2>
+    <p style="color:#C9D5DA;max-width:62ch">Parto de lo que ya funciona en vuestras mejores ventas. No traigo un argumentario de fuera: el argumento bueno ya está dentro de la empresa, en la cabeza de alguien. Es consultoría con implantación, entrenada sobre ventas reales. No es un curso.</p>
+    <ul class="lista">
+      <li><b>La propuesta de valor, en euros</b><span>Lo que gana vuestro cliente, o lo que deja de perder. No las características.</span></li>
+      <li><b>El valor que ya regaláis, empaquetado</b><span>Acompañamiento, instalación, mantenimiento, garantía. Si ya lo dais, que tenga nombre y esté en el presupuesto.</span></li>
+      <li><b>Un discurso común</b><span>La misma explicación de por qué valéis más, en boca de todo el equipo.</span></li>
+      <li><b>Las objeciones de siempre, preparadas</b><span>"Es caro", "el otro es más barato", "me lo pienso", con respuesta y algo que enseñar encima de la mesa.</span></li>
+      <li><b>Presupuestos que enseñan algo más que la cifra</b><span>La última pieza que mira el cliente antes de decidir, y la que casi nadie trabaja.</span></li>
+    </ul>
+    <p style="color:#C9D5DA;max-width:62ch">Una condición: quien vende hoy en vuestra empresa no queda nunca en evidencia. Se trabaja con él, no contra él.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack">
+    <span class="label">Lo que no te voy a prometer</span>
+    <h2>Ni un 30 % más, ni la mitad de los descuentos recuperada, ni plazos.</h2>
+    <p class="prose" style="max-width:62ch">Cualquiera que te ponga un número sin conocer tus operaciones se lo está inventando. Lo que sí será distinto:</p>
+    <ul class="no-prometo">
+      <li>Sabréis por qué se dio cada descuento del último año, porque es lo primero que miramos.</li>
+      <li>La explicación de por qué lo vuestro cuesta más estará escrita y será la misma para todo el equipo.</li>
+      <li>Las objeciones de siempre tendrán respuesta preparada, en vez de improvisarse una por una.</li>
+      <li>Las operaciones grandes las podrá sostener el equipo aunque tú ese día estés en otra cosa.</li>
+    </ul>
+    <p class="prose" style="max-width:62ch">Si todo eso acaba en más margen, lo contaréis vosotros con vuestros números.</p>
+  </div>
+</section>
+
+<section class="band blanco">
+  <div class="wrap stack">
+    <span class="label">Quién soy</span>
+    <h2>De vendedor a vendedor.</h2>
+    <div class="prose">
+      <p>Llevo más de quince años vendiendo, en B2B y en B2C, y he llegado arriba en empresas y tipos de venta muy distintos. Donde mejor me ha ido ha sido vendiendo algo que costaba más que la alternativa y que nadie más ofrecía. En American Express recibí el premio Centurion, que la compañía da al top 1 % de su plantilla mundial.</p>
+    </div>
+    <div class="trayectoria"><span>Tele2</span><span>Grupo Planeta</span><span>Quality Fry</span><span>Muñoz Bosch</span><span>American Express</span></div>
+    <div class="prose">
+      <p>En Quality Fry vendía un equipo para cocinar sin cocina, bastante más caro que la competencia. Lo primero que me preguntaban era cuánto costaba. Yo preguntaba cuántas raciones podían sacar.</p>
+    </div>
+    <div class="servilleta" aria-label="Ejemplo de cuenta">
+      <div class="linea"><span>10 raciones al día a 15 €</span><span>150 €</span></div>
+      <div class="linea"><span>Coste de cada ración, 5 €</span><span>−50 €</span></div>
+      <div class="linea total"><span>Margen que deja cada día</span><span>100 €</span></div>
+    </div>
+    <div class="prose">
+      <p>A partir de ahí, el precio del equipo se discutía de otra manera. También he montado y dirigido mi propio negocio, así que sé lo que es vender cuando el dinero que entra es el tuyo.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack">
+    <span class="label">Para quién es</span>
+    <h2>Si no hay valor que defender, no te puedo ayudar.</h2>
+    <div class="filtros">
+      <div>
+        <h3>Encaja si</h3>
+        <ul>
+          <li>Vendéis algo mejor y más caro que vuestra competencia.</li>
+          <li>Lo vende vuestro propio equipo al cliente final.</li>
+          <li>El cliente lo compra como proyecto, inversión o trabajo a medida.</li>
+          <li>Sois de 3 a 8 personas vendiendo, a menudo técnicos, sin jefe de ventas.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>No encaja si</h3>
+        <ul>
+          <li>Vendéis lo mismo que el de al lado, de la misma manera.</li>
+          <li>Os compran por catálogo o con tres presupuestos sobre la mesa.</li>
+          <li>Vendéis a través de distribuidores.</li>
+          <li>El valor está solo en lo que dice el dueño. No invento valor que no existe.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contacto-final">
+  <div class="wrap">
+    <div class="bar" aria-hidden="true"></div>
+    <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, escríbeme.</b>
+    <div class="email-box"><code id="email">hola@juanabarca.es</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
+    <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
+    <p>Juan Abarca Ferrando · Venta B2B por valor</p>
+  </div>
+</footer>
+
+<script>
+// Pega aquí la URL de tu formulario (Formspree, Tally…) cuando la subas a tu dominio.
+// Vacía = el formulario muestra el resumen para copiarlo.
+const FORM_ENDPOINT = "";
+const EMAIL = "hola@juanabarca.es";
+
+const $ = s => document.querySelector(s);
+const eur = v => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(Math.round(v)) + " €";
+const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
+const DEF = {n:4,f:300000,p:50,d:8};
+
+function cuenta(){
+  const n=num("#n"), f=num("#f"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100);
+  const fact=n*f, total=fact*(p/100)*(d/100);
+  $("#total").textContent = eur(total);
+  $("#desglose").textContent = `${n} × ${eur(f)} = ${eur(fact)} · ${p} % con un ${d} % de descuento`;
+  $("#aviso-ejemplo").hidden = !(n===DEF.n && f===DEF.f && p===DEF.p && d===DEF.d);
+  return {n,f,p,d,fact,total};
+}
+["#n","#f","#p","#d"].forEach(id => $(id).addEventListener("input", cuenta));
+
+const LECTURAS = {
+  quien:{
+    cliente:["El cliente aprieta y se cede.","Suele pasar cuando el comercial no tiene con qué sostener la cifra: si el cliente no ve en euros lo que gana, el precio es lo único que puede discutir."],
+    comercial:["El descuento sale de vosotros.","Frases como \"podemos ver qué margen tenemos\" regalan margen antes de que nadie lo pida. Es de lo más caro y de lo más fácil de cambiar."],
+    nose:["No sabéis de quién sale.","Esa casilla vacía es el hallazgo. Mirad las diez últimas operaciones grandes: precio de salida, precio de cierre, quién lo pidió y por qué."]
+  },
+  cambio:{
+    aveces:["El precio se mueve sin que cambie lo que entregáis.","Cada vez que baja sin quitar nada, el cliente aprende que el primer número era una posición de salida, y lo recuerda en la siguiente."],
+    nunca:["El precio se mueve sin que cambie lo que entregáis.","Cada vez que baja sin quitar nada, el cliente aprende que el primer número era una posición de salida, y lo recuerda en la siguiente."]
+  },
+  cierra:{
+    aveces:["Cuando entras tú, se cierra.","Funciona porque eres el único que sostiene el precio sin pedir permiso. El coste está en lo que aprende el equipo: que las difíciles no las llevan ellos."],
+    siempre:["La empresa vende caro tantas veces como reuniones caben en tu agenda.","El equipo llega hasta el precio y ahí entras tú. Mientras siga así, no aprenden a sostenerlo solos."]
+  },
+  discurso:{
+    parecido:["Cada uno lo cuenta a su manera.","Si el argumento vive en la cabeza de cada comercial, el cliente oye una versión distinta según con quién hable."],
+    distinto:["Cada uno lo cuenta a su manera.","Si el argumento vive en la cabeza de cada comercial, el cliente oye una versión distinta según con quién hable, y se queda con la más floja."],
+    nose:["No sabes cómo lo explica cada uno.","Pregúntaselo a tres esta semana. Lo normal es oír tres respuestas distintas, y alguna muy buena que nadie ha puesto por escrito."]
+  },
+  presu:{
+    cifra:["Vuestro presupuesto se parece al del más barato.","Si las tres hojas que recibe el cliente se parecen, solo puede comparar el total. Es la última pieza que mira antes de decidir."]
+  },
+  perdida:{
+    mes:["Perdéis contra precio con frecuencia.","Cuando pasa a menudo siendo lo vuestro mejor, casi nunca es el precio: el cliente no vio la diferencia o no tenía con qué defenderla dentro de su empresa."],
+    trimestre:["Perdéis contra precio con frecuencia.","Cuando pasa a menudo siendo lo vuestro mejor, casi nunca es el precio: el cliente no vio la diferencia o no tenía con qué defenderla dentro de su empresa."]
+  }
+};
+const PREGUNTAS = {
+  quien:"De quién sale el descuento", cambio:"Se quita algo a cambio", cierra:"Quién cierra las grandes",
+  discurso:"Qué dicen tres comerciales", presu:"Qué enseña el presupuesto", perdida:"Última pérdida contra uno más barato",
+  tipo:"Cómo compra el cliente", canal:"Quién vende al cliente final"
+};
+const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+const txt = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.nextElementSibling.textContent : "—"; };
+
+function lectura(){
+  const ul = $("#obs"); ul.textContent = "";
+  let n = 0, contestadas = 0;
+  Object.keys(LECTURAS).forEach(k => {
+    const v = val(k); if (v) contestadas++;
+    const l = v && LECTURAS[k][v];
+    if (l){
+      n++;
+      const li = document.createElement("li");
+      const b = document.createElement("b"); b.textContent = l[0];
+      const s = document.createElement("span"); s.textContent = l[1];
+      li.append(b, s); ul.append(li);
+    }
+  });
+  const tipo = val("tipo"), canal = val("canal");
+  const fuera = $("#fuera");
+  if (tipo === "catalogo" || canal === "distribuidor"){
+    fuera.hidden = false;
+    fuera.textContent = tipo === "catalogo"
+      ? "Con franqueza: cuando el cliente compra por catálogo o comparando tres presupuestos, lo que yo hago aporta poco. Ahí la decisión suele estar tomada por precio antes de la reunión."
+      : "Con franqueza: cuando quien vende al cliente final es un distribuidor, el trabajo es otro y no es el que hago ahora.";
+  } else fuera.hidden = true;
+  $("#vacio").hidden = contestadas > 0;
+  $("#cierre-res").hidden = n === 0;
+  if (contestadas > 0 && n === 0){
+    const li = document.createElement("li");
+    const b = document.createElement("b"); b.textContent = "Por lo que cuentas, tenéis buena parte de esto resuelto.";
+    const s = document.createElement("span"); s.textContent = "Si aun así la cuenta del paso 1 sale alta, el siguiente sitio donde mirar son las diez últimas operaciones grandes, una por una.";
+    li.append(b, s); ul.append(li);
+  }
+}
+document.querySelectorAll('.q input[type=radio]').forEach(r => r.addEventListener("change", lectura));
+
+function resumen(){
+  const c = cuenta();
+  const lineas = [
+    "AUTODIAGNÓSTICO · VENTA B2B POR VALOR",
+    `Personas vendiendo: ${c.n}`,
+    `Facturación por persona: ${eur(c.f)}`,
+    `Ventas con descuento: ${c.p} %`,
+    `Descuento medio: ${c.d} %`,
+    `Margen en descuentos al año: ${eur(c.total)}`,
+    ""
+  ];
+  Object.keys(PREGUNTAS).forEach(k => lineas.push(`${PREGUNTAS[k]}: ${txt(k)}`));
+  lineas.push("",
+    `Nombre: ${$("#c-nombre").value.trim()}`,
+    `Empresa: ${$("#c-empresa").value.trim()}`,
+    `Cargo: ${$("#c-cargo").value.trim() || "—"}`,
+    `Contacto: ${$("#c-contacto").value.trim()}`,
+    `Quiere llamada: ${$("#c-llamada").checked ? "Sí" : "No"}`,
+    `Caso: ${$("#c-caso").value.trim() || "—"}`);
+  return lineas.join("\n");
+}
+
+$("#form").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#err"); err.hidden = true;
+  const faltan = [];
+  if (!$("#c-nombre").value.trim()) faltan.push("tu nombre");
+  if (!$("#c-empresa").value.trim()) faltan.push("la empresa");
+  if (!$("#c-contacto").value.trim()) faltan.push("un email o teléfono");
+  if (faltan.length){ err.textContent = "Falta " + faltan.join(", ") + "."; err.hidden = false; return; }
+  if (!$("#c-privacidad").checked){ err.textContent = "Marca la casilla de uso de datos para poder enviarlo."; err.hidden = false; return; }
+  const texto = resumen();
+  let enviado = false;
+  if (FORM_ENDPOINT){
+    try{
+      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), contacto:$("#c-contacto").value.trim(), llamada:$("#c-llamada").checked})});
+      enviado = r.ok;
+    }catch(_){ enviado = false; }
+  }
+  $("#form").hidden = true; $("#ok").hidden = false;
+  if (enviado){
+    $("#ok-t").textContent = "Recibido. Te contesto en unos días.";
+    $("#ok-p").textContent = "Lo leo yo, no un sistema automático.";
+  } else {
+    $("#ok-t").textContent = "Tu resultado, listo para enviar";
+    $("#ok-p").textContent = "Cópialo y mándamelo a " + EMAIL + " o por mensaje en LinkedIn. Lo leo yo y te contesto.";
+    $("#resumen").textContent = texto; $("#resumen").hidden = false; $("#ok-acciones").hidden = false;
+  }
+});
+
+function copiar(text, btn){
+  const fin = t => { const o = btn.textContent; btn.textContent = t; setTimeout(() => btn.textContent = o, 1600); };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => fin("Copiado"), () => fin("Selecciónalo y copia"));
+  } else fin("Selecciónalo y copia");
+}
+$("#copiar-email").addEventListener("click", e => copiar(EMAIL, e.currentTarget));
+$("#copiar-res").addEventListener("click", e => copiar($("#resumen").textContent, e.currentTarget));
+
+cuenta();
+</script>
