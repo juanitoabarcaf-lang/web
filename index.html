@@ -111,7 +111,10 @@ textarea{min-height:96px;resize:vertical}
 .sep{height:1px;background:var(--linea)}
 
 .resultado{display:flex;flex-direction:column;gap:18px}
-.abrir{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px}
+.abrir{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:10px;padding-top:16px;border-top:1px solid var(--borde)}
+.puente{font-size:16px;font-weight:600;color:var(--papel)}
+.micro{font-size:13px;color:var(--gris)}
+@media (max-width:520px){.btn.ancho{width:100%}}
 .mas{display:flex;flex-direction:column;gap:32px}
 .obs{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
 .obs li{border-left:3px solid var(--verde);padding-left:14px}
@@ -223,14 +226,15 @@ footer b{color:var(--papel)}
           <div class="desglose" id="anual">En descuentos: 2.400 € en cada venta con descuento, en 20 ventas.</div>
           <div class="desglose">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
           <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
+          <div class="abrir" id="abrir-wrap">
+            <p class="puente">Casi siempre se va por los mismos sitios.</p>
+            <button class="btn primary ancho" type="button" id="abrir">Ver por dónde se os van los 48.000 € →</button>
+            <span class="micro">5 preguntas · 1 minuto · sin dejar datos</span>
+          </div>
           <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
         </div>
       </div>
 
-      <div class="abrir" id="abrir-wrap">
-        <button class="btn dark" type="button" id="abrir">¿Quieres ver por dónde se os va?</button>
-        <span class="vacio">Cinco preguntas, un minuto.</span>
-      </div>
 
       <div class="mas" id="mas" hidden>
       <div class="sep"></div>
@@ -447,6 +451,7 @@ function cuenta(){
   $("#recuperar").textContent = `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
   const ct=$("#c-total"); if (ct) ct.textContent = eur(total);
   const tt=$("#c-titulo"); if (tt) tt.hidden = total<=0;
+  const bt=$("#abrir"); if (bt) bt.textContent = total>0 ? `Ver por dónde se os van los ${eur(total)} →` : "Ver por dónde se os va el margen →";
   $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
   return {t,v,p,d,m,porventa,total,recuperar};
 }
