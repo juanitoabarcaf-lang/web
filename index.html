@@ -137,6 +137,10 @@ textarea{min-height:96px;resize:vertical}
 .filtros div{min-width:0}
 .filtros h3{margin-bottom:10px}
 .filtros ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.yo{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:end}
+.yo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border-bottom:6px solid var(--ambar)}
+@media (max-width:560px){.yo{grid-template-columns:minmax(0,1fr)}.yo picture{max-width:240px}}
+.avatar{width:72px;height:72px;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--ambar)}
 footer{background:var(--tinta);color:var(--gris);font-size:14px}
 footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
 footer b{color:var(--papel)}
@@ -377,8 +381,16 @@ footer b{color:var(--papel)}
 
 <section class="band blanco">
   <div class="wrap stack">
-    <span class="label">Quién soy</span>
-    <h2>De vendedor a vendedor.</h2>
+    <div class="yo">
+      <picture>
+        <source srcset="juan-abarca.webp" type="image/webp">
+        <img src="juan-abarca.jpg" width="640" height="800" alt="Juan Abarca Ferrando" loading="lazy">
+      </picture>
+      <div class="stack-s">
+        <span class="label">Quién soy</span>
+        <h2>De vendedor a vendedor.</h2>
+      </div>
+    </div>
     <div class="prose">
       <p>Llevo más de quince años vendiendo, en B2B y en B2C, y he llegado arriba en empresas y tipos de venta muy distintos. Donde mejor me ha ido ha sido vendiendo algo que costaba más que la alternativa y que nadie más ofrecía. En American Express recibí el premio Centurion, que la compañía da al top 1 % de su plantilla mundial.</p>
     </div>
@@ -427,6 +439,7 @@ footer b{color:var(--papel)}
 <footer id="contacto-final">
   <div class="wrap">
     <div class="bar" aria-hidden="true"></div>
+    <img class="avatar" src="juan-abarca.webp" width="72" height="72" alt="" loading="lazy">
     <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, escríbeme.</b>
     <div class="email-box"><code id="email">juanabarcaferrando@hotmail.com</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
     <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
