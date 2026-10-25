@@ -96,7 +96,8 @@ textarea{min-height:96px;resize:vertical}
 .unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--texto-suave);font-size:15px;pointer-events:none}
 .cuenta{background:var(--tinta);color:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:8px}
 .cuenta .cifra{font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
-.cuenta .cifra mark{padding:0 .1em}
+.cuenta .cifra{margin:6px 0}
+#anual-cifra{display:inline-block;color:var(--ambar);border-left:8px solid var(--ambar);padding-left:14px;line-height:1;white-space:nowrap;font-size:clamp(44px,13vw,64px)}
 .cuenta .desglose{font-size:15px;color:#C9D5DA;font-variant-numeric:tabular-nums}
 .cuenta .aviso{font-size:13px;color:var(--gris)}
 .q{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
@@ -227,14 +228,14 @@ footer b{color:var(--papel)}
         </div>
         <div class="cuenta" aria-live="polite">
           <span class="label" style="color:var(--gris)">Dinero que se os va al año</span>
-          <div class="cifra"><mark id="anual-cifra">48.000 €</mark></div>
+          <div class="cifra"><span id="anual-cifra">48.000 €</span></div>
           <div class="desglose" id="anual">En descuentos: 2.400 € en cada venta con descuento, en 20 ventas.</div>
           <div class="desglose">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
           <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
           <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
           <div class="abrir" id="abrir-wrap">
             <p class="puente">Casi siempre se va por los mismos cuatro o cinco sitios. ¿Cuál es el vuestro?</p>
-            <button class="btn primary ancho" type="button" id="abrir">Ver por dónde se os van los 48.000 € →</button>
+            <button class="btn claro ancho" type="button" id="abrir">Ver por dónde se os van los 48.000 € →</button>
             <span class="micro">5 preguntas · 1 minuto · sin dejar datos</span>
           </div>
         </div>
@@ -431,10 +432,16 @@ const eur = v => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") 
 const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
 const DEF = {t:30000,v:40,p:50,d:8,m:25};
 
+function ajustarCifra(){
+  const el=$("#anual-cifra"), box=el.parentElement; el.style.fontSize="";
+  let fs=parseFloat(getComputedStyle(el).fontSize);
+  while (el.scrollWidth + 22 > box.clientWidth && fs > 24){ fs -= 2; el.style.fontSize = fs + "px"; }
+}
+addEventListener("resize", ajustarCifra);
 function cuenta(){
   const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
   const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
-  $("#anual-cifra").textContent = eur(total);
+  const ac=$("#anual-cifra"); ac.textContent = eur(total); ajustarCifra();
   const a=$("#anual");
   a.hidden = total<=0;
   a.textContent = `Son ${eur(porventa)} en cada venta con descuento, en ${conDesc} ventas.`;
