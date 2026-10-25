@@ -72,6 +72,7 @@ a{color:inherit}
 .btn.dark{background:var(--tinta);color:var(--papel)}
 .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--ambar);outline-offset:2px}
 .hero .nota{font-size:14px;color:var(--gris)}
+.hero .cred{font-size:14px;font-weight:600;color:var(--papel);padding-top:14px;border-top:1px solid var(--borde);max-width:62ch}
 
 /* Frases literales */
 .frases{display:flex;flex-direction:column;gap:14px;margin:8px 0}
@@ -155,6 +156,9 @@ textarea{min-height:96px;resize:vertical}
 .yo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border-bottom:6px solid var(--ambar)}
 @media (max-width:560px){.yo{grid-template-columns:minmax(0,1fr)}.yo picture{max-width:240px}}
 .avatar{flex:none;align-self:flex-start;width:72px;height:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--ambar)}
+.noprom{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:20px;border:1px solid var(--borde);border-radius:8px}
+.noprom h3{color:var(--ambar)}
+.noprom p{color:#C9D5DA;max-width:62ch}
 footer{background:var(--tinta);color:var(--gris);font-size:14px}
 footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
 footer b{color:var(--papel)}
@@ -177,13 +181,14 @@ footer b{color:var(--papel)}
 <section class="band tinta hero">
   <div class="wrap stack">
     <div class="bar" aria-hidden="true"></div>
-    <h1>Ayudo a pymes B2B que venden algo mejor que su competencia a que su equipo <mark>deje de perder por precio.</mark></h1>
+    <h1>Ayudo a pymes B2B que venden algo mejor que su competencia <mark>a dejar de perder por precio.</mark></h1>
     <p class="lead">Lo vuestro vale más, pero acabáis cerrando con descuento o sin margen. El equipo lo explica por características, el cliente no ve la diferencia y las ventas grandes las tiene que salvar el dueño.</p>
     <div class="ctas">
       <a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a>
       <a class="btn ghost" href="#contacto-final">Escríbeme</a>
     </div>
     <p class="nota">Dos minutos. Ves el resultado al momento, sin dejar ningún dato.</p>
+    <p class="cred">15 años vendiendo · Premio Centurion de American Express, top 1 % mundial</p>
   </div>
 </section>
 
@@ -315,10 +320,10 @@ footer b{color:var(--papel)}
           <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
           <p class="legal">Al enviar, aceptas que use estos datos para responder a tu solicitud. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
-          <div><button class="btn dark" type="submit">Enviarte mi resultado</button></div>
+          <div class="stack-s" style="gap:8px"><div><button class="btn dark" type="submit">Quiero saber por dónde empezar</button></div><span style="font-size:13px;color:var(--texto-suave)">Te contesto en dos días laborables.</span></div>
         </form>
         <div class="ok" id="ok" hidden>
-          <h3 id="ok-t">Recibido. Te contesto en unos días.</h3>
+          <h3 id="ok-t">Recibido. Te contesto en dos días laborables.</h3>
           <p id="ok-p" style="font-size:15px;color:var(--texto-suave)"></p>
           <div class="resumen" id="resumen" hidden></div>
           <div id="ok-acciones" hidden class="email-box"><button class="copy" type="button" id="copiar-res" style="color:var(--verde);border-color:var(--linea)">Copiar resultado</button></div>
@@ -342,21 +347,10 @@ footer b{color:var(--papel)}
       <li><b>Presupuestos que enseñan algo más que la cifra</b><span>La última pieza que mira el cliente antes de decidir, y la que casi nadie trabaja.</span></li>
     </ul>
     <p style="color:#C9D5DA;max-width:62ch">Una condición: quien vende hoy en vuestra empresa no queda nunca en evidencia. Se trabaja con él, no contra él.</p>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap stack">
-    <span class="label">Lo que no te voy a prometer</span>
-    <h2>Ni un 30 % más, ni la mitad de los descuentos recuperada, ni plazos.</h2>
-    <p class="prose" style="max-width:62ch">Sin conocer vuestras operaciones, cualquier número es inventado. Lo que sí cambia:</p>
-    <ul class="no-prometo">
-      <li>Sabréis por qué se dio cada descuento del último año, porque es lo primero que miramos.</li>
-      <li>La explicación de por qué lo vuestro cuesta más estará escrita y será la misma para todo el equipo.</li>
-      <li>Las objeciones de siempre tendrán respuesta preparada, en vez de improvisarse una por una.</li>
-      <li>Las operaciones grandes las podrá sostener el equipo aunque tú ese día estés en otra cosa.</li>
-    </ul>
-    <p class="prose" style="max-width:62ch">Si todo eso acaba en más margen, lo contaréis vosotros con vuestros números.</p>
+    <div class="noprom">
+      <h3>Lo que no te voy a prometer: ni un 30 % más, ni plazos.</h3>
+      <p>Sin conocer vuestras operaciones, cualquier número es inventado. Lo que sí cambia: sabréis por qué se dio cada descuento, la explicación de por qué valéis más será la misma en todo el equipo, las objeciones tendrán respuesta preparada y las ventas grandes no dependerán de que entres tú. Si eso acaba en más margen, lo contaréis vosotros con vuestros números.</p>
+    </div>
   </div>
 </section>
 
@@ -422,8 +416,9 @@ footer b{color:var(--papel)}
   <div class="wrap">
     <div class="bar" aria-hidden="true"></div>
     <img class="avatar" src="juan-abarca.webp" width="72" height="72" alt="" loading="lazy">
-    <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, escríbeme.</b>
-    <p>O empieza por la cuenta: <a href="#diagnostico" style="color:var(--ambar)">calcula cuánto dinero se os va</a>. Son dos minutos.</p>
+    <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, empieza por la cuenta.</b>
+    <div><a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a></div>
+    <p>O escríbeme directamente:</p>
     <div class="email-box"><code id="email">juanabarcaferrando@hotmail.com</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
     <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
     <p>Juan Abarca Ferrando · Venta B2B por valor · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></p>
@@ -562,7 +557,7 @@ $("#form").addEventListener("submit", async e => {
   }
   $("#form").hidden = true; $("#ok").hidden = false;
   if (enviado){
-    $("#ok-t").textContent = "Recibido. Te contesto en unos días.";
+    $("#ok-t").textContent = "Recibido. Te contesto en dos días laborables.";
     $("#ok-p").textContent = "Lo leo yo, no un sistema automático.";
   } else {
     $("#ok-t").textContent = "Tu resultado, listo para enviar";
