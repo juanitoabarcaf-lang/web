@@ -308,9 +308,8 @@ footer b{color:var(--papel)}
             <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" autocomplete="tel" required></div>
           </div>
           <label class="check"><input id="c-llamada" type="checkbox"><span>Quiero que lo veamos veinte minutos por teléfono.</span></label>
-          <label class="check"><input id="c-privacidad" type="checkbox" required><span>He leído la <a href="legal.html#privacidad" target="_blank">política de privacidad</a> y acepto que Juan Abarca Ferrando use mis datos para responder a mi solicitud. (Obligatoria)</span></label>
           <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
-          <p class="legal">Responsable: Juan Abarca Ferrando. Finalidad: responder a tu solicitud y, si lo marcas, ofrecerte mis servicios. Base legal: tu consentimiento. Los datos se reciben a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes acceder a ellos, corregirlos, pedir que se borren o retirar tu consentimiento en cualquier momento. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
+          <p class="legal">Al enviar, aceptas que use estos datos para responder a tu solicitud. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
           <div><button class="btn dark" type="submit">Enviarte mi resultado</button></div>
         </form>
@@ -548,12 +547,11 @@ $("#form").addEventListener("submit", async e => {
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) faltan.push("un email válido");
   if ($("#c-tel").value.replace(/\D/g,"").length < 9) faltan.push("un teléfono válido");
   if (faltan.length){ err.textContent = "Falta " + faltan.join(", ") + "."; err.hidden = false; return; }
-  if (!$("#c-privacidad").checked){ err.textContent = "Marca la casilla de uso de datos para poder enviarlo."; err.hidden = false; return; }
   const texto = resumen();
   let enviado = false;
   if (FORM_ENDPOINT){
     try{
-      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), _replyto:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim(), llamada:$("#c-llamada").checked, privacidad_aceptada:true, acepta_comunicaciones_comerciales:$("#c-comercial").checked, fecha:new Date().toISOString()})});
+      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), _replyto:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim(), llamada:$("#c-llamada").checked, informado_privacidad:true, acepta_comunicaciones_comerciales:$("#c-comercial").checked, fecha:new Date().toISOString()})});
       enviado = r.ok;
     }catch(_){ enviado = false; }
   }
