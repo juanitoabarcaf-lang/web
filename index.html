@@ -164,6 +164,7 @@ footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
 footer b{color:var(--papel)}
 .email-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .dir{font-size:13px;user-select:all}
+.li-wrap{display:flex;flex-direction:column;gap:10px;margin-top:18px;padding-top:22px;border-top:1px solid var(--borde)}
 .email-box .mail{font-size:17px;color:var(--papel);font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar)}
 .copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ambar);border:1.5px solid var(--borde);border-radius:6px;padding:6px 10px;cursor:pointer}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
@@ -186,7 +187,7 @@ footer b{color:var(--papel)}
     <p class="lead">Lo vuestro vale más, pero acabáis cerrando con descuento o sin margen. El equipo lo explica por características, el cliente no ve la diferencia y las ventas grandes las tiene que salvar el dueño.</p>
     <div class="ctas">
       <a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a>
-      <a class="btn ghost" href="#contacto-final">Escríbeme</a>
+      <a class="btn ghost" href="#contacto">Escríbeme</a>
     </div>
     <p class="nota">Dos minutos. Ves el resultado al momento, sin dejar ningún dato.</p>
     <p class="cred">15 años vendiendo · Premio Centurion de American Express, top 1 % mundial</p>
@@ -307,6 +308,8 @@ footer b{color:var(--papel)}
         <p class="vacio" id="cierre-res" hidden>Esto no es un veredicto. Son los patrones que más se repiten. Lo que pasa en vuestro caso solo se ve mirando operaciones reales.</p>
       </div>
 
+      </div>
+
       <div class="contacto" id="contacto">
         <h3 id="c-titulo">Este año se os van <mark id="c-total">48.000 €</mark> por aquí, y el que viene igual.</h3>
         <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo por dónde creo que se os va y qué miraría primero. Lo leo yo, no un sistema. Si te encaja, lo vemos veinte minutos por teléfono, sin compromiso.</p>
@@ -329,7 +332,6 @@ footer b{color:var(--papel)}
           <div class="resumen" id="resumen" hidden></div>
           <div id="ok-acciones" hidden class="email-box"><button class="copy" type="button" id="copiar-res" style="color:var(--verde);border-color:var(--linea)">Copiar resultado</button></div>
         </div>
-      </div>
       </div>
     </div>
   </div>
@@ -421,7 +423,10 @@ footer b{color:var(--papel)}
     <div><a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a></div>
     <div class="email-box"><a class="btn ghost" href="mailto:juanabarcaferrando@hotmail.com?subject=Desde%20juanabarca.es">Escríbeme por email</a></div>
     <p class="dir">juanabarcaferrando@hotmail.com</p>
-    <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
+    <div class="li-wrap">
+      <span>¿Prefieres conocerme antes?</span>
+      <div><a class="btn ghost" href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Ver mi perfil de LinkedIn</a></div>
+    </div>
     <p>Juan Abarca Ferrando · Venta B2B por valor · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></p>
   </div>
 </footer>
