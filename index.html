@@ -227,8 +227,8 @@ footer b{color:var(--papel)}
           </div>
         </div>
         <div class="cuenta" aria-live="polite">
-          <span class="label" style="color:var(--papel);font-size:15px">Lo que perdéis cada año</span>
-          <div class="cifra"><span id="anual-cifra">48.000 €</span></div>
+          <span class="label" style="color:var(--papel);font-size:15px">Lo que perdéis cada año:</span>
+          <div class="cifra"><span id="anual-cifra">−48.000 €</span></div>
           <div class="desglose" id="anual">En descuentos: 2.400 € en cada venta con descuento, en 20 ventas.</div>
           <div class="desglose">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
           <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
@@ -441,7 +441,7 @@ addEventListener("resize", ajustarCifra);
 function cuenta(){
   const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
   const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
-  const ac=$("#anual-cifra"); ac.textContent = eur(total); ajustarCifra();
+  const ac=$("#anual-cifra"); ac.textContent = (total>0 ? "−" : "") + eur(total); ajustarCifra();
   const a=$("#anual");
   a.hidden = total<=0;
   a.textContent = `Son ${eur(porventa)} en cada venta con descuento, en ${conDesc} ventas.`;
