@@ -165,6 +165,9 @@ footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
 footer b{color:var(--papel)}
 .email-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .dir{font-size:13px;user-select:all}
+.quien{display:flex;align-items:center;gap:14px;padding:14px;background:var(--blanco);border:1px solid var(--linea);border-radius:8px}
+.quien img{flex:none;width:56px;height:56px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 22%;border:2px solid var(--ambar)}
+.quien p{font-size:14px;line-height:1.5;color:var(--texto);min-width:0}
 .li-wrap{display:flex;flex-direction:column;gap:10px;margin-top:18px;padding-top:22px;border-top:1px solid var(--borde)}
 .email-box .mail{font-size:17px;color:var(--papel);font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar)}
 .copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ambar);border:1.5px solid var(--borde);border-radius:6px;padding:6px 10px;cursor:pointer}
@@ -190,7 +193,6 @@ footer b{color:var(--papel)}
       <a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a>
     </div>
     <p class="nota">Dos minutos. Ves el resultado al momento, sin dejar ningún dato.</p>
-    <p class="cred">Más de 15 años vendiendo · Top 15 nacional en Grupo Planeta · Top 1 % mundial en American Express</p>
   </div>
 </section>
 
@@ -312,7 +314,11 @@ footer b{color:var(--papel)}
 
       <div class="contacto" id="contacto">
         <h3 id="c-titulo">Este año se os van <mark id="c-total">48.000 €</mark> por aquí, y el que viene igual.</h3>
-        <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo por dónde creo que se os va y qué miraría primero. Lo leo yo, no un sistema. Si te encaja, lo vemos veinte minutos por teléfono, sin compromiso.</p>
+        <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo por dónde creo que se os va y qué miraría primero. Si te encaja, lo vemos veinte minutos por teléfono, sin compromiso.</p>
+        <div class="quien">
+          <img src="juan-abarca.webp" width="56" height="56" alt="Juan Abarca Ferrando">
+          <p><b>Te contesto yo,</b> no un sistema: más de 15 años vendiendo, top 15 nacional en Grupo Planeta y top 1 % mundial en American Express.</p>
+        </div>
         <form id="form" novalidate class="stack-s">
           <div class="grid2">
             <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
