@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Juan Abarca · Venta B2B por valor</title>
 <meta name="description" content="Pymes B2B que venden algo mejor y más caro que su competencia y acaban en el descuento. Calcula cuánto margen se os va cada año.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
 <style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:700;font-display:swap;src:url(fonts/inter-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-style:normal;font-weight:800;font-display:swap;src:url(fonts/inter-latin-800-normal.woff2) format("woff2")}
 /* Layout: bandas a todo el ancho, alternando tinta (lo que se ve) y papel (lo que se lee); una columna de lectura de ~680px; el autodiagnóstico es la única pieza con caja. */
 :root{
   --tinta:#10212A;
@@ -109,8 +111,10 @@ textarea{min-height:96px;resize:vertical}
 
 .contacto{background:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px}
 .check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave)}
+.check a{color:var(--verde)}
 .check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--verde)}
 .legal{font-size:12px;color:var(--texto-suave);line-height:1.5}
+.legal a{color:var(--verde)}
 .ok{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
 .resumen{font-family:ui-monospace,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:var(--papel);border-radius:6px;padding:14px;max-height:220px;overflow:auto;user-select:all}
 .err{color:#9A3B12;font-size:14px}
@@ -314,16 +318,18 @@ footer b{color:var(--papel)}
           <div class="grid2">
             <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
             <div class="field"><label for="c-empresa">Empresa</label><input id="c-empresa" type="text" autocomplete="organization" required></div>
-            <div class="field"><label for="c-cargo">Cargo</label><input id="c-cargo" type="text" autocomplete="organization-title"></div>
-            <div class="field"><label for="c-contacto">Email o teléfono</label><input id="c-contacto" type="text" autocomplete="email" required></div>
+            <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" autocomplete="tel" required></div>
+            <div class="field" style="grid-column:1/-1"><label for="c-cargo">Cargo</label><input id="c-cargo" type="text" autocomplete="organization-title"></div>
           </div>
           <div class="field">
             <label for="c-caso">¿Qué pasó la última vez que perdisteis una venta por precio, o la cerrasteis con descuento? (opcional)</label>
             <textarea id="c-caso"></textarea>
           </div>
           <label class="check"><input id="c-llamada" type="checkbox"><span>Me vendría bien comentarlo veinte minutos.</span></label>
-          <label class="check"><input id="c-privacidad" type="checkbox" required><span>Acepto que Juan Abarca Ferrando use estos datos solo para responderme.</span></label>
-          <p class="legal">Responsable: Juan Abarca Ferrando. Finalidad: responder a tu consulta. No se ceden a terceros ni se usan para enviarte publicidad. Puedes pedir que se borren escribiendo a la dirección de contacto de esta página.</p>
+          <label class="check"><input id="c-privacidad" type="checkbox" required><span>He leído la <a href="legal.html#privacidad" target="_blank">política de privacidad</a> y acepto que Juan Abarca Ferrando use mis datos para responder a mi solicitud. (Obligatoria)</span></label>
+          <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
+          <p class="legal">Responsable: Juan Abarca Ferrando. Finalidad: responder a tu solicitud y, si lo marcas, ofrecerte mis servicios. Base legal: tu consentimiento. Los datos se reciben a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes acceder a ellos, corregirlos, pedir que se borren o retirar tu consentimiento en cualquier momento. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
           <div><button class="btn dark" type="submit">Enviar mi resultado</button></div>
         </form>
@@ -422,9 +428,9 @@ footer b{color:var(--papel)}
   <div class="wrap">
     <div class="bar" aria-hidden="true"></div>
     <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, escríbeme.</b>
-    <div class="email-box"><code id="email">hola@juanabarca.es</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
+    <div class="email-box"><code id="email">juanabarcaferrando@hotmail.com</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
     <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
-    <p>Juan Abarca Ferrando · Venta B2B por valor</p>
+    <p>Juan Abarca Ferrando · Venta B2B por valor · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></p>
   </div>
 </footer>
 
@@ -432,7 +438,7 @@ footer b{color:var(--papel)}
 // Pega aquí la URL de tu formulario (Formspree, Tally…) cuando la subas a tu dominio.
 // Vacía = el formulario muestra el resumen para copiarlo.
 const FORM_ENDPOINT = "https://formspree.io/f/xvkkzjwl";
-const EMAIL = "hola@juanabarca.es";
+const EMAIL = "juanabarcaferrando@hotmail.com";
 
 const $ = s => document.querySelector(s);
 const eur = v => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(Math.round(v)) + " €";
@@ -533,8 +539,10 @@ function resumen(){
     `Nombre: ${$("#c-nombre").value.trim()}`,
     `Empresa: ${$("#c-empresa").value.trim()}`,
     `Cargo: ${$("#c-cargo").value.trim() || "—"}`,
-    `Contacto: ${$("#c-contacto").value.trim()}`,
+    `Email: ${$("#c-email").value.trim()}`,
+    `Teléfono: ${$("#c-tel").value.trim()}`,
     `Quiere llamada: ${$("#c-llamada").checked ? "Sí" : "No"}`,
+    `Acepta comunicaciones comerciales: ${$("#c-comercial").checked ? "Sí" : "No"}`,
     `Caso: ${$("#c-caso").value.trim() || "—"}`);
   return lineas.join("\n");
 }
@@ -545,14 +553,17 @@ $("#form").addEventListener("submit", async e => {
   const faltan = [];
   if (!$("#c-nombre").value.trim()) faltan.push("tu nombre");
   if (!$("#c-empresa").value.trim()) faltan.push("la empresa");
-  if (!$("#c-contacto").value.trim()) faltan.push("un email o teléfono");
+  const em = $("#c-email").value.trim();
+  if (!em) faltan.push("tu email");
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) faltan.push("un email válido");
+  if ($("#c-tel").value.replace(/\D/g,"").length < 9) faltan.push("un teléfono válido");
   if (faltan.length){ err.textContent = "Falta " + faltan.join(", ") + "."; err.hidden = false; return; }
   if (!$("#c-privacidad").checked){ err.textContent = "Marca la casilla de uso de datos para poder enviarlo."; err.hidden = false; return; }
   const texto = resumen();
   let enviado = false;
   if (FORM_ENDPOINT){
     try{
-      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), contacto:$("#c-contacto").value.trim(), llamada:$("#c-llamada").checked})});
+      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), _replyto:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim(), llamada:$("#c-llamada").checked, privacidad_aceptada:true, acepta_comunicaciones_comerciales:$("#c-comercial").checked, fecha:new Date().toISOString()})});
       enviado = r.ok;
     }catch(_){ enviado = false; }
   }
