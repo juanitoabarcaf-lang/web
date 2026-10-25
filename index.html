@@ -90,7 +90,7 @@ a{color:inherit}
 .field{display:flex;flex-direction:column;gap:6px;min-width:0}
 .field label,.q legend{font-size:15px;font-weight:600;color:var(--texto)}
 .field small{font-size:13px;color:var(--texto-suave)}
-input[type=number],input[type=text],input[type=email],textarea{font:inherit;font-size:17px;border:1.5px solid var(--linea);border-radius:6px;padding:12px 14px;background:var(--papel);color:var(--texto);width:100%;font-variant-numeric:tabular-nums}
+input[type=number],input[type=text],input[type=email],input[type=tel],textarea{font:inherit;font-size:17px;border:1.5px solid var(--linea);border-radius:6px;padding:12px 14px;background:var(--papel);color:var(--texto);width:100%;font-variant-numeric:tabular-nums}
 textarea{min-height:96px;resize:vertical}
 .unit{position:relative}
 .unit input{padding-right:44px}
@@ -172,48 +172,33 @@ footer b{color:var(--papel)}
 <section class="band tinta hero">
   <div class="wrap stack">
     <div class="bar" aria-hidden="true"></div>
-    <h1>Lo vuestro es mejor y más caro. <mark>Y aun así acabáis en el descuento.</mark></h1>
-    <p class="lead">Trabajo con pymes B2B que venden directamente algo que vale más que lo de su competencia. Su equipo conoce el producto como nadie, pero lo explica por características, el cliente no ve por qué cuesta más y la venta se cierra con descuento, se pierde contra el más barato o la tiene que cerrar el dueño.</p>
+    <h1>Ayudo a pymes B2B a vender lo que vale más <mark>sin acabar en el descuento.</mark></h1>
+    <p class="lead">Vuestro producto es mejor y más caro, pero el equipo lo explica por características. El cliente no ve la diferencia y la venta se cierra con descuento, se pierde contra el más barato o la tiene que cerrar el dueño.</p>
     <div class="ctas">
-      <a class="btn primary" href="#diagnostico">Calcula cuánto os cuesta el descuento</a>
+      <a class="btn primary" href="#diagnostico">Calcula cuánto perdéis en cada venta</a>
       <a class="btn ghost" href="#contacto-final">Escríbeme</a>
     </div>
-    <p class="nota">Cinco minutos. El resultado lo ves tú al momento y no hace falta dejar ningún dato.</p>
-  </div>
-</section>
-
-<section class="band">
-  <div class="wrap stack">
-    <span class="label">Lo que se oye en las reuniones</span>
-    <div class="frases">
-      <p class="frase">"El otro es más barato."</p>
-      <p class="frase">"Bueno, podemos ver qué margen tenemos."</p>
-      <p class="frase">"Las operaciones importantes las acabo cerrando yo."</p>
-    </div>
-    <div class="prose">
-      <p>Ninguna de las tres aparece como pérdida en las cuentas. El descuento figura como venta cerrada, la operación perdida como una que no era para vosotros, y la que rescató el dueño como un buen mes.</p>
-      <p>Pero un 8 % de descuento en la mitad de las ventas de un equipo de cuatro personas que factura 1,2 millones son <b>48.000 euros al año</b> que salen enteros del margen. Es el sueldo de una persona, repartido en decisiones de dos segundos que nadie apunta.</p>
-    </div>
+    <p class="nota">Dos minutos. Ves el resultado al momento, sin dejar ningún dato.</p>
   </div>
 </section>
 
 <section class="band blanco" id="diagnostico">
   <div class="wrap stack">
     <span class="label">Autodiagnóstico</span>
-    <h2>¿Cuánto margen se os va cada año en descuentos?</h2>
-    <p class="prose" style="max-width:62ch">Pon tus cifras y contesta seis preguntas sobre cómo vendéis. Al final ves la cuenta y lo que suele haber detrás de cada respuesta. Si quieres, me mandas el resultado y lo comentamos.</p>
+    <h2>¿Cuánto perdéis en cada venta con descuento?</h2>
+    <p class="prose" style="max-width:62ch">Pon vuestras cifras y contesta unas preguntas sobre cómo vendéis. La cuenta sale al momento.</p>
 
     <div class="diag">
       <div class="paso">
         <div class="paso-h"><span class="paso-n">Paso 1</span><h3>La cuenta del descuento</h3></div>
         <div class="grid2">
           <div class="field">
-            <label for="n">Personas que venden</label>
-            <input id="n" type="number" inputmode="numeric" min="1" max="50" value="4">
+            <label for="t">Importe medio de una venta</label>
+            <div class="unit"><input id="t" type="number" inputmode="numeric" min="0" step="1000" value="30000"><span>€</span></div>
           </div>
           <div class="field">
-            <label for="f">Facturación media por persona</label>
-            <div class="unit"><input id="f" type="number" inputmode="numeric" min="0" step="10000" value="300000"><span>€</span></div>
+            <label for="v">Ventas al año, todo el equipo</label>
+            <input id="v" type="number" inputmode="numeric" min="0" value="40">
           </div>
           <div class="field">
             <label for="p">Ventas que se cierran con descuento</label>
@@ -224,11 +209,16 @@ footer b{color:var(--papel)}
             <label for="d">Descuento medio</label>
             <div class="unit"><input id="d" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="8"><span>%</span></div>
           </div>
+          <div class="field" style="grid-column:1/-1">
+            <label for="m">Vuestro margen bruto</label>
+            <div class="unit"><input id="m" type="number" inputmode="decimal" min="1" max="95" value="25"><span>%</span></div>
+          </div>
         </div>
         <div class="cuenta" aria-live="polite">
-          <span class="label" style="color:var(--gris)">Margen que se va en descuentos cada año</span>
-          <div class="cifra"><mark id="total">48.000 €</mark></div>
-          <div class="desglose" id="desglose">4 × 300.000 € = 1.200.000 € · 50 % con un 8 % de descuento</div>
+          <span class="label" style="color:var(--gris)">En cada venta con descuento perdéis</span>
+          <div class="cifra"><mark id="porventa">2.400 €</mark></div>
+          <div class="desglose" id="anual">Al año: 48.000 €, en 20 ventas con descuento.</div>
+          <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
           <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
         </div>
       </div>
@@ -325,8 +315,8 @@ footer b{color:var(--papel)}
       </div>
 
       <div class="contacto" id="contacto">
-        <h3>¿Me mandas tu resultado?</h3>
-        <p style="font-size:15px;color:var(--texto-suave)">Lo leo yo y te contesto con lo que veo. Si te viene bien, lo comentamos veinte minutos por teléfono. No es una llamada de venta: estoy hablando con gerentes de empresas como la tuya para entender cómo lo vivís.</p>
+        <h3>Este año se os van <mark id="c-total">48.000 €</mark> por aquí, y el que viene igual.</h3>
+        <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo dónde miraría primero en vuestro caso. Lo leo yo, y si quieres lo vemos veinte minutos por teléfono.</p>
         <form id="form" novalidate class="stack-s">
           <div class="grid2">
             <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
@@ -336,15 +326,15 @@ footer b{color:var(--papel)}
             <div class="field" style="grid-column:1/-1"><label for="c-cargo">Cargo</label><input id="c-cargo" type="text" autocomplete="organization-title"></div>
           </div>
           <div class="field">
-            <label for="c-caso">¿Qué pasó la última vez que perdisteis una venta por precio, o la cerrasteis con descuento? (opcional)</label>
+            <label for="c-caso">Piensa en la última venta que cerrasteis con descuento o que se llevó uno más barato. ¿De cuánto era y qué pasó? (opcional)</label>
             <textarea id="c-caso"></textarea>
           </div>
-          <label class="check"><input id="c-llamada" type="checkbox"><span>Me vendría bien comentarlo veinte minutos.</span></label>
+          <label class="check"><input id="c-llamada" type="checkbox"><span>Quiero que lo veamos veinte minutos por teléfono.</span></label>
           <label class="check"><input id="c-privacidad" type="checkbox" required><span>He leído la <a href="legal.html#privacidad" target="_blank">política de privacidad</a> y acepto que Juan Abarca Ferrando use mis datos para responder a mi solicitud. (Obligatoria)</span></label>
           <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
           <p class="legal">Responsable: Juan Abarca Ferrando. Finalidad: responder a tu solicitud y, si lo marcas, ofrecerte mis servicios. Base legal: tu consentimiento. Los datos se reciben a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes acceder a ellos, corregirlos, pedir que se borren o retirar tu consentimiento en cualquier momento. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
-          <div><button class="btn dark" type="submit">Enviar mi resultado</button></div>
+          <div><button class="btn dark" type="submit">Enviarte mi resultado</button></div>
         </form>
         <div class="ok" id="ok" hidden>
           <h3 id="ok-t">Recibido. Te contesto en unos días.</h3>
@@ -360,7 +350,7 @@ footer b{color:var(--papel)}
 <section class="band tinta">
   <div class="wrap stack">
     <span class="label">Cómo trabajo</span>
-    <h2>Diseño con vosotros cómo vender ese valor, y lo implanto.</h2>
+    <h2>Diseño con vosotros cómo vender ese valor y os ayudo a implantarlo.</h2>
     <p style="color:#C9D5DA;max-width:62ch">Parto de lo que ya funciona en vuestras mejores ventas. No traigo un argumentario de fuera: el argumento bueno ya está dentro de la empresa, en la cabeza de alguien. Es consultoría con implantación, entrenada sobre ventas reales. No es un curso.</p>
     <ul class="lista">
       <li><b>La propuesta de valor, en euros</b><span>Lo que gana vuestro cliente, o lo que deja de perder. No las características.</span></li>
@@ -377,7 +367,7 @@ footer b{color:var(--papel)}
   <div class="wrap stack">
     <span class="label">Lo que no te voy a prometer</span>
     <h2>Ni un 30 % más, ni la mitad de los descuentos recuperada, ni plazos.</h2>
-    <p class="prose" style="max-width:62ch">Cualquiera que te ponga un número sin conocer tus operaciones se lo está inventando. Lo que sí será distinto:</p>
+    <p class="prose" style="max-width:62ch">Sin conocer vuestras operaciones, cualquier número es inventado. Lo que sí cambia:</p>
     <ul class="no-prometo">
       <li>Sabréis por qué se dio cada descuento del último año, porque es lo primero que miramos.</li>
       <li>La explicación de por qué lo vuestro cuesta más estará escrita y será la misma para todo el equipo.</li>
@@ -465,17 +455,19 @@ const EMAIL = "juanabarcaferrando@hotmail.com";
 const $ = s => document.querySelector(s);
 const eur = v => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format(Math.round(v)) + " €";
 const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
-const DEF = {n:4,f:300000,p:50,d:8};
+const DEF = {t:30000,v:40,p:50,d:8,m:25};
 
 function cuenta(){
-  const n=num("#n"), f=num("#f"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100);
-  const fact=n*f, total=fact*(p/100)*(d/100);
-  $("#total").textContent = eur(total);
-  $("#desglose").textContent = `${n} × ${eur(f)} = ${eur(fact)} · ${p} % con un ${d} % de descuento`;
-  $("#aviso-ejemplo").hidden = !(n===DEF.n && f===DEF.f && p===DEF.p && d===DEF.d);
-  return {n,f,p,d,fact,total};
+  const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
+  const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
+  $("#porventa").textContent = eur(porventa);
+  $("#anual").textContent = `Al año: ${eur(total)}, en ${conDesc} ventas con descuento.`;
+  $("#recuperar").textContent = `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
+  const ct=$("#c-total"); if (ct) ct.textContent = eur(total);
+  $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
+  return {t,v,p,d,m,porventa,total,recuperar};
 }
-["#n","#f","#p","#d"].forEach(id => $(id).addEventListener("input", cuenta));
+["#t","#v","#p","#d","#m"].forEach(id => $(id).addEventListener("input", cuenta));
 
 const LECTURAS = {
   quien:{
@@ -549,11 +541,14 @@ function resumen(){
   const c = cuenta();
   const lineas = [
     "AUTODIAGNÓSTICO · VENTA B2B POR VALOR",
-    `Personas vendiendo: ${c.n}`,
-    `Facturación por persona: ${eur(c.f)}`,
+    `Importe medio por venta: ${eur(c.t)}`,
+    `Ventas al año: ${c.v}`,
     `Ventas con descuento: ${c.p} %`,
     `Descuento medio: ${c.d} %`,
-    `Margen en descuentos al año: ${eur(c.total)}`,
+    `Margen bruto: ${c.m} %`,
+    `Pérdida por venta con descuento: ${eur(c.porventa)}`,
+    `Pérdida al año: ${eur(c.total)}`,
+    `Facturación extra para recuperarlo: ${eur(c.recuperar)}`,
     ""
   ];
   Object.keys(PREGUNTAS).forEach(k => lineas.push(`${PREGUNTAS[k]}: ${txt(k)}`));
