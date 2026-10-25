@@ -320,9 +320,7 @@ footer b{color:var(--papel)}
             <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" required></div>
             <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" autocomplete="tel" required></div>
           </div>
-          <label class="check"><input id="c-llamada" type="checkbox"><span>Quiero que lo veamos veinte minutos por teléfono.</span></label>
-          <label class="check"><input id="c-comercial" type="checkbox"><span>Acepto que Juan Abarca Ferrando me contacte por email o teléfono para ofrecerme sus servicios. (Opcional)</span></label>
-          <p class="legal">Al enviar, aceptas que use estos datos para responder a tu solicitud. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
+          <p class="legal">Al enviar, aceptas que use estos datos para contestarte por email o teléfono sobre tu resultado. Nada de listas ni publicidad. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
           <div class="stack-s" style="gap:8px"><div><button class="btn dark" type="submit">Quiero saber por dónde empezar</button></div><span style="font-size:13px;color:var(--texto-suave)">Te contesto en dos días laborables.</span></div>
         </form>
@@ -536,9 +534,7 @@ function resumen(){
     `Nombre: ${$("#c-nombre").value.trim()}`,
     `Empresa: ${$("#c-empresa").value.trim()}`,
     `Email: ${$("#c-email").value.trim()}`,
-    `Teléfono: ${$("#c-tel").value.trim()}`,
-    `Quiere llamada: ${$("#c-llamada").checked ? "Sí" : "No"}`,
-    `Acepta comunicaciones comerciales: ${$("#c-comercial").checked ? "Sí" : "No"}`);
+    `Teléfono: ${$("#c-tel").value.trim()}`);
   return lineas.join("\n");
 }
 
@@ -557,7 +553,7 @@ $("#form").addEventListener("submit", async e => {
   let enviado = false;
   if (FORM_ENDPOINT){
     try{
-      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), _replyto:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim(), llamada:$("#c-llamada").checked, informado_privacidad:true, acepta_comunicaciones_comerciales:$("#c-comercial").checked, fecha:new Date().toISOString()})});
+      const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({resumen:texto, nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), _replyto:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim(), informado_privacidad:true, fecha:new Date().toISOString()})});
       enviado = r.ok;
     }catch(_){ enviado = false; }
   }
