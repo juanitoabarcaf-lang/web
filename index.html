@@ -7,13 +7,13 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://juanabarca.es/">
 <meta property="og:title" content="Juan Abarca Ferrando · Venta B2B por valor">
-<meta property="og:description" content="Para pymes B2B que venden algo mejor y más caro que su competencia y acaban en el descuento. Calcula cuánto margen se os va cada año.">
+<meta property="og:description" content="Para pymes B2B que venden algo mejor que su competencia y acaban cerrando con descuento o vendiendo sin margen. Calcula cuánto dinero se os va cada año.">
 <meta property="og:image" content="https://juanabarca.es/og-juanabarca.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="627">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="description" content="Pymes B2B que venden algo mejor y más caro que su competencia y acaban en el descuento. Calcula cuánto margen se os va cada año.">
+<meta name="description" content="Pymes B2B que venden algo mejor que su competencia y acaban cerrando con descuento o vendiendo sin margen. Calcula cuánto dinero se os va cada año.">
 <style>
 @font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format("woff2")}
@@ -172,10 +172,10 @@ footer b{color:var(--papel)}
 <section class="band tinta hero">
   <div class="wrap stack">
     <div class="bar" aria-hidden="true"></div>
-    <h1>Ayudo a pymes B2B que venden algo mejor y más caro que su competencia a que su equipo <mark>deje de perder por precio.</mark></h1>
-    <p class="lead">El producto no es el problema. El equipo lo explica por características, el cliente no ve la diferencia y la venta se cierra con descuento, se pierde contra el más barato o la tiene que cerrar el dueño.</p>
+    <h1>Ayudo a pymes B2B que venden algo mejor que su competencia a que su equipo <mark>deje de perder por precio.</mark></h1>
+    <p class="lead">Lo vuestro vale más, pero acabáis cerrando con descuento o vendiendo sin margen. El equipo lo explica por características, el cliente no ve la diferencia y las ventas grandes las tiene que salvar el dueño.</p>
     <div class="ctas">
-      <a class="btn primary" href="#diagnostico">Calcula cuánto perdéis en cada venta</a>
+      <a class="btn primary" href="#diagnostico">Calcula cuánto dinero se os va</a>
       <a class="btn ghost" href="#contacto-final">Escríbeme</a>
     </div>
     <p class="nota">Dos minutos. Ves el resultado al momento, sin dejar ningún dato.</p>
@@ -275,7 +275,7 @@ footer b{color:var(--papel)}
         </fieldset>
 
         <fieldset class="q">
-          <legend>Si pregunto a tres de tus comerciales por qué lo vuestro cuesta más, ¿qué me dicen?</legend>
+          <legend>Si pregunto a tres de tus comerciales por qué lo vuestro es mejor que lo de la competencia, ¿qué me dicen?</legend>
           <div class="opts">
             <label class="opt"><input type="radio" name="discurso" value="igual"><span>Lo mismo</span></label>
             <label class="opt"><input type="radio" name="discurso" value="parecido"><span>Algo parecido</span></label>
@@ -334,8 +334,8 @@ footer b{color:var(--papel)}
       </div>
 
       <div class="contacto" id="contacto">
-        <h3>Este año se os van <mark id="c-total">48.000 €</mark> por aquí, y el que viene igual.</h3>
-        <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo dónde miraría primero en vuestro caso. Lo leo yo, y si quieres lo vemos veinte minutos por teléfono.</p>
+        <h3 id="c-titulo">Este año se os van <mark id="c-total">48.000 €</mark> por aquí, y el que viene igual.</h3>
+        <p style="font-size:15px;color:var(--texto-suave)">Mándame tu resultado y te digo por dónde creo que se os va y qué miraría primero. Lo leo yo, no un sistema. Si te encaja, lo vemos veinte minutos por teléfono, sin compromiso.</p>
         <form id="form" novalidate class="stack-s">
           <div class="grid2">
             <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
@@ -436,7 +436,7 @@ footer b{color:var(--papel)}
       <div>
         <h3>Encaja si</h3>
         <ul>
-          <li>Vendéis algo mejor y más caro que vuestra competencia.</li>
+          <li>Vendéis algo mejor que vuestra competencia, aunque hoy no lo cobréis.</li>
           <li>Lo vende vuestro propio equipo al cliente final.</li>
           <li>El cliente lo compra como proyecto, inversión o trabajo a medida.</li>
           <li>Sois de 3 a 8 personas vendiendo, a menudo técnicos, sin jefe de ventas.</li>
@@ -460,6 +460,7 @@ footer b{color:var(--papel)}
     <div class="bar" aria-hidden="true"></div>
     <img class="avatar" src="juan-abarca.webp" width="72" height="72" alt="" loading="lazy">
     <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, escríbeme.</b>
+    <p>O empieza por la cuenta: <a href="#diagnostico" style="color:var(--ambar)">calcula cuánto dinero se os va</a>. Son dos minutos.</p>
     <div class="email-box"><code id="email">juanabarcaferrando@hotmail.com</code><button class="copy" type="button" id="copiar-email">Copiar</button></div>
     <p>También por mensaje en LinkedIn: <a href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Juan Abarca Ferrando</a></p>
     <p>Juan Abarca Ferrando · Venta B2B por valor · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></p>
@@ -490,6 +491,7 @@ function cuenta(){
   b.textContent = `Por vender por debajo de lo que vale: ${eur(bajo)} al año, un ${x} % sobre ${eur(t*v)} de ventas.`;
   $("#recuperar").textContent = `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
   const ct=$("#c-total"); if (ct) ct.textContent = eur(total);
+  const tt=$("#c-titulo"); if (tt) tt.hidden = total<=0;
   $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && x===DEF.x && m===DEF.m);
   return {t,v,p,d,x,m,porventa,descuentos,bajo,total,recuperar};
 }
