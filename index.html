@@ -215,9 +215,9 @@ footer b{color:var(--papel)}
           </div>
         </div>
         <div class="cuenta" aria-live="polite">
-          <span class="label" style="color:var(--gris)">En cada venta con descuento perdéis</span>
-          <div class="cifra"><mark id="porventa">2.400 €</mark></div>
-          <div class="desglose" id="anual">Al año: 48.000 €, en 20 ventas con descuento.</div>
+          <span class="label" style="color:var(--gris)">Margen que perdéis al año en descuentos</span>
+          <div class="cifra"><mark id="anual-cifra">48.000 €</mark></div>
+          <div class="desglose" id="anual">Son 2.400 € en cada venta con descuento, en 20 ventas.</div>
           <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
           <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
         </div>
@@ -461,8 +461,8 @@ const DEF = {t:30000,v:40,p:50,d:8,m:25};
 function cuenta(){
   const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
   const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
-  $("#porventa").textContent = eur(porventa);
-  $("#anual").textContent = `Al año: ${eur(total)}, en ${conDesc} ventas con descuento.`;
+  $("#anual-cifra").textContent = eur(total);
+  $("#anual").textContent = `Son ${eur(porventa)} en cada venta con descuento, en ${conDesc} ventas.`;
   $("#recuperar").textContent = `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
   const ct=$("#c-total"); if (ct) ct.textContent = eur(total);
   $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
