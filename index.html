@@ -326,10 +326,10 @@ footer b{color:var(--papel)}
           </div>
           <p class="legal">Al enviar, aceptas que use estos datos para contestarte por email o teléfono sobre tu resultado. Nada de listas ni publicidad. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
           <p class="err" id="err" hidden></p>
-          <div class="stack-s" style="gap:8px"><div><button class="btn dark" type="submit">Quiero saber por dónde empezar</button></div><span style="font-size:13px;color:var(--texto-suave)">Te contesto en dos días laborables.</span></div>
+          <div><button class="btn dark" type="submit">Quiero saber por dónde empezar</button></div>
         </form>
         <div class="ok" id="ok" hidden>
-          <h3 id="ok-t">Recibido. Te contesto en dos días laborables.</h3>
+          <h3 id="ok-t">Recibido. Te contesto yo.</h3>
           <p id="ok-p" style="font-size:15px;color:var(--texto-suave)"></p>
           <div class="resumen" id="resumen" hidden></div>
           <div id="ok-acciones" hidden class="email-box"><button class="copy" type="button" id="copiar-res" style="color:var(--verde);border-color:var(--linea)">Copiar resultado</button></div>
@@ -573,7 +573,7 @@ $("#form").addEventListener("submit", async e => {
   }
   $("#form").hidden = true; $("#ok").hidden = false;
   if (enviado){
-    $("#ok-t").textContent = "Recibido. Te contesto en dos días laborables.";
+    $("#ok-t").textContent = "Recibido. Te contesto yo.";
     $("#ok-p").textContent = "Lo leo yo, no un sistema automático.";
   } else {
     $("#ok-t").textContent = "Tu resultado, listo para enviar";
