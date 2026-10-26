@@ -214,7 +214,7 @@ footer b{color:var(--papel)}
             <small>Operaciones cerradas por todo el equipo, no euros.</small>
           </div>
           <div class="field">
-            <label for="p">Ventas que cerráis por debajo de lo que vale</label>
+            <label for="p">Ventas que cerráis por debajo de vuestro precio objetivo</label>
             <div class="unit"><input id="p" type="number" inputmode="decimal" min="0" max="100" value="50"><span>%</span></div>
             <small>Con descuento, o con un precio ya bajo de entrada. Si siempre vendéis barato, pon 100.</small>
           </div>
@@ -534,7 +534,7 @@ function resumen(){
     "AUTODIAGNÓSTICO · VENTA B2B POR VALOR",
     `Importe medio por venta: ${eur(c.t)}`,
     `Número de ventas al año: ${c.v}`,
-    `Ventas por debajo de lo que vale: ${c.p} %`,
+    `Ventas por debajo del precio objetivo: ${c.p} %`,
     `Cuánto por debajo, de media: ${c.d} %`,
     `Margen bruto: ${c.m} %`,
     `Pérdida por venta: ${eur(c.porventa)}`,
