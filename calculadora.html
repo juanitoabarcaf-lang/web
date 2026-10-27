@@ -311,6 +311,7 @@ details.mas-info.claro p{color:var(--texto)}
 
 <script>
 const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
 const eur = v => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " €";
 const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
 const DEF = {t:30000,v:40,p:50,d:8,m:25};
