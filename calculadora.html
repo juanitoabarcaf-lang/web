@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calculadora · Juan Abarca</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://juanabarca.es/">
+<meta property="og:title" content="Juan Abarca Ferrando · Venta B2B por valor">
+<meta property="og:description" content="Para pymes que venden algo mejor que su competencia y acaban cerrando con descuento o sin margen. Lo construimos juntos, sobre vuestras ventas reales.">
+<meta property="og:image" content="https://juanabarca.es/og-juanabarca.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Para pymes que venden algo mejor que su competencia y acaban cerrando con descuento o sin margen. Lo construimos juntos, sobre vuestras ventas reales.">
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-opsz-normal.woff2) format("woff2")}
+/* Layout: bandas a todo el ancho, alternando tinta (lo que se ve) y papel (lo que se lee); una columna de lectura de ~680px; el autodiagnóstico es la única pieza con caja. */
+:root{
+  --tinta:#10212A;
+  --ambar:#E9B44C;
+  --papel:#F4F7F8;
+  --gris:#8A9EA8;
+  --borde:#2A3E48;
+  --verde:#0A5C5C;
+  --blanco:#FFFFFF;
+  --texto:#1B2B33;
+  --texto-suave:#4E6470;
+  --linea:#D9E2E6;
+  --font:"Inter",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{font-optical-sizing:auto;background:var(--papel);color:var(--texto);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:72px}
+.band.tinta{background:var(--tinta);color:var(--papel)}
+.band.blanco{background:var(--blanco)}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.02em}
+h1{font-size:clamp(32px,6vw,52px);font-weight:800}
+h2{font-size:clamp(26px,4.4vw,36px);font-weight:700;color:var(--verde)}
+.tinta h2{color:var(--papel)}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:20px}
+.stack-s{display:flex;flex-direction:column;gap:12px}
+.label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.bar{width:90px;height:8px;background:var(--ambar)}
+mark{background:var(--ambar);color:var(--tinta);padding:0 .15em}
+h1 mark{padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+a{color:inherit}
+
+/* Cabecera */
+.top{background:var(--tinta);color:var(--papel);border-bottom:1px solid var(--borde)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;flex-wrap:wrap}
+.firma{display:flex;flex-direction:column;line-height:1.25}
+.firma b{font-size:16px;font-weight:700}
+.firma span{font-size:13px;color:var(--gris)}
+.top a.mini{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar);padding-bottom:2px}
+
+/* Hero */
+.hero{padding-block:64px 80px}
+.hero .lead{font-size:19px;color:#C9D5DA;max-width:60ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:6px;padding:15px 22px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:var(--ambar);color:var(--tinta)}
+.btn.claro{background:var(--papel);color:var(--tinta)}
+.btn.ghost{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1.5px var(--borde)}
+.btn.dark{background:var(--tinta);color:var(--papel)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--ambar);outline-offset:2px}
+.hero .nota{font-size:14px;color:var(--gris)}
+.hero .cred{font-size:14px;font-weight:600;color:var(--papel);padding-top:14px;border-top:1px solid var(--borde);max-width:62ch}
+
+/* Frases literales */
+.frases{display:flex;flex-direction:column;gap:14px;margin:8px 0}
+.frase{font-size:20px;font-weight:600;color:var(--tinta);border-left:3px solid var(--ambar);padding-left:16px}
+.prose p{max-width:62ch}
+.prose p+p{margin-top:16px}
+
+/* Autodiagnóstico */
+.diag{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:32px}
+@media (max-width:480px){.diag{padding:20px}}
+.paso{display:flex;flex-direction:column;gap:18px}
+.paso-h{display:flex;gap:12px;align-items:baseline}
+.paso-n{font-size:13px;font-weight:700;color:var(--verde);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.q legend{font-size:15px;font-weight:600;color:var(--texto)}
+.field small{font-size:13px;color:var(--texto-suave)}
+input[type=number],input[type=text],input[type=email],input[type=tel],textarea{font:inherit;font-size:17px;border:1.5px solid var(--linea);border-radius:6px;padding:12px 14px;background:var(--papel);color:var(--texto);width:100%;font-variant-numeric:tabular-nums}
+textarea{min-height:96px;resize:vertical}
+.unit{position:relative}
+.unit input{padding-right:44px}
+.unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--texto-suave);font-size:15px;pointer-events:none}
+.cuenta{background:var(--tinta);color:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.cuenta .cifra{font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.cuenta .cifra{margin:6px 0}
+#anual-cifra{display:inline-block;color:var(--ambar);line-height:1;white-space:nowrap;font-size:clamp(44px,13vw,64px)}
+#anual-cifra::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.18em;vertical-align:-.04em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M4 8 L16 22 L24 15 L36 30' fill='none' stroke='%23E9B44C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M26 30 H36 V20' fill='none' stroke='%23E9B44C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
+.cuenta .desglose{font-size:15px;color:#C9D5DA;font-variant-numeric:tabular-nums}
+.cuenta .aviso{font-size:13px;color:var(--gris)}
+.q{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.q legend{margin-bottom:10px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;font-size:15px;padding:10px 14px;border:1.5px solid var(--linea);border-radius:999px;cursor:pointer;background:var(--papel);line-height:1.3}
+.opt input:checked+span{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.opt span:hover{border-color:var(--gris)}
+.sep{height:1px;background:var(--linea)}
+
+.resultado{display:flex;flex-direction:column;gap:18px}
+.abrir{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:10px;padding-top:16px;border-top:1px solid var(--borde)}
+.puente{font-size:16px;font-weight:600;color:var(--papel)}
+.micro{font-size:13px;color:var(--gris)}
+@media (max-width:520px){.btn.ancho{width:100%}}
+.mas{display:flex;flex-direction:column;gap:32px}
+.obs{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
+.obs li{border-left:3px solid var(--verde);padding-left:14px}
+.obs li b{display:block;font-size:16px;color:var(--tinta)}
+.obs li span{font-size:15px;color:var(--texto-suave)}
+.fuera{background:#FFF7E6;border:1px solid var(--ambar);border-radius:8px;padding:16px;font-size:15px}
+.vacio{font-size:15px;color:var(--texto-suave)}
+
+.contacto{background:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave)}
+.check a{color:var(--verde)}
+.check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--verde)}
+.legal{font-size:12px;color:var(--texto-suave);line-height:1.5}
+.legal a{color:var(--verde)}
+.ok{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.resumen{font-family:ui-monospace,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:var(--papel);border-radius:6px;padding:14px;max-height:220px;overflow:auto;user-select:all}
+.err{color:#9A3B12;font-size:14px}
+
+/* Cómo trabajo */
+.lista{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--borde)}
+.lista li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:18px 0;border-bottom:1px solid var(--borde)}
+.lista li b{font-size:18px;color:var(--papel)}
+.lista li span{color:#C9D5DA;font-size:16px}
+.no-prometo{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.no-prometo li{padding-left:22px;position:relative}
+.no-prometo li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:2px;background:var(--verde)}
+.trayectoria{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600;color:var(--tinta)}
+.trayectoria span{white-space:nowrap}
+.servilleta{background:var(--blanco);border:1px dashed var(--gris);border-radius:8px;padding:18px;font-variant-numeric:tabular-nums}
+.servilleta .linea{display:flex;justify-content:space-between;gap:12px;font-size:16px;padding:4px 0}
+.servilleta .total{border-top:1.5px solid var(--tinta);margin-top:6px;padding-top:8px;font-weight:700}
+.filtros{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:600px){.filtros{grid-template-columns:1fr}}
+.filtros div{min-width:0}
+.filtros h3{margin-bottom:10px}
+.filtros ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.yo{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:end}
+.yo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border-bottom:6px solid var(--ambar)}
+@media (max-width:560px){.yo{grid-template-columns:minmax(0,1fr)}.yo picture{max-width:240px}}
+.avatar{flex:none;align-self:flex-start;width:72px;height:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--borde)}
+.noprom{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:20px;border:1px solid var(--borde);border-radius:8px}
+.noprom h3{color:var(--ambar)}
+.noprom p{color:#C9D5DA;max-width:62ch}
+footer{background:var(--tinta);color:var(--gris);font-size:14px}
+footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
+footer b{color:var(--papel)}
+.email-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dir{font-size:13px;user-select:all}
+.quien{display:flex;align-items:center;gap:14px;padding:14px;background:var(--blanco);border:1px solid var(--linea);border-radius:8px}
+.quien img{flex:none;width:56px;height:56px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 22%;border:2px solid var(--ambar)}
+.quien p{font-size:14px;line-height:1.5;color:var(--texto);min-width:0}
+.li-wrap{display:flex;flex-direction:column;gap:10px;margin-top:18px;padding-top:22px;border-top:1px solid var(--borde)}
+.email-box .mail{font-size:17px;color:var(--papel);font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar)}
+.copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ambar);border:1.5px solid var(--borde);border-radius:6px;padding:6px 10px;cursor:pointer}
+/* v2: fugas, desplegables y caja de reserva */
+.fugas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:640px){.fugas{grid-template-columns:minmax(0,1fr)}}
+.fuga{background:var(--papel);border-top:4px solid var(--ambar);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.fuga b{font-size:18px;color:var(--tinta)}
+.fuga span{font-size:15px;color:var(--texto-suave)}
+.lista li b em{font-style:normal;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);margin-left:8px}
+details.mas-info{border:1px solid var(--borde);border-radius:8px;padding:0 18px}
+details.mas-info summary{cursor:pointer;font-weight:700;padding:16px 0;color:var(--ambar)}
+details.mas-info[open]{padding-bottom:18px}
+details.mas-info p{color:#C9D5DA;max-width:62ch}
+details.mas-info.claro{border-color:var(--linea)}
+details.mas-info.claro summary{color:var(--verde)}
+details.mas-info.claro p{color:var(--texto)}
+.caja{background:var(--blanco);color:var(--texto);border-radius:10px;padding:28px}
+@media (max-width:480px){.caja{padding:20px}}
+.caja h3{color:var(--tinta)}
+.hero .nota a{color:var(--papel)}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap"><div class="firma"><b>Juan Abarca Ferrando</b><span>Venta B2B por valor</span></div><a class="mini" href="index.html">juanabarca.es</a></div></header>
+<section class="band blanco" id="calc">
+  <div class="wrap stack">
+    <span class="label">Calculadora</span>
+    <h2>¿Cuánto dejáis de ganar por no vender al precio correcto?</h2>
+    <p class="prose" style="max-width:62ch">Pon vuestras cifras y la cuenta sale al momento, sin dejar ningún dato.</p>
+
+    <div class="diag">
+      <div class="paso">
+        <div class="grid2">
+          <div class="field">
+            <label for="t">Importe medio de una venta</label>
+            <div class="unit"><input id="t" type="number" inputmode="numeric" min="0" step="1000" value="30000"><span>€</span></div>
+          </div>
+          <div class="field">
+            <label for="v">Número de ventas al año</label>
+            <input id="v" type="number" inputmode="numeric" min="0" value="40">
+            <small>Operaciones cerradas por todo el equipo, no euros.</small>
+          </div>
+          <div class="field">
+            <label for="p">% de ventas que cerráis por debajo de vuestro precio objetivo</label>
+            <div class="unit"><input id="p" type="number" inputmode="decimal" min="0" max="100" value="50"><span>%</span></div>
+            <small>Con descuento, o con un precio ya bajo de entrada. Si siempre vendéis barato, pon 100.</small>
+          </div>
+          <div class="field">
+            <label for="d">Cuánto por debajo, de media</label>
+            <div class="unit"><input id="d" type="number" inputmode="decimal" min="0" max="60" step="0.5" value="8"><span>%</span></div>
+            <small>El descuento que hacéis, o lo que cobráis de menos sobre lo que os gustaría cobrar.</small>
+          </div>
+          <div class="field" style="grid-column:1/-1">
+            <label for="m">Vuestro margen bruto</label>
+            <div class="unit"><input id="m" type="number" inputmode="decimal" min="1" max="95" value="25"><span>%</span></div>
+          </div>
+        </div>
+        <div class="cuenta" aria-live="polite">
+          <span class="label" id="cifra-label" style="color:var(--papel);font-size:15px">Lo que dejáis de ganar cada año:</span>
+          <div class="cifra"><span id="anual-cifra">48.000 €</span></div>
+          <div class="desglose" id="anual">Son 2.400 € en cada venta por debajo de lo que vale, en 20 ventas.</div>
+          <div class="desglose" id="margen-txt">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
+          <div class="desglose" id="recuperar">Para recuperarlo vendiendo más, con un 25 % de margen, tendríais que facturar 192.000 € más.</div>
+          <div class="aviso" id="aviso-ejemplo">Son cifras de ejemplo. Cambia cada una por las vuestras.</div>
+          <div class="abrir" id="abrir-wrap">
+            <p class="puente">Casi siempre se va por los mismos cuatro o cinco sitios. ¿Cuál es el vuestro?</p>
+            <button class="btn claro ancho" type="button" id="abrir">Ver por dónde se os van los 48.000 € →</button>
+            <span class="micro">5 preguntas · 1 minuto · sin dejar datos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mas" id="mas" hidden>
+      <div class="sep"></div>
+      <div class="paso">
+        <h3>Por dónde se os va</h3>
+        <p class="vacio">Cada respuesta te dice qué suele haber detrás.</p>
+        <fieldset class="q">
+          <legend>¿Cómo fijáis el precio?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="precio" value="valor"><span>Según lo que aporta al cliente</span></label>
+            <label class="opt"><input type="radio" name="precio" value="competencia"><span>Mirando a la competencia</span></label>
+            <label class="opt"><input type="radio" name="precio" value="coste"><span>Coste más un margen</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>Cuando hay descuento, ¿de quién sale?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="quien" value="cliente"><span>Lo pide el cliente</span></label>
+            <label class="opt"><input type="radio" name="quien" value="comercial"><span>Lo ofrece el comercial antes de que lo pidan</span></label>
+            <label class="opt"><input type="radio" name="quien" value="nose"><span>No lo sé</span></label>
+            <label class="opt"><input type="radio" name="quien" value="ninguno"><span>No hacemos descuentos</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>Las operaciones grandes, ¿quién las acaba cerrando?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="cierra" value="equipo"><span>El equipo, solo</span></label>
+            <label class="opt"><input type="radio" name="cierra" value="aveces"><span>Entro yo a menudo</span></label>
+            <label class="opt"><input type="radio" name="cierra" value="siempre"><span>Las cierro yo casi siempre</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>Si pregunto a tres de tus comerciales por qué lo vuestro es mejor que lo de la competencia, ¿qué me dicen?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="discurso" value="igual"><span>Lo mismo</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="parecido"><span>Algo parecido</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="distinto"><span>Cada uno lo suyo</span></label>
+            <label class="opt"><input type="radio" name="discurso" value="nose"><span>No lo sé</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>Vuestro presupuesto, ¿qué enseña?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="presu" value="valor"><span>Lo que gana el cliente con nosotros</span></label>
+            <label class="opt"><input type="radio" name="presu" value="cifra"><span>Referencias, cantidades y el total</span></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="sep"></div>
+      <div class="resultado" id="resultado">
+        <h3>Lo que suele haber detrás</h3>
+        <p class="vacio" id="vacio">Contesta las preguntas de arriba y aquí aparece la lectura de cada respuesta.</p>
+        <ul class="obs" id="obs"></ul>
+        <p class="vacio" id="cierre-res" hidden>Esto no es un veredicto. Son los patrones que más se repiten. Lo que pasa en vuestro caso solo se ve mirando operaciones reales.</p>
+      </div>
+      </div>
+
+      <div class="contacto">
+        <h3 id="c-titulo">Este año dejáis de ganar <mark id="c-total">48.000 €</mark>, y el que viene igual.</h3>
+        <p style="font-size:15px;color:var(--texto-suave)">En una hora lo miramos con tres operaciones reales y te digo por dónde empezaría. Tu resultado me llega junto con tus datos.</p>
+        <div><a class="btn dark" href="index.html#hablamos" id="ir-hablamos">Quiero verlo en una hora</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const $ = s => document.querySelector(s);
+const eur = v => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " €";
+const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
+const DEF = {t:30000,v:40,p:50,d:8,m:25};
+let calcUsada = false;
+function ajustarCifra(){
+  const el=$("#anual-cifra"), box=el.parentElement; el.style.fontSize="";
+  let fs=parseFloat(getComputedStyle(el).fontSize);
+  while (el.scrollWidth + 22 > box.clientWidth && fs > 24){ fs -= 2; el.style.fontSize = fs + "px"; }
+}
+addEventListener("resize", ajustarCifra);
+function cuenta(){
+  const t=num("#t"), v=num("#v"), p=Math.min(num("#p"),100), d=Math.min(num("#d"),100), m=Math.min(Math.max(num("#m"),1),100);
+  const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
+  const cero = total<=0, punto=t*v/100, cinco=punto*5;
+  $("#anual-cifra").textContent = eur(cero ? punto : total); ajustarCifra();
+  $("#cifra-label").textContent = cero ? "Lo que vale cada 1 % de precio, al año:" : "Lo que dejáis de ganar cada año:";
+  const a=$("#anual");
+  a.hidden = cero && punto<=0;
+  a.textContent = cero
+    ? `Si de verdad cobráis lo que vale, sois de los pocos. Si no, un 5 % más en cada venta serían ${eur(cinco)} al año.`
+    : `Son ${eur(porventa)} en cada venta por debajo de lo que vale, en ${conDesc} ventas.`;
+  $("#margen-txt").textContent = cero
+    ? "Y entra entero en el margen: subir el precio no cuesta ni un euro más de producir ni de servir."
+    : "Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.";
+  $("#recuperar").textContent = cero
+    ? `Ganar esos ${eur(cinco)} vendiendo más, con un ${m} % de margen, exigiría facturar ${eur(cinco/(m/100))} más.`
+    : `Para recuperarlo vendiendo más, con un ${m} % de margen, tendríais que facturar ${eur(recuperar)} más.`;
+  $("#c-total").textContent = eur(cero ? punto : total);
+  const tt=$("#c-titulo");
+  tt.hidden = cero && punto<=0;
+  tt.firstChild.textContent = cero ? "Cada 1 % de precio que no cobráis son " : "Este año dejáis de ganar ";
+  tt.lastChild.textContent = cero ? " al año." : ", y el que viene igual.";
+  $("#abrir").textContent = cero ? "Ver dónde se os queda el precio →" : `Ver por dónde se os van los ${eur(total)} →`;
+  $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
+  return {t,v,p,d,m,porventa,total,recuperar};
+}
+["#t","#v","#p","#d","#m"].forEach(id => $(id).addEventListener("input", () => { calcUsada = true; cuenta(); }));
+
+const LECTURAS = {
+  precio:{
+    competencia:["Fijáis el precio mirando a la competencia.","Si lo vuestro es mejor y cobráis lo mismo, el descuento ya está hecho en la tarifa, antes de la primera reunión. Es la misma fuga que un descuento, solo que no se ve."],
+    coste:["Fijáis el precio por lo que os cuesta.","El cliente no os paga vuestros costes, os paga lo que gana con vosotros. Si eso no está en la cuenta, lo normal es quedarse corto."]
+  },
+  quien:{
+    cliente:["El cliente aprieta y se cede.","Suele pasar cuando el comercial no tiene con qué sostener la cifra: si el cliente no ve en euros lo que gana, el precio es lo único que puede discutir."],
+    comercial:["El descuento sale de vosotros.","Frases como \"podemos ver qué margen tenemos\" regalan margen antes de que nadie lo pida. Es de lo más caro y de lo más fácil de cambiar."],
+    nose:["No sabéis de quién sale.","Esa casilla vacía es el hallazgo. Mirad las diez últimas operaciones grandes: precio de salida, precio de cierre, quién lo pidió y por qué."]
+  },
+  cierra:{
+    aveces:["Cuando entras tú, se cierra.","Funciona porque eres el único que sostiene el precio sin pedir permiso. El coste está en lo que aprende el equipo: que las difíciles no las llevan ellos."],
+    siempre:["La empresa vende caro tantas veces como reuniones caben en tu agenda.","El equipo llega hasta el precio y ahí entras tú. Mientras siga así, no aprenden a sostenerlo solos."]
+  },
+  discurso:{
+    parecido:["Cada uno lo cuenta a su manera.","Si el argumento vive en la cabeza de cada comercial, el cliente oye una versión distinta según con quién hable."],
+    distinto:["Cada uno lo cuenta a su manera.","Si el argumento vive en la cabeza de cada comercial, el cliente oye una versión distinta según con quién hable, y se queda con la más floja."],
+    nose:["No sabes cómo lo explica cada uno.","Pregúntaselo a tres esta semana. Lo normal es oír tres respuestas distintas, y alguna muy buena que nadie ha puesto por escrito."]
+  },
+  presu:{
+    cifra:["Vuestro presupuesto se parece al del más barato.","Si las tres hojas que recibe el cliente se parecen, solo puede comparar el total. Es la última pieza que mira antes de decidir."]
+  }
+};
+const PREGUNTAS = {
+  precio:"Cómo fijan el precio", quien:"De quién sale el descuento", cierra:"Quién cierra las grandes",
+  discurso:"Qué dicen tres comerciales", presu:"Qué enseña el presupuesto"
+};
+const val = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : null; };
+const txt = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.nextElementSibling.textContent : "—"; };
+
+function lectura(){
+  const ul = $("#obs"); ul.textContent = "";
+  let n = 0, contestadas = 0;
+  Object.keys(LECTURAS).forEach(k => {
+    const v = val(k); if (v) contestadas++;
+    const l = v && LECTURAS[k][v];
+    if (l){
+      n++;
+      const li = document.createElement("li");
+      const b = document.createElement("b"); b.textContent = l[0];
+      const s = document.createElement("span"); s.textContent = l[1];
+      li.append(b, s); ul.append(li);
+    }
+  });
+  $("#vacio").hidden = contestadas > 0;
+  $("#cierre-res").hidden = n === 0;
+  if (contestadas > 0 && n === 0){
+    const li = document.createElement("li");
+    const b = document.createElement("b"); b.textContent = "Por lo que cuentas, tenéis buena parte de esto resuelto.";
+    const s = document.createElement("span"); s.textContent = "Si aun así la cuenta sale alta, el siguiente sitio donde mirar son las diez últimas operaciones grandes, una por una.";
+    li.append(b, s); ul.append(li);
+  }
+}
+$$('#mas .q input[type=radio]').forEach(r => r.addEventListener("change", () => { calcUsada = true; lectura(); }));
+$("#abrir").addEventListener("click", () => {
+  calcUsada = true;
+  $("#mas").hidden = false; $("#abrir-wrap").hidden = true;
+  $("#mas").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+});
+
+cuenta();
+</script>
+</body>
+</html>
