@@ -199,7 +199,7 @@ details.mas-info.claro p{color:var(--texto)}
 <section class="band blanco" id="calc">
   <div class="wrap stack">
     <span class="label">Calculadora</span>
-    <h2>¿Cuánto dejáis de ganar por no vender al precio correcto?</h2>
+    <h2>¿Cuánto perdéis por no vender al precio correcto?</h2>
     <p class="prose" style="max-width:62ch">Pon vuestras cifras y la cuenta sale al momento, sin dejar ningún dato.</p>
 
     <div class="diag">
@@ -230,7 +230,7 @@ details.mas-info.claro p{color:var(--texto)}
           </div>
         </div>
         <div class="cuenta" aria-live="polite">
-          <span class="label" id="cifra-label" style="color:var(--papel);font-size:15px">Lo que dejáis de ganar cada año:</span>
+          <span class="label" id="cifra-label" style="color:var(--papel);font-size:15px">Lo que perdéis cada año:</span>
           <div class="cifra"><span id="anual-cifra">48.000 €</span></div>
           <div class="desglose" id="anual">Son 2.400 € en cada venta por debajo de lo que vale, en 20 ventas.</div>
           <div class="desglose" id="margen-txt">Sale entero del margen: cada euro que no cobráis es un euro menos de beneficio.</div>
@@ -301,7 +301,7 @@ details.mas-info.claro p{color:var(--texto)}
       </div>
 
       <div class="contacto">
-        <h3 id="c-titulo">Este año dejáis de ganar <mark id="c-total">48.000 €</mark>, y el que viene igual.</h3>
+        <h3 id="c-titulo">Este año perdéis <mark id="c-total">48.000 €</mark>, y el que viene igual.</h3>
         <p style="font-size:15px;color:var(--texto-suave)">En una hora lo miramos con tres operaciones reales y te digo por dónde empezaría. Tu resultado me llega junto con tus datos.</p>
         <div><a class="btn dark" href="index.html#hablamos" id="ir-hablamos">Quiero verlo en una hora</a></div>
       </div>
@@ -327,7 +327,7 @@ function cuenta(){
   const porventa=t*(d/100), conDesc=Math.round(v*(p/100)), total=t*v*(p/100)*(d/100), recuperar=total/(m/100);
   const cero = total<=0, punto=t*v/100, cinco=punto*5;
   $("#anual-cifra").textContent = eur(cero ? punto : total); ajustarCifra();
-  $("#cifra-label").textContent = cero ? "Lo que vale cada 1 % de precio, al año:" : "Lo que dejáis de ganar cada año:";
+  $("#cifra-label").textContent = cero ? "Lo que vale cada 1 % de precio, al año:" : "Lo que perdéis cada año:";
   const a=$("#anual");
   a.hidden = cero && punto<=0;
   a.textContent = cero
@@ -342,7 +342,7 @@ function cuenta(){
   $("#c-total").textContent = eur(cero ? punto : total);
   const tt=$("#c-titulo");
   tt.hidden = cero && punto<=0;
-  tt.firstChild.textContent = cero ? "Cada 1 % de precio que no cobráis son " : "Este año dejáis de ganar ";
+  tt.firstChild.textContent = cero ? "Cada 1 % de precio que no cobráis son " : "Este año perdéis ";
   tt.lastChild.textContent = cero ? " al año." : ", y el que viene igual.";
   $("#abrir").textContent = cero ? "Ver dónde se os queda el precio →" : `Ver por dónde se os van los ${eur(total)} →`;
   $("#aviso-ejemplo").hidden = !(t===DEF.t && v===DEF.v && p===DEF.p && d===DEF.d && m===DEF.m);
