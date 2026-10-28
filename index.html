@@ -68,6 +68,8 @@ a{color:inherit}
 .btn.claro{background:var(--papel);color:var(--tinta)}
 .btn.ghost{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1.5px var(--borde)}
 .btn.dark{background:var(--tinta);color:var(--papel)}
+.btn.linea{background:transparent;color:var(--tinta);box-shadow:inset 0 0 0 1.5px var(--tinta)}
+.btn.linea:hover{background:var(--tinta);color:var(--papel)}
 .btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--ambar);outline-offset:2px}
 .hero .nota{font-size:14px;color:var(--gris)}
 .hero .cred{font-size:14px;font-weight:600;color:var(--papel);padding-top:14px;border-top:1px solid var(--borde);max-width:62ch}
@@ -228,14 +230,14 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
 <section class="band blanco">
   <div class="wrap stack">
     <span class="label">¿Cuál es vuestro caso?</span>
-    <h2>Tres razones por las que vendéis barato <mark>y perdéis dinero.</mark></h2>
+    <h2>Tres razones por las que <mark>o bajáis el precio o perdéis la venta.</mark></h2>
     <div class="fugas">
       <div class="fuga"><b>Lo explicáis por características</b><span>El cliente oye datos, no lo que gana. Y compara precio.</span></div>
       <div class="fuga"><b>Cada uno lo cuenta a su manera</b><span>Y el cliente se queda con la versión más floja.</span></div>
       <div class="fuga"><b>Regaláis el valor sin nombrarlo</b><span>Si no está en el presupuesto, para el cliente no existe.</span></div>
     </div>
-    <div class="prose"><p><b>Cada euro que no cobráis sale entero de vuestro beneficio.</b> En cada venta, todos los años.</p></div>
-    <div><a class="btn dark" href="#hablamos">¿Os suena? Contádmelo</a></div>
+    <div class="prose"><p>Las tres acaban en el mismo sitio: el cliente nunca ve por qué lo vuestro cuesta más. Y a partir de ahí, o bajáis el precio para no perderla, o la perdéis contra alguien más barato. <b>Las dos salen enteras de vuestro beneficio.</b></p></div>
+    <div class="ctas"><a class="btn dark" href="#hablamos">¿Os suena? Contádmelo</a><a class="btn linea" href="calculadora-margen.html">O ponle número en dos minutos</a></div>
   </div>
 </section>
 
@@ -522,15 +524,7 @@ function copiar(text, btn){
 }
 $("#copiar-res").addEventListener("click", e => copiar($("#resumen").textContent, e.currentTarget));
 
-$("#f3").addEventListener("submit", async e => {
-  e.preventDefault();
-  const em=$("#c-email3").value.trim(), err=$("#err3"); err.hidden=true;
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ err.textContent="Pon un email válido."; err.hidden=false; return; }
-  let ok=false;
-  try{ const r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({_subject:"Piden la calculadora", paso:"calculadora", email:em, _replyto:em, informado_privacidad:true, fecha:new Date().toISOString()})}); ok=r.ok; }catch(_){}
-  if(ok){ $("#f3").hidden=true; $("#ok3").hidden=false; }
-  else { err.textContent="No se ha podido enviar. Escríbeme a "+EMAIL+" y te la mando."; err.hidden=false; }
-});
+
 </script>
 
 </body>
