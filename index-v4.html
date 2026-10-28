@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Juan Abarca · Venta B2B por valor</title>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://juanabarca.es/">
+<meta property="og:title" content="Juan Abarca Ferrando · Venta B2B por valor">
+<meta property="og:description" content="Consultoría comercial para pymes B2B con equipo comercial que venden algo mejor que su competencia y acaban bajando el precio o perdiendo la venta. Proyecto cerrado, precio fijo.">
+<meta property="og:image" content="https://juanabarca.es/og-juanabarca.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="description" content="Consultoría comercial para pymes B2B con equipo comercial que venden algo mejor que su competencia y acaban bajando el precio o perdiendo la venta. Proyecto cerrado, precio fijo.">
+<style>
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(fonts/inter-latin-opsz-normal.woff2) format("woff2")}
+/* Layout: bandas a todo el ancho, alternando tinta (lo que se ve) y papel (lo que se lee); una columna de lectura de ~680px; el autodiagnóstico es la única pieza con caja. */
+:root{
+  --tinta:#10212A;
+  --ambar:#E9B44C;
+  --papel:#F4F7F8;
+  --gris:#8A9EA8;
+  --borde:#2A3E48;
+  --verde:#0A5C5C;
+  --blanco:#FFFFFF;
+  --texto:#1B2B33;
+  --texto-suave:#4E6470;
+  --linea:#D9E2E6;
+  --font:"Inter",Helvetica,Arial,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{font-optical-sizing:auto;background:var(--papel);color:var(--texto);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band{padding-block:72px}
+.band.tinta{background:var(--tinta);color:var(--papel)}
+.band.blanco{background:var(--blanco)}
+h1,h2,h3{text-wrap:balance;margin:0;line-height:1.15;letter-spacing:-.02em}
+h1{font-size:clamp(32px,6vw,52px);font-weight:800}
+h2{font-size:clamp(26px,4.4vw,36px);font-weight:700;color:var(--verde)}
+.tinta h2{color:var(--papel)}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.stack{display:flex;flex-direction:column;gap:20px}
+.stack-s{display:flex;flex-direction:column;gap:12px}
+.label{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gris)}
+.bar{width:90px;height:8px;background:var(--ambar)}
+mark{background:var(--ambar);color:var(--tinta);padding:0 .15em}
+h1 mark{padding:0 .12em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+a{color:inherit}
+
+/* Cabecera */
+.top{background:var(--tinta);color:var(--papel);border-bottom:1px solid var(--borde)}
+.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:18px;flex-wrap:wrap}
+.firma{display:flex;flex-direction:column;line-height:1.25}
+.firma b{font-size:16px;font-weight:700}
+.firma span{font-size:13px;color:var(--gris)}
+.top a.mini{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar);padding-bottom:2px}
+
+/* Hero */
+.hero{padding-block:64px 80px}
+.hero .lead{font-size:19px;color:#C9D5DA;max-width:60ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{font:inherit;font-weight:700;font-size:16px;border:0;border-radius:6px;padding:15px 22px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:var(--ambar);color:var(--tinta)}
+.btn.claro{background:var(--papel);color:var(--tinta)}
+.btn.ghost{background:transparent;color:var(--papel);box-shadow:inset 0 0 0 1.5px var(--borde)}
+.btn.dark{background:var(--tinta);color:var(--papel)}
+.btn:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.opt input:focus-visible+span{outline:3px solid var(--ambar);outline-offset:2px}
+.hero .nota{font-size:14px;color:var(--gris)}
+.hero .cred{font-size:14px;font-weight:600;color:var(--papel);padding-top:14px;border-top:1px solid var(--borde);max-width:62ch}
+
+/* Frases literales */
+.frases{display:flex;flex-direction:column;gap:14px;margin:8px 0}
+.frase{font-size:20px;font-weight:600;color:var(--tinta);border-left:3px solid var(--ambar);padding-left:16px}
+.prose p{max-width:62ch}
+.prose p+p{margin-top:16px}
+
+/* Autodiagnóstico */
+.diag{background:var(--blanco);border:1px solid var(--linea);border-radius:10px;padding:28px;display:flex;flex-direction:column;gap:32px}
+@media (max-width:480px){.diag{padding:20px}}
+.paso{display:flex;flex-direction:column;gap:18px}
+.paso-h{display:flex;gap:12px;align-items:baseline}
+.paso-n{font-size:13px;font-weight:700;color:var(--verde);letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:520px){.grid2{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:6px;min-width:0}
+.field label,.q legend{font-size:15px;font-weight:600;color:var(--texto)}
+.field small{font-size:13px;color:var(--texto-suave)}
+input[type=number],input[type=text],input[type=email],input[type=tel],textarea{font:inherit;font-size:17px;border:1.5px solid var(--linea);border-radius:6px;padding:12px 14px;background:var(--papel);color:var(--texto);width:100%;font-variant-numeric:tabular-nums}
+textarea{min-height:96px;resize:vertical}
+.unit{position:relative}
+.unit input{padding-right:44px}
+.unit span{position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--texto-suave);font-size:15px;pointer-events:none}
+.cuenta{background:var(--tinta);color:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:8px}
+.cuenta .cifra{font-size:clamp(34px,8vw,48px);font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.1}
+.cuenta .cifra{margin:6px 0}
+#anual-cifra{display:inline-block;color:var(--ambar);line-height:1;white-space:nowrap;font-size:clamp(44px,13vw,64px)}
+#anual-cifra::before{content:"";display:inline-block;width:.8em;height:.8em;margin-right:.18em;vertical-align:-.04em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M4 8 L16 22 L24 15 L36 30' fill='none' stroke='%23E9B44C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M26 30 H36 V20' fill='none' stroke='%23E9B44C' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center/contain}
+.cuenta .desglose{font-size:15px;color:#C9D5DA;font-variant-numeric:tabular-nums}
+.cuenta .aviso{font-size:13px;color:var(--gris)}
+.q{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:10px}
+.q legend{margin-bottom:10px;padding:0}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:1px;height:1px}
+.opt span{display:inline-block;font-size:15px;padding:10px 14px;border:1.5px solid var(--linea);border-radius:999px;cursor:pointer;background:var(--papel);line-height:1.3}
+.opt input:checked+span{background:var(--tinta);color:var(--papel);border-color:var(--tinta)}
+.opt span:hover{border-color:var(--gris)}
+.sep{height:1px;background:var(--linea)}
+
+.resultado{display:flex;flex-direction:column;gap:18px}
+.abrir{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin-top:10px;padding-top:16px;border-top:1px solid var(--borde)}
+.puente{font-size:16px;font-weight:600;color:var(--papel)}
+.micro{font-size:13px;color:var(--gris)}
+@media (max-width:520px){.btn.ancho{width:100%}}
+.mas{display:flex;flex-direction:column;gap:32px}
+.obs{display:flex;flex-direction:column;gap:14px;padding:0;margin:0;list-style:none}
+.obs li{border-left:3px solid var(--verde);padding-left:14px}
+.obs li b{display:block;font-size:16px;color:var(--tinta)}
+.obs li span{font-size:15px;color:var(--texto-suave)}
+.fuera{background:#FFF7E6;border:1px solid var(--ambar);border-radius:8px;padding:16px;font-size:15px}
+.vacio{font-size:15px;color:var(--texto-suave)}
+
+.contacto{background:var(--papel);border-radius:8px;padding:22px;display:flex;flex-direction:column;gap:16px}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--texto-suave)}
+.check a{color:var(--verde)}
+.check input{margin-top:4px;width:18px;height:18px;flex:none;accent-color:var(--verde)}
+.legal{font-size:12px;color:var(--texto-suave);line-height:1.5}
+.legal a{color:var(--verde)}
+.ok{background:var(--blanco);border:1px solid var(--linea);border-radius:8px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.resumen{font-family:ui-monospace,Menlo,monospace;font-size:13px;white-space:pre-wrap;background:var(--papel);border-radius:6px;padding:14px;max-height:220px;overflow:auto;user-select:all}
+.err{color:#9A3B12;font-size:14px}
+
+/* Cómo trabajo */
+.lista{display:flex;flex-direction:column;gap:0;margin:0;padding:0;list-style:none;border-top:1px solid var(--borde)}
+.lista li{display:grid;grid-template-columns:minmax(0,1fr);gap:4px;padding:18px 0;border-bottom:1px solid var(--borde)}
+.lista li b{font-size:18px;color:var(--papel)}
+.lista li span{color:#C9D5DA;font-size:16px}
+.no-prometo{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
+.no-prometo li{padding-left:22px;position:relative}
+.no-prometo li::before{content:"";position:absolute;left:0;top:.7em;width:10px;height:2px;background:var(--verde)}
+.trayectoria{display:flex;flex-wrap:wrap;gap:8px 18px;font-weight:600;color:var(--tinta)}
+.trayectoria span{white-space:nowrap}
+.trayectoria{font-size:18px;margin:0}
+.trayectoria i{font-style:normal;color:var(--ambar);font-weight:800}
+.servilleta{background:var(--blanco);border:1px dashed var(--gris);border-radius:8px;padding:18px;font-variant-numeric:tabular-nums}
+.servilleta .linea{display:flex;justify-content:space-between;gap:12px;font-size:16px;padding:4px 0}
+.servilleta .total{border-top:1.5px solid var(--tinta);margin-top:6px;padding-top:8px;font-weight:700}
+.filtros{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:600px){.filtros{grid-template-columns:1fr}}
+.filtros div{min-width:0}
+.filtros h3{margin-bottom:10px}
+.filtros ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:16px}
+.yo{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:end}
+.yo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border-bottom:6px solid var(--ambar)}
+@media (max-width:560px){.yo{grid-template-columns:minmax(0,1fr)}.yo picture{max-width:240px}}
+.avatar{flex:none;align-self:flex-start;width:72px;height:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--borde)}
+.noprom{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:20px;border:1px solid var(--borde);border-radius:8px}
+.noprom h3{color:var(--ambar)}
+.noprom p{color:#C9D5DA;max-width:62ch}
+footer{background:var(--tinta);color:var(--gris);font-size:14px}
+footer .wrap{padding-block:40px;display:flex;flex-direction:column;gap:14px}
+footer b{color:var(--papel)}
+.email-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.dir{font-size:13px;user-select:all}
+.quien{display:flex;align-items:center;gap:14px;padding:14px;background:var(--blanco);border:1px solid var(--linea);border-radius:8px}
+.quien img{flex:none;width:56px;height:56px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 22%;border:2px solid var(--ambar)}
+.quien p{font-size:14px;line-height:1.5;color:var(--texto);min-width:0}
+.li-wrap{display:flex;flex-direction:column;gap:10px;margin-top:18px;padding-top:22px;border-top:1px solid var(--borde)}
+.email-box .mail{font-size:17px;color:var(--papel);font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar)}
+.copy{font:inherit;font-size:13px;font-weight:600;background:transparent;color:var(--ambar);border:1.5px solid var(--borde);border-radius:6px;padding:6px 10px;cursor:pointer}
+/* v2: fugas, desplegables y caja de reserva */
+.fugas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:640px){.fugas{grid-template-columns:minmax(0,1fr)}}
+.fuga{background:var(--papel);border-top:4px solid var(--ambar);border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.fuga b{font-size:18px;color:var(--tinta)}
+.fuga span{font-size:15px;color:var(--texto-suave)}
+.lista li b em{font-style:normal;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ambar);margin-left:8px}
+details.mas-info{border:1px solid var(--borde);border-radius:8px;padding:0 18px}
+details.mas-info summary{cursor:pointer;font-weight:700;padding:16px 0;color:var(--ambar)}
+details.mas-info[open]{padding-bottom:18px}
+details.mas-info p{color:#C9D5DA;max-width:62ch}
+details.mas-info.claro{border-color:var(--linea)}
+details.mas-info.claro summary{color:var(--verde)}
+details.mas-info.claro p{color:var(--texto)}
+.caja{background:var(--blanco);color:var(--texto);border-radius:10px;padding:28px}
+@media (max-width:480px){.caja{padding:20px}}
+.caja h3{color:var(--tinta)}
+.hero .nota a{color:var(--papel)}
+.regalo{font-size:20px;font-weight:700}
+.regalo mark{padding:.15em .4em;border-radius:4px}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<script>
+/* Visitas con Umami, sin cookies. Entra una vez en juanabarca.es/?yo para que tu navegador no cuente. */
+(function(){try{
+  if(/[?&]yo\b/.test(location.search)) localStorage.setItem("umami.disabled","1");
+  if(localStorage.getItem("umami.disabled")) return;
+}catch(e){}
+var s=document.createElement("script");s.defer=true;s.src="https://cloud.umami.is/script.js";
+s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");document.head.appendChild(s);})();
+</script>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="firma"><b>Juan Abarca Ferrando</b><span>Venta B2B por valor</span></div>
+  </div>
+</header>
+
+<section class="band tinta hero">
+  <div class="wrap stack">
+    <div class="bar" aria-hidden="true"></div>
+    <h1>Lo vuestro es mejor. <mark>Y aun así acabáis bajando el precio o perdiendo la venta.</mark></h1>
+    <p class="lead"><b style="color:var(--papel)">Ayudo a dueños de pymes B2B a que su equipo comercial defienda el precio como lo haría él, sin descuentos y sin perder operaciones contra el más barato.</b></p>
+    <p class="nota">Consultoría comercial con tu equipo y sobre vuestras ventas reales. Proyecto cerrado y precio fijo.</p>
+    <div class="ctas">
+      <a class="btn primary" href="#hablamos">¿Cuánto perdéis al año? Lo vemos juntos</a>
+    </div>
+  </div>
+</section>
+
+<section class="band blanco">
+  <div class="wrap stack">
+    <span class="label">¿Cuál es vuestro caso?</span>
+    <h2>Tres razones por las que vendéis barato <mark>y perdéis dinero.</mark></h2>
+    <div class="fugas">
+      <div class="fuga"><b>Lo explicáis por características</b><span>El cliente oye datos, no lo que gana. Y compara precio.</span></div>
+      <div class="fuga"><b>Cada uno lo cuenta a su manera</b><span>Y el cliente se queda con la versión más floja.</span></div>
+      <div class="fuga"><b>Regaláis el valor sin nombrarlo</b><span>Si no está en el presupuesto, para el cliente no existe.</span></div>
+    </div>
+    <div class="prose"><p><b>Cada euro que no cobráis sale entero de vuestro beneficio.</b> En cada venta, todos los años.</p></div>
+    <div><a class="btn dark" href="#hablamos">¿Os suena? Contádmelo</a></div>
+  </div>
+</section>
+
+<section class="band tinta">
+  <div class="wrap stack">
+    <span class="label">Cómo trabajo</span>
+    <h2>No es una formación. Lo construimos juntos.</h2>
+    <p style="color:#C9D5DA;max-width:62ch">En una formación, alguien que no conoce vuestro negocio da una charla y el equipo escucha. Aquí yo guío y pongo el criterio, y vuestro equipo construye su propia venta sobre operaciones reales. Lo aprenden haciéndolo, y por eso se queda.</p>
+    <p style="color:var(--papel);font-weight:600;max-width:62ch">Consultoría comercial con tu equipo y sobre vuestras ventas reales. Proyecto cerrado y precio fijo: ocho semanas de trabajo y tres meses de acompañamiento.</p>
+    <div class="noprom" style="border-color:var(--ambar)">
+      <h3>El método: vuestro precio, frente a las alternativas de vuestro cliente.</h3>
+      <p>Vuestro cliente no compara vuestro precio solo con el del competidor. Lo compara con lo que le cuesta llegar al mismo sitio de otra manera: hacerlo él, contratar, esperar, arriesgarse con el barato y rehacerlo. Esa cuenta, en euros, es la que construimos con el equipo. Cuando la tienen delante, el precio deja de discutirse solo.</p>
+    </div>
+    <ul class="lista">
+      <li><b>1 · Diagnóstico <em>semanas 1-2</em></b><span>Sesiones con la dirección (el dueño o el director comercial), con cada comercial y en equipo. Repasamos ventas ganadas y perdidas: dónde se cedió y por qué os compraron.</span></li>
+      <li><b>2 · Construcción <em>semanas 3-5</em></b><span>Sacamos juntos por qué os compran, en euros. Ponemos nombre al valor que ya regaláis, miramos qué ofrece la competencia y montamos la cuenta de lo que gana vuestro cliente.</span></li>
+      <li><b>3 · Puesta en marcha <em>semanas 6-8</em></b><span>Discurso común, objeciones preparadas, propuesta comercial y criterio de descuento. Todo probado en operaciones que tenéis abiertas.</span></li>
+      <li><b>4 · Acompañamiento <em>3 meses</em></b><span>Una revisión al mes sobre ventas ya cerradas y un grupo de WhatsApp para dudas.</span></li>
+    </ul>
+    <details class="mas-info">
+      <summary>Ver el método en detalle</summary>
+      <div class="stack-s">
+        <p><b>Formato.</b> Una sesión semanal con el equipo, online, durante ocho semanas. Las sesiones individuales con la dirección y con cada comercial, en el hueco que mejor os venga.</p>
+        <p><b>Antes de empezar.</b> Un cuestionario corto a cada comercial para llegar al diagnóstico con datos, y una sesión de arranque con el dueño o el director comercial.</p>
+        <p><b>Sobre ventas reales.</b> Sin teoría, sin casos inventados y sin nada que estudiarse. Cada sesión trabaja sobre operaciones vuestras, cerradas o abiertas.</p>
+        <p><b>Lo que os pido.</b> Una hora a la semana del equipo, bloqueada en agenda. Ventas reales. El dueño o el director comercial en el arranque y en el cierre.</p>
+        <p><b>Una condición.</b> Quien vende hoy en vuestra empresa no queda nunca en evidencia. Se trabaja con él, no contra él.</p>
+      </div>
+    </details>
+    <div class="noprom">
+      <h3>Lo que no voy a prometer: ni un 30 % más, ni plazos. Y nadie debería.</h3>
+      <p>Sin conocer vuestras operaciones, cualquier número es inventado. Si el trabajo acaba en más margen, lo contaréis vosotros con vuestros números.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band blanco">
+  <div class="wrap stack">
+    <span class="label">Lo que os lleváis</span>
+    <h2>Un equipo que defiende vuestro precio.</h2>
+    <ul class="obs">
+      <li><b>Vender al precio correcto</b><span>Con un criterio claro de cuándo se da un descuento, cuánto y a cambio de qué. Sin descuentos por reflejo.</span></li>
+      <li><b>Un equipo que lo cuenta igual</b><span>El mismo porqué en boca de todos, no solo del que más vende.</span></li>
+      <li><b>Que las grandes no dependan de ti</b><span>Tu equipo sostiene el precio sin que tengas que entrar a cerrar cada venta importante.</span></li>
+      <li><b>Vuestra propuesta de valor, estructurada y en euros</b><span>Con el valor que ya regaláis puesto en su sitio y las objeciones de siempre preparadas.</span></li>
+      <li><b>Una propuesta comercial que vende</b><span>Que enseña lo que gana el cliente, no solo la cifra, y que el equipo adapta a cada cliente.</span></li>
+      <li><b>Seguridad para sostener el precio</b><span>Saber poner lo vuestro frente a lo que tiene vuestro cliente como alternativa, en euros. Quien sabe por qué vale lo que cuesta deja de pedir perdón por el precio.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="band tinta" id="hablamos">
+  <div class="wrap stack">
+    <span class="label">El primer paso</span>
+    <h2>Una sesión para ver cuánto perdéis y cómo recuperarlo. <span style="color:var(--ambar)">Y no os cuesta nada.</span></h2>
+    <p style="color:#C9D5DA;max-width:62ch">Es una sesión de trabajo, no una presentación: me contáis cómo vendéis, miramos tres operaciones reales y salís con vuestra cuenta. Trabajemos juntos o no, esa cuenta ya os sirve.</p>
+    <div class="caja">
+      <form id="f1" novalidate class="stack-s">
+        <div class="grid2">
+          <div class="field"><label for="c-nombre">Nombre</label><input id="c-nombre" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="c-empresa">Empresa</label><input id="c-empresa" type="text" autocomplete="organization" required></div>
+          <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" required></div>
+          <div class="field"><label for="c-tel">Teléfono</label><input id="c-tel" type="tel" autocomplete="tel" required></div>
+        </div>
+        <p class="legal">Al enviar, aceptas que use estos datos para contactarte por email o teléfono sobre esta reunión. Nada de listas ni publicidad. Responsable: Juan Abarca Ferrando. Los datos llegan a través de Formspree (EE. UU.) y no se ceden a nadie más. Puedes pedir que se borren cuando quieras. Más información en la <a href="legal.html#privacidad" target="_blank">política de privacidad</a>.</p>
+        <p class="err" id="err1" hidden></p>
+        <div><button class="btn dark" type="submit">Quiero la sesión</button></div>
+      </form>
+
+      <form id="f2" novalidate class="stack" hidden>
+        <div class="stack-s">
+          <h3 id="f2-t">Gracias. Cuatro preguntas para preparar la sesión.</h3>
+          <p class="vacio">Un minuto. Así llego con los deberes hechos.</p>
+        </div>
+        <div class="field"><label for="c-web">Vuestra web</label><input id="c-web" type="text" inputmode="url" placeholder="www.…"></div>
+        <div class="field"><label for="c-vende">¿Qué vendéis y a quién?</label><textarea id="c-vende" placeholder="Ej.: instalaciones de frío industrial a cadenas de alimentación"></textarea></div>
+        <fieldset class="q">
+          <legend>¿Cuál es vuestro caso? Marca las que os pasen.</legend>
+          <div class="opts">
+            <label class="opt"><input type="checkbox" name="caso" value="Descuentos que nadie pidió"><span>Descuentos que nadie pidió</span></label>
+            <label class="opt"><input type="checkbox" name="caso" value="Perdemos contra más baratos"><span>Perdemos contra más baratos</span></label>
+            <label class="opt"><input type="checkbox" name="caso" value="Cobramos lo de siempre"><span>Cobramos lo de siempre</span></label>
+            <label class="opt"><input type="checkbox" name="caso" value="No nos pasa"><span>No nos pasa</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>¿Cuántas personas venden en la empresa?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="equipo" value="Solo yo"><span>Solo yo</span></label>
+            <label class="opt"><input type="radio" name="equipo" value="2-5"><span>2 a 5</span></label>
+            <label class="opt"><input type="radio" name="equipo" value="6-15"><span>6 a 15</span></label>
+            <label class="opt"><input type="radio" name="equipo" value="Más de 15"><span>Más de 15</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>Si la cuenta sale, ¿estaríais dispuestos a invertir entre 3.000 y 5.000 € para dejar de perder margen por precio?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="inversion" value="Sí"><span>Sí</span></label>
+            <label class="opt"><input type="radio" name="inversion" value="Depende de lo que salga"><span>Depende de lo que salga</span></label>
+            <label class="opt"><input type="radio" name="inversion" value="No"><span>No</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="q">
+          <legend>¿Cómo prefieres que te contacte para fijar el día?</legend>
+          <div class="opts">
+            <label class="opt"><input type="radio" name="via" value="Llamada" checked><span>Llamada</span></label>
+            <label class="opt"><input type="radio" name="via" value="Email"><span>Email</span></label>
+          </div>
+        </fieldset>
+        <p class="err" id="err2" hidden></p>
+        <div><button class="btn dark" type="submit">Enviar</button></div>
+      </form>
+
+      <div class="ok" id="ok" hidden>
+        <h3 id="ok-t">Recibido. Te contacto yo para fijar el día.</h3>
+        <p id="ok-p" style="font-size:15px;color:var(--texto-suave)">Lo leo yo, no un sistema automático.</p>
+        <div class="resumen" id="resumen" hidden></div>
+        <div id="ok-acciones" hidden class="email-box"><button class="copy" type="button" id="copiar-res" style="color:var(--verde);border-color:var(--linea)">Copiar</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band blanco">
+  <div class="wrap stack">
+    <div class="yo">
+      <picture>
+        <source srcset="juan-abarca.webp" type="image/webp">
+        <img src="juan-abarca.jpg" width="640" height="800" alt="Juan Abarca Ferrando" loading="lazy">
+      </picture>
+      <div class="stack-s">
+        <span class="label">Quién soy</span>
+        <h2>De vendedor a vendedores.</h2>
+      </div>
+    </div>
+    <div class="prose">
+      <p>Más de 15 años vendiendo, casi siempre algo más caro que la competencia. Top ventas en Tele2, top 15 nacional en Grupo Planeta y premio Centurion en American Express, que se da al top 1&nbsp;% de la plantilla mundial.</p>
+    </div>
+    <details class="mas-info claro">
+      <summary>¿Quieres saber más?</summary>
+      <div class="prose">
+        <p>Empecé vendiendo en Tele2. Fui top ventas y la compañía acabó usando mi forma de explicar el producto con todo el equipo. Fue la primera vez que vi a un equipo entero vender mejor contando lo mismo.</p>
+        <p>Después vendí colecciones de 1.600 € en Grupo Planeta, donde llegué al top 15 nacional, y equipos de cocina en Qualityfry, bastante más caros que la competencia. Cuando me preguntaban el precio, yo preguntaba cuántas raciones podían sacar: 10 al día a 15 €, con 5 € de coste, son 100 € de margen diario. A partir de ahí, el precio se discutía de otra manera.</p>
+        <p>También he montado mi propio negocio, así que sé lo que es vender cuando el dinero que entra es el tuyo. Y sí, yo también he bajado el precio por miedo. Por eso sé dónde se va el margen.</p>
+        <p>Hoy sigo en American Express. Como lo compagino, trabajo con pocas empresas a la vez y elijo con cuáles: me gusta el trato directo con la pyme y ver casos distintos.</p>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap stack">
+    <span class="label">Para quién es</span>
+    <h2>Si no hay valor que defender, no te puedo ayudar.</h2>
+    <div class="filtros">
+      <div>
+        <h3>Encaja si</h3>
+        <ul>
+          <li>Vendéis a otras empresas algo mejor que vuestra competencia, aunque hoy no lo cobréis.</li>
+          <li>Tenéis equipo comercial: al menos tres personas que venden, contigo o sin ti.</li>
+          <li>Lo vende directamente vuestro equipo, no un distribuidor.</li>
+          <li>Detrás de lo que vendéis hay algo más que el producto: un proyecto, un servicio, una instalación o un trabajo a medida.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>No encaja si</h3>
+        <ul>
+          <li>Vendes tú solo, sin equipo comercial.</li>
+          <li>Vendéis lo mismo que el de al lado, de la misma manera.</li>
+          <li>Os compran por catálogo o con tres presupuestos sobre la mesa.</li>
+          <li>El valor está solo en lo que dice el dueño. No invento valor que no existe.</li>
+        </ul>
+      </div>
+    </div>
+    <div><a class="btn dark" href="#hablamos">Encaja. Quiero la sesión</a></div>
+  </div>
+</section>
+
+<section class="band" id="calculadora">
+  <div class="wrap stack-s">
+    <span class="label">¿Prefieres hacer la cuenta tú solo?</span>
+    <h3 style="font-size:22px">Te mando la calculadora: en dos minutos ves cuánto perdéis al año.</h3>
+    <form id="f3" novalidate class="email-box" style="margin-top:6px">
+      <input id="c-email3" type="email" autocomplete="email" placeholder="Tu email" aria-label="Tu email" style="max-width:320px">
+      <button class="btn dark" type="submit">Mándamela</button>
+    </form>
+    <p class="err" id="err3" hidden></p>
+    <p class="micro" id="ok3" hidden style="color:var(--verde);font-size:15px;font-weight:600">Hecho. Te la mando yo, por email.</p>
+    <p class="legal">Solo para mandarte la calculadora. Nada de listas. Responsable: Juan Abarca Ferrando, vía Formspree (EE. UU.). <a href="legal.html#privacidad" target="_blank">Privacidad</a>.</p>
+  </div>
+</section>
+
+<footer id="contacto-final">
+  <div class="wrap">
+    <div class="bar" aria-hidden="true"></div>
+    <img class="avatar" src="juan-abarca.webp" width="72" height="72" alt="" loading="lazy">
+    <b style="font-size:20px">Si lo vuestro es mejor pero vuestros clientes solo preguntan el precio, hablemos&nbsp;↓</b>
+    <div><a class="btn primary" href="#hablamos">Quiero la sesión</a></div>
+    <div class="email-box"><a class="btn ghost" href="mailto:juanabarcaferrando@hotmail.com?subject=Desde%20juanabarca.es">Escríbeme por email</a></div>
+    <div class="li-wrap">
+      <span>¿Prefieres conocerme antes?</span>
+      <div><a class="btn ghost" href="https://www.linkedin.com/in/abarcaferrandojuan" target="_blank" rel="noopener">Ver mi perfil de LinkedIn</a></div>
+    </div>
+    <p>Juan Abarca Ferrando · Venta B2B por valor · <a href="legal.html#aviso">Aviso legal</a> · <a href="legal.html#privacidad">Privacidad</a></p>
+  </div>
+</footer>
+
+<script>
+const FORM_ENDPOINT = "https://formspree.io/f/xvkkzjwl";
+const EMAIL = "juanabarcaferrando@hotmail.com";
+
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const eur = v => Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + " €";
+const num = id => { const v = parseFloat($(id).value.replace(",", ".")); return isFinite(v) && v >= 0 ? v : 0; };
+const DEF = {t:30000,v:40,p:50,d:8,m:25};
+let calcUsada = false;
+
+function lineasCalc(){ return []; }
+const datos = () => ({ nombre:$("#c-nombre").value.trim(), empresa:$("#c-empresa").value.trim(), email:$("#c-email").value.trim(), telefono:$("#c-tel").value.trim() });
+function filtro(){
+  return { web:$("#c-web").value.trim(), vende:$("#c-vende").value.trim(),
+    caso:$$('input[name="caso"]:checked').map(x=>x.value).join(", "),
+    equipo:val("equipo")||"", inversion:val("inversion")||"", via:val("via")||"" };
+}
+function resumen(paso){
+  const d = datos();
+  const l = [`JUANABARCA.ES · RESERVA DE LA SESIÓN (${paso})`, `Nombre: ${d.nombre}`, `Empresa: ${d.empresa}`, `Email: ${d.email}`, `Teléfono: ${d.telefono}`];
+  if (paso === "paso 2"){
+    const f = filtro();
+    l.push("", `Web: ${f.web||"—"}`, `Qué venden y a quién: ${f.vende||"—"}`, `Su caso: ${f.caso||"—"}`,
+      `Personas que venden: ${f.equipo||"—"}`, `Dispuestos a invertir 3.000-5.000 € para dejar de perder margen: ${f.inversion||"—"}`, `Contactar por: ${f.via||"—"}`);
+  }
+  return l.concat(lineasCalc()).join("\n");
+}
+async function enviar(paso, extra){
+  if (!FORM_ENDPOINT) return false;
+  const d = datos();
+  try{
+    const r = await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify(Object.assign({_subject:`Reserva sesión (${paso}) · ${d.empresa}`, paso, resumen:resumen(paso), _replyto:d.email, informado_privacidad:true, fecha:new Date().toISOString()}, d, extra||{}))});
+    return r.ok;
+  }catch(_){ return false; }
+}
+function fallo(paso){
+  $("#f1").hidden = true; $("#f2").hidden = true; $("#ok").hidden = false;
+  $("#ok-t").textContent = "No se ha podido enviar. Mándamelo tú";
+  $("#ok-p").textContent = "Cópialo y mándamelo a " + EMAIL + " o por mensaje en LinkedIn. Te contesto yo.";
+  $("#resumen").textContent = resumen(paso); $("#resumen").hidden = false; $("#ok-acciones").hidden = false;
+}
+
+$("#f1").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#err1"); err.hidden = true;
+  const d = datos(), faltan = [];
+  if (!d.nombre) faltan.push("tu nombre");
+  if (!d.empresa) faltan.push("la empresa");
+  if (!d.email) faltan.push("tu email");
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email)) faltan.push("un email válido");
+  if (d.telefono.replace(/\D/g,"").length < 9) faltan.push("un teléfono válido");
+  if (faltan.length){ err.textContent = "Falta " + faltan.join(", ") + "."; err.hidden = false; return; }
+  const btn = e.submitter; if (btn) btn.disabled = true;
+  const ok = await enviar("paso 1");
+  if (!ok){ fallo("paso 1"); return; }
+  $("#f1").hidden = true; $("#f2").hidden = false;
+  $("#f2-t").textContent = `Gracias, ${d.nombre.split(" ")[0]}. Cuatro preguntas para preparar la sesión.`;
+  $("#f2").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"start"});
+});
+
+$("#f2").addEventListener("submit", async e => {
+  e.preventDefault();
+  const err = $("#err2"); err.hidden = true;
+  const f = filtro();
+  if (!f.vende || !f.caso || !f.equipo || !f.inversion){
+    err.textContent = "Contesta las preguntas, por favor: así llego a la sesión con los deberes hechos."; err.hidden = false; return;
+  }
+  const btn = e.submitter; if (btn) btn.disabled = true;
+  const ok = await enviar("paso 2", f);
+  if (!ok){ fallo("paso 2"); return; }
+  $("#f2").hidden = true; $("#ok").hidden = false;
+  $("#ok-t").textContent = f.via === "Email" ? "Recibido. Te escribo yo para fijar el día." : "Recibido. Te llamo yo para fijar el día.";
+});
+
+function copiar(text, btn){
+  const fin = t => { const o = btn.textContent; btn.textContent = t; setTimeout(() => btn.textContent = o, 1600); };
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(() => fin("Copiado"), () => fin("Selecciónalo y copia"));
+  } else fin("Selecciónalo y copia");
+}
+$("#copiar-res").addEventListener("click", e => copiar($("#resumen").textContent, e.currentTarget));
+
+$("#f3").addEventListener("submit", async e => {
+  e.preventDefault();
+  const em=$("#c-email3").value.trim(), err=$("#err3"); err.hidden=true;
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)){ err.textContent="Pon un email válido."; err.hidden=false; return; }
+  let ok=false;
+  try{ const r=await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({_subject:"Piden la calculadora", paso:"calculadora", email:em, _replyto:em, informado_privacidad:true, fecha:new Date().toISOString()})}); ok=r.ok; }catch(_){}
+  if(ok){ $("#f3").hidden=true; $("#ok3").hidden=false; }
+  else { err.textContent="No se ha podido enviar. Escríbeme a "+EMAIL+" y te la mando."; err.hidden=false; }
+});
+</script>
+
+</body>
+</html>

@@ -98,6 +98,8 @@ button[disabled]{opacity:.55; cursor:default}
 
 .cierre{margin-top:34px; padding-top:26px; border-top:1px solid var(--borde)}
 .cierre p{margin:0 0 12px}
+.cta{display:inline-block;background:var(--ambar);color:var(--tinta);font-weight:650;text-decoration:none;border-radius:10px;padding:14px 22px}
+.cta:hover{filter:brightness(1.07)}
 a{color:var(--ambar); text-decoration:underline; text-underline-offset:3px}
 footer{margin-top:46px; padding-top:20px; border-top:1px solid var(--borde); color:var(--gris); font-size:13.5px}
 footer b{color:var(--papel); font-weight:600}
@@ -180,8 +182,9 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
   </div>
 
   <div class="cierre" id="cierre" hidden>
-    <p>Esto es lo que se ve con tres cifras. Con tres operaciones reales delante se ve el motivo, que es lo que de verdad se puede cambiar.</p>
-    <p>Si quieres que lo miremos juntos, es una hora y no cuesta nada. <a href="https://juanabarca.es">juanabarca.es</a></p>
+    <p>Esto es lo que se ve con tres cifras. Lo que no dice es <b>por qué</b> se dio cada descuento, y el porqué es lo único que se puede cambiar.</p>
+    <p>Eso se ve en una sesión de trabajo de una hora, mirando tres operaciones reales vuestras. No es una presentación y no cuesta nada: trabajemos juntos o no, la cuenta os la lleváis vosotros.</p>
+    <p style="margin-top:18px"><a class="cta" href="https://juanabarca.es/#hablamos">Quiero la sesión</a></p>
   </div>
 
   <footer><b>Juan Abarca Ferrando</b><br>Venta B2B por valor</footer>
@@ -236,9 +239,13 @@ function lectura(r){
          " al año que no aparecen en ninguna línea del presupuesto, porque se van de reunión en reunión.");
 
   if(clase === "verde"){
-    p.push("Con tu margen, un " + pct(r.desc) + " de media no te está haciendo daño. Antes de darlo por bueno, " +
-           "comprueba una cosa: que ese " + pct(r.desc) + " es el que firmáis de verdad y no el que está autorizado. " +
-           "Casi nunca coinciden.");
+    p.push("Con tu margen, un " + pct(r.desc) + " de media no te está haciendo daño por aquí. Antes de darlo " +
+           "por bueno, comprueba que ese " + pct(r.desc) + " es el que firmáis de verdad y no el que está " +
+           "autorizado. Casi nunca coinciden.");
+    p.push("Pero ojo, porque esta cuenta solo mide un lado: lo que regaláis en las que ganáis. El otro lado " +
+           "es el de las que <b>no</b> ganáis, las que se van a alguien más barato porque el cliente nunca " +
+           "llegó a ver por qué lo vuestro cuesta más. Eso no aparece en ninguna cuenta y suele costar más " +
+           "que el descuento.");
   } else if(clase === "ambar"){
     p.push("No es una sangría. Es peor: es la clase de fuga que no se nota, porque cada descuento, de uno en uno, " +
            "parece razonable. Y para recuperarlo vendiendo más tendríais que facturar " + eur(r.compensar) +
@@ -248,6 +255,9 @@ function lectura(r){
            "A ese nivel ya no es una concesión puntual: es vuestra forma de vender. Recuperarlo vendiendo más exigiría " +
            eur(r.compensar) + " de facturación nueva, que es casi otra empresa dentro de la vuestra.");
   }
+
+  p.push("Y esto no es de este año. Si lleváis tres vendiendo igual son " + eur(r.regalado*3) +
+         ". Si lleváis cinco, " + eur(r.regalado*5) + ".");
 
   p.push("Bajar ese descuento medio <b>un solo punto</b> vale " + eur(r.unPunto) + " al año.");
 
