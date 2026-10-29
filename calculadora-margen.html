@@ -231,42 +231,34 @@ function pintar(){
 function lectura(r){
   let clase, titulo;
   if(r.fuga < 5){ clase="verde"; titulo="Por aquí no se os va el dinero"; }
-  else if(r.fuga <= 15){ clase="ambar"; titulo="Hay una fuga, y es tapable"; }
+  else if(r.fuga <= 15){ clase="ambar"; titulo="Hay una fuga, y se puede tapar"; }
   else { clase="rojo"; titulo="El precio está decidiendo vuestras ventas"; }
 
   const p = [];
-  p.push("El descuento se lleva el <b>" + pct(r.fuga) + "</b> de vuestro beneficio. Son " + eur(r.regalado) +
-         " al año que no aparecen en ninguna línea del presupuesto, porque se van de reunión en reunión.");
+  p.push("El descuento se lleva el <b>" + pct(r.fuga) + "</b> de vuestro beneficio: " + eur(r.regalado) +
+         " al año. No sale en ningún presupuesto porque se va de venta en venta.");
 
   if(clase === "verde"){
-    p.push("Con tu margen, un " + pct(r.desc) + " de media no te está haciendo daño por aquí. Antes de darlo " +
-           "por bueno, comprueba que ese " + pct(r.desc) + " es el que firmáis de verdad y no el que está " +
-           "autorizado. Casi nunca coinciden.");
-    p.push("Pero ojo, porque esta cuenta solo mide un lado: lo que regaláis en las que ganáis. El otro lado " +
-           "es el de las que <b>no</b> ganáis, las que se van a alguien más barato porque el cliente nunca " +
-           "llegó a ver por qué lo vuestro cuesta más. Eso no aparece en ninguna cuenta y suele costar más " +
-           "que el descuento.");
+    p.push("Con vuestro margen, un " + pct(r.desc) + " de descuento medio no os hace daño. Comprobad solo que es " +
+           "el que firmáis de verdad y no el que está autorizado. Casi nunca coinciden.");
+    p.push("Ojo: esta cuenta no mide las ventas que <b>perdéis</b> frente a alguien más barato. Esas suelen costar más que el descuento.");
   } else if(clase === "ambar"){
-    p.push("No es una sangría. Es peor: es la clase de fuga que no se nota, porque cada descuento, de uno en uno, " +
-           "parece razonable. Y para recuperarlo vendiendo más tendríais que facturar " + eur(r.compensar) +
-           " nuevos. Sale más barato dejar de regalarlo.");
+    p.push("Cada descuento, por separado, parece razonable. Sumados, no. Para recuperarlo vendiendo más tendríais que facturar " +
+           eur(r.compensar) + " más. Sale más barato dejar de regalarlo.");
   } else {
-    p.push("De cada diez euros de beneficio, " + Math.min(10, Math.round(r.fuga/10)) + " se van en descuentos. " +
-           "A ese nivel ya no es una concesión puntual: es vuestra forma de vender. Recuperarlo vendiendo más exigiría " +
-           eur(r.compensar) + " de facturación nueva, que es casi otra empresa dentro de la vuestra.");
+    p.push("De cada 10 € de beneficio, " + Math.min(10, Math.round(r.fuga/10)) + " se van en descuentos. Ya no es algo puntual: " +
+           "es vuestra forma de vender. Recuperarlo vendiendo más exigiría " + eur(r.compensar) + " de facturación nueva.");
   }
 
-  p.push("Y esto no es de este año. Si lleváis tres vendiendo igual son " + eur(r.regalado*3) +
-         ". Si lleváis cinco, " + eur(r.regalado*5) + ".");
+  p.push("En tres años son " + eur(r.regalado*3) + ". En cinco, " + eur(r.regalado*5) + ".");
 
-  p.push("Bajar ese descuento medio <b>un solo punto</b> vale " + eur(r.unPunto) + " al año.");
+  p.push("Bajar el descuento medio <b>un solo punto</b> vale " + eur(r.unPunto) + " al año.");
 
-  p.push('<span class="aparte">Lo primero que yo miraría, y lo puedes hacer tú esta semana: coge las diez últimas ' +
-         'operaciones grandes y apunta <b>quién pidió</b> cada descuento y <b>qué se quitó a cambio</b>. ' +
-         'Si la segunda columna sale vacía, ahí está el trabajo. No en el precio.</span>');
+  p.push('<span class="aparte">Lo primero que miraría, y puedes hacerlo esta semana: coge las diez últimas ventas grandes ' +
+         'y apunta <b>quién pidió</b> cada descuento y <b>qué se quitó a cambio</b>. Si la segunda columna sale vacía, ' +
+         'el problema no es el precio.</span>');
 
-  p.push("Y te lo digo claro: esto es una foto hecha con tres cifras que has puesto tú. No dice por qué se dieron " +
-         "esos descuentos, y el porqué es lo único que se puede cambiar.");
+  p.push("Es una foto con tres cifras tuyas. No dice por qué se dieron esos descuentos, y eso es lo que se puede cambiar.");
 
   $("lectura").className = "lectura " + clase;
   $("titulo").textContent = titulo;
