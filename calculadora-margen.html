@@ -124,7 +124,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
 <div class="wrap">
   <div class="barra"></div>
   <h1>Dónde se va tu margen</h1>
-  <p class="lema">Tres cifras que ya te sabes. Te digo cuánto beneficio se te va en descuentos y si eso es mucho o poco.</p>
+  <p class="lema">Tres cifras que ya te sabes. Te digo qué te está costando el precio cada año y si eso es mucho o poco.</p>
 
   <form id="f" novalidate>
     <div class="campo">
@@ -183,7 +183,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
   </div>
 
   <div class="cierre" id="cierre" hidden>
-    <p>Esto es lo que se ve con tres cifras. Lo que no dice es <b>por qué</b> se dio cada descuento, y el porqué es lo único que se puede cambiar.</p>
+    <p>Esto es lo que se ve con tres cifras. Lo que no dice es <b>por qué</b> vuestro precio acaba donde acaba, y eso es lo único que se puede cambiar.</p>
     <p>Eso se ve en una sesión de trabajo de una hora, mirando tres operaciones reales vuestras. No es una presentación y no cuesta nada: trabajemos juntos o no, la cuenta os la lleváis vosotros.</p>
     <p style="margin-top:18px"><a class="cta" href="https://juanabarca.es/#hablamos">Quiero la sesión</a></p>
   </div>
@@ -224,7 +224,9 @@ function pintar(){
     return;
   }
   $("big").textContent = eur(r.regalado);
-  $("pie").textContent = "Sale entero de vuestro beneficio. Todos los años.";
+  $("pie").textContent = r.desc <= 1
+    ? "En descuentos no se os va nada. Eso puede ser muy buena señal o la peor de las tres. Pide la lectura y te digo cuál."
+    : "Sale entero de vuestro beneficio. Todos los años.";
   $("r-fuga").textContent = pct(r.fuga);
   $("r-comp").textContent = eur(r.compensar);
 }
