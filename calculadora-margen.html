@@ -62,6 +62,7 @@ input{
   padding:13px 14px; width:100%; min-width:0; appearance:textfield;
 }
 input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{appearance:none;margin:0}
+input::placeholder{color:var(--gris); opacity:.55}
 input:focus-visible{outline:2px solid var(--ambar); outline-offset:2px; border-color:var(--ambar)}
 .unidad{color:var(--gris); font-size:16px; flex:none; font-weight:500}
 
@@ -129,7 +130,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
     <div class="campo">
       <label for="cifra">Lo que facturáis al año</label>
       <div class="entrada">
-        <input id="cifra" type="number" inputmode="numeric" min="0" step="100000" value="5000000">
+        <input id="cifra" type="number" inputmode="numeric" min="0" step="100000" placeholder="5000000">
         <span class="unidad">€</span>
       </div>
       <p class="ayuda" id="eco"></p>
@@ -139,7 +140,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
       <label for="margen">Vuestro margen bruto</label>
       <p class="ayuda">Si vendes a 100 y te cuesta 70, es 30.</p>
       <div class="entrada">
-        <input id="margen" type="number" inputmode="numeric" min="1" max="95" step="1" value="30">
+        <input id="margen" type="number" inputmode="numeric" min="1" max="95" step="1" placeholder="30">
         <span class="unidad">%</span>
       </div>
     </div>
@@ -148,7 +149,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
       <label for="desc">El descuento medio que acabáis haciendo</label>
       <p class="ayuda">Sobre todo lo que facturáis. Si solo bajas el precio en la mitad de las ventas, un 8 % en esas es un 4 % de media.</p>
       <div class="entrada">
-        <input id="desc" type="number" inputmode="numeric" min="0" max="50" step="1" value="4">
+        <input id="desc" type="number" inputmode="numeric" min="0" max="50" step="1" placeholder="4">
         <span class="unidad">%</span>
       </div>
     </div>
