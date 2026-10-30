@@ -200,7 +200,7 @@ const pct = n => new Intl.NumberFormat("es-ES",{maximumFractionDigits:0}).format
 function leer(){
   const cifra = Number($("cifra").value), margen = Number($("margen").value), desc = Number($("desc").value);
   if(!(cifra > 0) || !(margen > 0) || !(margen < 100)) return null;
-  if(!(desc > 0)) return {vacio:true};
+  if($("desc").value.trim() === "" || !(desc >= 0)) return {vacio:true};
   const d = Math.min(desc,95)/100;
   const regalado = cifra * d/(1-d);
   const margenTotal = cifra * margen/100;
@@ -230,11 +230,33 @@ function pintar(){
 
 function lectura(r){
   let clase, titulo;
-  if(r.fuga < 5){ clase="verde"; titulo="Por aquí no se os va el dinero"; }
+  const apenas = r.desc <= 1;
+  if(apenas){ clase="verde"; titulo="Casi no descontáis. Eso puede significar dos cosas."; }
+  else if(r.fuga < 5){ clase="verde"; titulo="Por aquí no se os va el dinero"; }
   else if(r.fuga <= 15){ clase="ambar"; titulo="Hay una fuga, y se puede tapar"; }
   else { clase="rojo"; titulo="El precio está decidiendo vuestras ventas"; }
 
   const p = [];
+
+  if(apenas){
+    p.push("O lo contáis tan bien que nadie os discute el precio. O estáis pidiendo poco de " +
+           "salida, y entonces no hay nada que discutir.");
+    p.push("La segunda es la más común, y es la única de las tres formas de perder dinero que " +
+           "<b>no deja rastro</b>: no hay un descuento firmado ni una operación perdida, así que " +
+           "no la busca nadie.");
+    p.push('<span class="aparte">La prueba es de treinta segundos: <b>¿cuándo fue la última vez ' +
+           'que un cliente os dijo que erais caros?</b> Si la respuesta es "casi nunca", no es que ' +
+           'seáis buenos negociando. Es que sois baratos.</span>');
+    p.push("Un cliente que nunca discute el precio no es una buena señal. Es que le estáis " +
+           "poniendo fácil decir que sí.");
+    p.push("Esto no se arregla subiendo el precio. Se arregla poniendo en euros lo que ya hacéis " +
+           "y que no cobráis, y contándolo antes de dar el número.");
+    $("lectura").className = "lectura " + clase;
+    $("titulo").textContent = titulo;
+    $("texto").innerHTML = p.map(x => "<p>" + x + "</p>").join("");
+    return;
+  }
+
   p.push("El descuento se lleva el <b>" + pct(r.fuga) + "</b> de vuestro beneficio: " + eur(r.regalado) +
          " al año. No sale en ningún presupuesto porque se va de venta en venta.");
 
