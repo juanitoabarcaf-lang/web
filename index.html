@@ -199,12 +199,18 @@ details.mas-info.claro p{color:var(--texto)}
 .regalo{font-size:20px;font-weight:700}
 .regalo mark{padding:.15em .4em;border-radius:4px}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
-.metodo ol{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:18px}
-.metodo li b{display:block;color:var(--papel);font-size:17px;margin-bottom:4px}
-.metodo li p{margin:0}
-.metodo .origen{margin-top:6px;font-size:14px;color:var(--gris);font-style:italic;padding-left:12px;border-left:2px solid var(--ambar)}
 .marca-pie img{width:64px;height:64px}
 .marca-pie .firma b{font-size:21px}
+.metodo{margin-top:8px}
+.metodo h3{color:var(--ambar);font-size:20px;margin:0 0 14px}
+.pasos-m{display:grid;grid-template-columns:1fr;gap:12px}
+@media (min-width:720px){.pasos-m{grid-template-columns:1fr 1fr}}
+.paso-m{border:1px solid var(--borde);border-radius:10px;padding:18px 18px 16px;display:flex;flex-direction:column;gap:6px}
+.paso-m .num{font-size:28px;font-weight:800;color:var(--ambar);line-height:1;letter-spacing:-.02em}
+.paso-m h4{margin:4px 0 0;font-size:18px;color:var(--papel)}
+.paso-m p{margin:0;font-size:15px}
+.paso-m .prueba{margin-top:auto;padding-top:12px;border-top:1px solid var(--borde);font-size:13.5px;color:var(--gris);line-height:1.5}
+.paso-m .prueba span{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ambar);margin-bottom:3px}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
@@ -257,14 +263,14 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
     <h2>No es una formación. Lo construimos juntos.</h2>
     <p style="color:#C9D5DA;max-width:62ch">En una formación, alguien que no conoce vuestro negocio da una charla y el equipo escucha. Aquí yo guío y pongo el criterio, y vuestro equipo construye su propia venta sobre operaciones reales. Lo aprenden haciéndolo, y por eso se queda.</p>
     <p style="color:var(--papel);font-weight:600;max-width:62ch">Consultoría comercial con vuestro equipo y sobre vuestras ventas reales. Proyecto cerrado y precio fijo: ocho semanas de trabajo y tres meses de acompañamiento.</p>
-    <div class="noprom metodo" style="border-color:var(--ambar)">
-      <h3>El método, en cuatro pasos.</h3>
-      <ol>
-        <li><b>1. Por qué os compran, en euros.</b><p>Sacamos lo que gana vuestro cliente con vosotros y lo ponemos en números, no en adjetivos.</p><p class="origen">Lo aprendí en Qualityfry: 10 raciones al día a 15 €, con 5 € de coste, son 100 € de margen diario. Con esa cuenta, el precio dejaba de discutirse.</p></li>
-        <li><b>2. Frente a la alternativa de vuestro cliente.</b><p>Vuestro cliente no os compara solo con el competidor. Os compara con hacerlo él, esperar o arriesgarse con el barato. Esa cuenta es la que cierra.</p><p class="origen">Lo aplico en American Express: una comisión frente a los clientes que el comercio deja de perder. Más del 350&nbsp;% de mi objetivo.</p></li>
-        <li><b>3. Que todos lo cuenten igual, también el distribuidor.</b><p>Un mismo porqué para todo el equipo, y una razón clara para que el distribuidor elija vuestras referencias y no otras.</p><p class="origen">En Tele2 la compañía acabó usando mi forma de explicar el producto con todo el equipo. En Qualityfry abrí una red de distribuidores por toda España.</p></li>
-        <li><b>4. Sostener el precio en la mesa.</b><p>Objeciones preparadas y un criterio de descuento: cuándo, cuánto y a cambio de qué.</p><p class="origen">En Grupo Planeta vendía colecciones de 1.600 €. En menos de seis meses estaba entre los 15 mejores de España.</p></li>
-      </ol>
+    <div class="metodo">
+      <h3>El método, en cuatro pasos</h3>
+      <div class="pasos-m">
+        <article class="paso-m"><span class="num">01</span><h4>Por qué os compran, en euros</h4><p>Lo que gana vuestro cliente con vosotros, en números y no en adjetivos.</p><div class="prueba"><span>Qualityfry</span>10 raciones a 15 €, con 5 € de coste: 100 € de margen al día. El precio dejaba de discutirse.</div></article>
+        <article class="paso-m"><span class="num">02</span><h4>Frente a su alternativa</h4><p>Vuestro cliente no os compara solo con el competidor: también con hacerlo él, esperar o arriesgarse con el barato.</p><div class="prueba"><span>American Express</span>Una comisión frente a los clientes que el comercio deja de perder. Más del 350&nbsp;% de mi objetivo.</div></article>
+        <article class="paso-m"><span class="num">03</span><h4>Todos lo cuentan igual</h4><p>Un mismo porqué en todo el equipo, y una razón clara para que el distribuidor elija lo vuestro.</p><div class="prueba"><span>Tele2 · Qualityfry</span>Mi forma de explicar el producto la acabó usando todo el equipo. Red de distribuidores por toda España.</div></article>
+        <article class="paso-m"><span class="num">04</span><h4>Sostener el precio en la mesa</h4><p>Objeciones preparadas y criterio de descuento: cuándo, cuánto y a cambio de qué.</p><div class="prueba"><span>Grupo Planeta</span>Colecciones de 1.600 €. Top 15 de España en menos de seis meses.</div></article>
+      </div>
     </div>
     <ul class="lista">
       <li><b>1 · Diagnóstico <em>semanas 1-2</em></b><span>Sesiones con la dirección (el dueño o el director comercial), con cada comercial y en equipo. Repasamos ventas ganadas y perdidas: dónde se cedió y por qué os compraron.</span></li>
