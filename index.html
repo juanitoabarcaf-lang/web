@@ -211,6 +211,14 @@ details.mas-info.claro p{color:var(--texto)}
 .paso-m p{margin:0;font-size:15px}
 .paso-m .prueba{margin-top:auto;padding-top:12px;border-top:1px solid var(--borde);font-size:13.5px;color:var(--gris);line-height:1.5}
 .paso-m .prueba span{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ambar);margin-bottom:3px}
+.vid{margin:6px 0 0;max-width:720px}
+.vid-caja{position:relative}
+.vid video{display:block;width:100%;height:auto;aspect-ratio:16/9;border-radius:10px;border:1px solid var(--borde);background:var(--tinta)}
+.vid figcaption{margin-top:8px;font-size:13px;color:var(--gris)}
+.vid-play{position:absolute;inset:0;margin:auto;width:72px;height:72px;border-radius:50%;border:2px solid var(--ambar);background:var(--tinta);cursor:pointer;display:grid;place-items:center;padding:0}
+.vid-play span{width:0;height:0;border-style:solid;border-width:12px 0 12px 20px;border-color:transparent transparent transparent var(--ambar);margin-left:5px}
+.vid-play:focus-visible{outline:3px solid var(--papel);outline-offset:3px}
+.vid-play[hidden]{display:none}
 </style>
 <style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
@@ -239,6 +247,15 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
     <div class="ctas">
       <a class="btn primary" href="#hablamos">¿Cuánto perdéis al año? Lo vemos juntos</a>
     </div>
+    <figure class="vid">
+      <div class="vid-caja">
+        <video controls playsinline preload="none" width="1280" height="720" poster="video/video-dolor.jpg" data-fin="video/video-dolor-fin.jpg" aria-label="Vídeo sin sonido de 28 segundos. Lo vuestro es mejor y aun así cobráis como si no lo fuera: o bajáis el precio, o perdéis la venta contra alguien más barato, o la cerráis sin saber que podíais haber pedido más. Las tres salen de vuestro beneficio.">
+          <source src="video/video-dolor.mp4" type="video/mp4">
+        </video>
+        <button class="vid-play" type="button" aria-label="Reproducir el vídeo"><span aria-hidden="true"></span></button>
+      </div>
+      <figcaption>Vídeo de 28 segundos, sin sonido.</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -262,6 +279,15 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
     <h2>No es una formación. Lo construimos juntos.</h2>
     <p style="color:#C9D5DA;max-width:62ch">En una formación, alguien que no conoce vuestro negocio da una charla y el equipo escucha. Aquí yo guío y pongo el criterio, y vuestro equipo construye su propia venta sobre operaciones reales. Lo aprenden haciéndolo, y por eso se queda.</p>
     <p style="color:var(--papel);font-weight:600;max-width:62ch">Consultoría comercial con vuestro equipo y sobre vuestras ventas reales. Proyecto cerrado y precio fijo: ocho semanas de trabajo y tres meses de acompañamiento.</p>
+    <figure class="vid">
+      <div class="vid-caja">
+        <video controls playsinline preload="none" width="1280" height="720" poster="video/video-solucion.jpg" data-fin="video/video-solucion-fin.jpg" aria-label="Vídeo sin sonido de 38 segundos con los cuatro pasos del método: por qué os compran en euros, frente a su alternativa, todos lo cuentan igual y sostener el precio en la mesa. Los pasos están escritos justo debajo.">
+          <source src="video/video-solucion.mp4" type="video/mp4">
+        </video>
+        <button class="vid-play" type="button" aria-label="Reproducir el vídeo"><span aria-hidden="true"></span></button>
+      </div>
+      <figcaption>Vídeo de 38 segundos, sin sonido. Los cuatro pasos están escritos debajo.</figcaption>
+    </figure>
     <div class="metodo">
       <h3>El método, en cuatro pasos</h3>
       <div class="pasos-m">
@@ -438,6 +464,15 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
     <span class="label">¿Prefieres hacer la cuenta tú solo?</span>
     <h3 style="font-size:22px">Tres cifras y ves cuánto margen se os va al año.</h3>
     <p class="prose" style="max-width:56ch">La cuenta sale al momento y es gratis. Si además quieres mi lectura de si eso es mucho o poco, me dices quién eres y te la doy ahí mismo.</p>
+    <figure class="vid">
+      <div class="vid-caja">
+        <video controls playsinline preload="none" width="1280" height="720" poster="video/video-calculadora.jpg" data-fin="video/video-calculadora-fin.jpg" aria-label="Vídeo sin sonido de 26 segundos. Se rellenan en la calculadora tres cifras de ejemplo (5.000.000 euros de facturación, 30 por ciento de margen y 4 por ciento de descuento medio) y sale al momento el beneficio que se va al año.">
+          <source src="video/video-calculadora.mp4" type="video/mp4">
+        </video>
+        <button class="vid-play" type="button" aria-label="Reproducir el vídeo"><span aria-hidden="true"></span></button>
+      </div>
+      <figcaption>Vídeo de 26 segundos, sin sonido. Las cifras son de ejemplo.</figcaption>
+    </figure>
     <div style="margin-top:6px"><a class="btn dark" href="calculadora-margen.html">Hacer la cuenta</a></div>
   </div>
 </section>
@@ -542,6 +577,15 @@ function copiar(text, btn){
 $("#copiar-res").addEventListener("click", e => copiar($("#resumen").textContent, e.currentTarget));
 
 
+
+// Vídeos: botón de reproducir y, con movimiento reducido, la última escena fija como portada.
+document.querySelectorAll(".vid").forEach(f => {
+  const v = f.querySelector("video"), b = f.querySelector(".vid-play");
+  try { if (matchMedia("(prefers-reduced-motion: reduce)").matches) v.poster = v.dataset.fin; } catch(e){}
+  v.controls = false;
+  b.addEventListener("click", () => { v.controls = true; v.play(); });
+  v.addEventListener("play", () => { v.controls = true; b.hidden = true; });
+});
 </script>
 
 </body>
