@@ -57,6 +57,8 @@ a{color:inherit}
 .firma{display:flex;flex-direction:column;line-height:1.25}
 .firma b{font-size:16px;font-weight:700}
 .firma span{font-size:13px;color:var(--gris)}
+.marca{display:flex;align-items:center;gap:12px}
+.marca img{width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid var(--ambar);flex:none}
 .top a.mini{font-size:14px;font-weight:600;text-decoration:none;border-bottom:2px solid var(--ambar);padding-bottom:2px}
 
 /* Hero */
@@ -159,7 +161,7 @@ textarea{min-height:96px;resize:vertical}
 .yo{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:28px;align-items:end}
 .yo img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:8px;border-bottom:6px solid var(--ambar)}
 @media (max-width:560px){.yo{grid-template-columns:minmax(0,1fr)}.yo picture{max-width:240px}}
-.avatar{flex:none;align-self:flex-start;width:72px;height:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 25%;border:2px solid var(--borde)}
+.avatar{flex:none;align-self:flex-start;width:72px;height:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:2px solid var(--borde)}
 .noprom{display:flex;flex-direction:column;gap:8px;margin-top:8px;padding:20px;border:1px solid var(--borde);border-radius:8px}
 .noprom h3{color:var(--ambar)}
 .noprom p{color:#C9D5DA;max-width:62ch}
@@ -211,7 +213,7 @@ s.setAttribute("data-website-id","1c7607e6-4799-4255-bdee-e5a77d4e1a08");documen
 
 <header class="top">
   <div class="wrap">
-    <div class="firma"><b>Juan Abarca Ferrando</b><span>Venta B2B por valor</span></div>
+    <div class="marca"><img src="juan-abarca-mini.jpg" width="44" height="44" alt=""><div class="firma"><b>Juan Abarca Ferrando</b><span>Venta por valor</span></div></div>
   </div>
 </header>
 
