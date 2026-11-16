@@ -75,12 +75,6 @@ textarea{width:100%;min-height:78px;background:var(--panel);border:1px solid var
 .check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-weight:600}
 .check input{width:22px;height:22px;accent-color:var(--amber);margin:0;flex:0 0 22px}
 .note{font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px}
-.sheet{background:#f6f3ec;color:#13202a;border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;font-size:14px}
-.sheet h3{margin:0;font-size:19px;line-height:1.15}
-.sheet .row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #d9d3c4;padding-bottom:8px;font-variant-numeric:tabular-nums}
-.sheet .row.tot{border:0;font-weight:800;font-size:17px}
-.sheet .foot{font-size:11.5px;color:#56626b;border-top:2px solid #13202a;padding-top:10px}
-.sheet ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
 .sign{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
 .sign b{color:var(--fg)}
 .screen{display:flex;flex-direction:column;gap:20px}
@@ -99,7 +93,6 @@ textarea{width:100%;min-height:78px;background:var(--panel);border:1px solid var
 .abc button:focus-visible{outline:2px solid var(--fg)}
 .btn[disabled]{opacity:.4;cursor:not-allowed}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}}
-@media print{body{background:#fff}.wrap>*:not(#app),#app .screen>*:not(#sheet){display:none!important}#sheet{display:block!important}#sheet .note,#sheet .btn{display:none!important}}
 </style>
 </head>
 <body>
@@ -236,8 +229,6 @@ function render(){
         <p class="lead" style="margin:0;color:var(--fg)">Al final del evento la terminamos juntos. Si se te cierra, vuelve a escanear el QR y sigues donde lo dejaste.</p>
         <button class="btn" data-go="1">Ya es el final, seguir</button>
       </div>`:`<button class="btn" data-go="1">Y ahora, qué hago?</button>`}
-      <button class="btn ghost" style="flex:1" data-sheet>Ver mi hoja para el socio</button>
-      <div id="sheet" hidden></div>
     </div>`;
   }
   if(S.step===7){
@@ -256,8 +247,7 @@ function render(){
         <button class="btn" data-send>Enviar</button>
         <div class="note" id="sent" hidden></div>
       </div>
-      <div class="nav"><button class="btn ghost" data-go="-1">Volver a mi cifra</button><button class="btn ghost" style="flex:1" data-sheet>Ver mi hoja para el socio</button></div>
-      <div id="sheet" hidden></div>
+      <div class="nav"><button class="btn ghost" style="flex:1" data-go="-1">Volver a mi cifra</button></div>
     </div>`;
   }
   app.innerHTML = h;
@@ -265,21 +255,6 @@ function render(){
 }
 try{ const saved = JSON.parse(localStorage.getItem('calc-precio')||'null'); if(saved) Object.assign(S, saved); }catch(e){}
 function dots(){ return Array.from({length:10},(_,i)=>`<b class="${i<S.conDesc?'on':''}"></b>`).join(''); }
-function sheet(){
-  const c = calc();
-  return `<div class="sheet">
-    <h3>Lo que se nos va por el precio</h3>
-    <div>${S.empresa||'Mi empresa'} · ${new Date().toLocaleDateString('es-ES')}</div>
-    <div class="row"><span>Bajar el precio</span><b>${fmt(c.desc)}</b></div>
-    <div class="row"><span>Perder la venta</span><b>${fmt(c.perd)}</b></div>
-    <div class="row"><span>Regalar trabajo</span><b>${fmt(c.regalo)}</b></div>
-    <div class="row tot"><span>Pierdes al año, en beneficio</span><span>${fmt(c.total)}</span></div>
-    ${S.comp!==null?`<div><b>Mi compromiso para la próxima propuesta</b><br>${OPC.comp[S.comp][0]}. ${OPC.comp[S.comp][1]}</div>`:''}
-    ${S.subida>0?`<div>Además, con una subida del ${S.subida} %: ${fmt(c.subida)} más al año.</div>`:''}
-    <div class="foot">Ticket ${fmt(S.ticket)} · ${S.ventas} ventas al año · ${S.conDesc} de 10 con un ${S.desc} % · ${S.perdidas} clientes perdidos · ${S.margen} € limpios de cada 100 · ${S.horas} h al mes a ${fmt(S.hora)}<br>Juan Abarca · Venta por valor · juanabarca.es</div>
-  </div>
-  <button class="btn" style="margin-top:10px;display:block;width:100%;box-sizing:border-box" data-print>Guardar en PDF</button>`;
-}
 
 app.addEventListener('click', e=>{
   const t = e.target.closest('button');
@@ -304,8 +279,6 @@ app.addEventListener('click', e=>{
       t.textContent = ok ? 'Enviado' : 'Enviar'; if(!ok) delete t.dataset.busy; });
     return;
   }
-  if('print' in t.dataset){ window.print(); return; }
-  if('sheet' in t.dataset){ const s=document.getElementById('sheet'); s.innerHTML = sheet(); s.hidden=false; s.scrollIntoView({behavior:'smooth',block:'start'}); }
 });
 app.addEventListener('input', e=>{
   const el = e.target;
