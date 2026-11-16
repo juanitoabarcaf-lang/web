@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Tu cifra · Juan Abarca</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: una sola columna de móvil, un paso por pantalla, marca de Juan (azul noche + ámbar) */
+:root{
+  --bg:#13202a; --panel:#1a2a36; --line:#2a3c4a; --fg:#f2f4f5; --muted:#93a4b1;
+  --amber:#e8b44a; --amber-ink:#13202a; --soft:#22343f;
+  --display:"Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, Menlo, monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:16px;line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:20px 40px}
+.wrap{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.proto{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:10px;padding:8px 10px}
+.seg{display:flex;background:var(--soft);border-radius:8px;padding:3px}
+.seg button{all:unset;cursor:pointer;padding:5px 10px;border-radius:6px;font-size:12px;font-weight:600;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.seg button:focus-visible{outline:2px solid var(--amber)}
+.bar{height:4px;background:var(--soft);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--amber);transition:width .3s}
+.step-lbl{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--amber)}
+h1{font-size:30px;line-height:1.08;margin:0;font-weight:800;text-wrap:balance}
+h1 mark{background:var(--amber);color:var(--amber-ink);padding:0 4px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+h2{font-size:23px;line-height:1.15;margin:0;font-weight:800;text-wrap:balance}
+.lead{color:var(--muted);margin:0}
+.q{display:flex;flex-direction:column;gap:8px}
+.q label,.q .lbl{font-weight:600;font-size:17px}
+.q small{color:var(--muted);font-size:13px}
+.field{display:flex;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:0 14px}
+.field input{all:unset;flex:1;min-width:0;padding:14px 0;font-size:20px;font-weight:700;font-variant-numeric:tabular-nums}
+.field span{color:var(--muted);font-weight:600}
+.field:focus-within{border-color:var(--amber)}
+input.txt{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:13px 14px;color:var(--fg);font:inherit;font-size:16px}
+input.txt:focus,textarea:focus{outline:none;border-color:var(--amber)}
+textarea{width:100%;min-height:78px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;color:var(--fg);font:inherit;font-size:15px;resize:vertical}
+.stepper{display:flex;align-items:center;justify-content:space-between;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:6px}
+.stepper button{all:unset;cursor:pointer;width:46px;height:46px;border-radius:9px;background:var(--soft);text-align:center;font-size:24px;font-weight:700}
+.stepper button:focus-visible{outline:2px solid var(--amber)}
+.stepper output{font-size:26px;font-weight:800;font-variant-numeric:tabular-nums}
+.stepper output small{font-size:14px;color:var(--muted);font-weight:500}
+.dots{display:flex;gap:5px;justify-content:center}
+.dots b{width:100%;height:8px;border-radius:3px;background:var(--soft)}
+.dots b.on{background:var(--amber)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips button{all:unset;cursor:pointer;padding:11px 15px;border-radius:999px;border:1px solid var(--line);background:var(--panel);font-weight:700;font-variant-numeric:tabular-nums}
+.chips button[aria-pressed="true"]{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}
+.chips button:focus-visible{outline:2px solid var(--fg)}
+.nav{display:flex;gap:10px;margin-top:6px}
+.btn{all:unset;cursor:pointer;flex:1;text-align:center;padding:15px;border-radius:12px;font-weight:800;font-size:16px;background:var(--amber);color:var(--amber-ink)}
+.btn.ghost{flex:0 0 auto;padding:15px 18px;background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
+.privacy{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px}
+.privacy svg{flex:0 0 18px;margin-top:2px}
+.total{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:4px}
+.total .k{font-size:13px;color:var(--muted);font-weight:600}
+.total .v{font-size:44px;font-weight:800;color:var(--amber);font-variant-numeric:tabular-nums;line-height:1.05}
+.total .s{font-size:13px;color:var(--muted)}
+.leaks{display:flex;flex-direction:column;gap:14px}
+.leak{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:baseline}
+.leak b{font-size:15px}
+.leak em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums}
+.leak .track{grid-column:1/-1;height:8px;background:var(--soft);border-radius:4px;overflow:hidden}
+.leak .track i{display:block;height:100%;background:var(--amber);border-radius:4px}
+.leak small{grid-column:1/-1;color:var(--muted);font-size:12.5px}
+.box{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.check{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-weight:600}
+.check input{width:22px;height:22px;accent-color:var(--amber);margin:0;flex:0 0 22px}
+.note{font-size:12.5px;color:var(--muted);background:var(--soft);border-radius:10px;padding:10px 12px}
+.sheet{background:#f6f3ec;color:#13202a;border-radius:6px;padding:22px 20px;display:flex;flex-direction:column;gap:14px;font-size:14px}
+.sheet h3{margin:0;font-size:19px;line-height:1.15}
+.sheet .row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px solid #d9d3c4;padding-bottom:8px;font-variant-numeric:tabular-nums}
+.sheet .row.tot{border:0;font-weight:800;font-size:17px}
+.sheet .foot{font-size:11.5px;color:#56626b;border-top:2px solid #13202a;padding-top:10px}
+.sheet ol{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px}
+.sign{display:flex;flex-direction:column;gap:2px;font-size:13px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+.sign b{color:var(--fg)}
+.screen{display:flex;flex-direction:column;gap:20px}
+.chips.col{flex-direction:column}
+.chips.col button{border-radius:12px;text-align:left;font-weight:600}
+.comps{display:flex;flex-direction:column;gap:8px}
+.comps button{all:unset;cursor:pointer;display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--panel);font-size:15px;line-height:1.35}
+.comps button b{width:28px;height:28px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--amber)}
+.comps button[aria-pressed="true"]{border-color:var(--amber);background:var(--soft)}
+.comps button[aria-pressed="true"] b{background:var(--amber);color:var(--amber-ink)}
+.comps button:focus-visible{outline:2px solid var(--fg)}
+.leak.big b{color:var(--amber)}
+.abc{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.abc button{all:unset;cursor:pointer;text-align:center;padding:22px 0;border-radius:14px;border:1px solid var(--line);background:var(--panel);font-size:40px;font-weight:800}
+.abc button[aria-pressed="true"]{background:var(--amber);color:var(--amber-ink);border-color:var(--amber)}
+.abc button:focus-visible{outline:2px solid var(--fg)}
+.btn[disabled]{opacity:.4;cursor:not-allowed}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+@media print{body{background:#fff}.wrap>*:not(#app),#app .screen>*:not(#sheet){display:none!important}#sheet{display:block!important}#sheet .note,#sheet .btn{display:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="bar" aria-hidden="true"><i id="prog" style="width:0%"></i></div>
+  <main id="app"></main>
+  <div class="sign"><b>Juan Abarca</b>Venta por valor · juanabarca.es</div>
+</div>
+
+<script>
+const fmt = n => new Intl.NumberFormat('es-ES',{maximumFractionDigits:0}).format(Math.round(n)) + ' €';
+const S = {
+  mode:(/[?&]web/.test(location.search)?'web':'sala'), step:0,
+  nombre:'', empresa:'', equipo:1,
+  ticket:0, ventas:0,
+  conDesc:0, desc:10,
+  perdidas:0, margen:40,
+  horas:0, hora:0, subida:0,
+  porque:null, freno:null, comp:null, seguir:false, quiere:false, email:''
+};
+const STEPS = 8; // 0 portada, 1 venta, 2 bajar, 3 perder, 4 regalar, 5 por qué, 6 resultado, 7 compromiso (al final del evento)
+const app = document.getElementById('app');
+const FORMSPREE = "https://formspree.io/f/xvkkzjwl";
+function cifras(){ const c=calc(); return `Ticket ${S.ticket} € · ${S.ventas} ventas/año · ${S.conDesc}/10 con ${S.desc===30?'más del 25':S.desc} % · ${S.perdidas} clientes perdidos · ${S.margen} € limpios de 100 · ${S.horas} h/mes a ${S.hora} € · subida posible ${S.subida} % · TOTAL ${Math.round(c.total)} € (bajar ${Math.round(c.desc)}, perder ${Math.round(c.perd)}, regalar ${Math.round(c.regalo)})`; }
+async function enviar(momento){
+  const d = {
+    _subject: (momento==='final'?'Cifra 25N · final · ':'Cifra 25N · ')+(S.nombre||'sin nombre'),
+    origen: 'Calculadora cifra · '+S.mode, momento,
+    nombre:S.nombre, empresa:S.empresa, cuantos_venden:S.equipo,
+    por_que_bajo: S.porque!==null?OPC.porque[S.porque]:'',
+    que_le_frena: S.freno!==null?OPC.freno[S.freno]:'',
+    compromiso: S.comp!==null?OPC.comp[S.comp][0]:'',
+    escribirle_2_semanas: S.seguir?'Sí':'No', quiere_sesion: S.quiere?'Sí':'No',
+    contacto: S.email||'', cifras: S.quiere?cifras():''
+  };
+  try{ const r = await fetch(FORMSPREE,{method:'POST',mode:'cors',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(d)}); return r.ok; }catch(e){ return false; }
+}
+const OPC = {
+  porque:['El cliente me dijo que era caro','Me comparó con otro más barato','Me dio miedo perderlo','No tenía argumentos preparados','Otro motivo','Prefiero no contestar'],
+  freno:['No tengo tiempo','No sé por dónde empezar','Creo que es cosa del mercado','Creo que lo hago bien','Otro motivo'],
+  comp:[
+    ['A','Poner nombre y precio a lo que regalo, aunque lo deje a cero'],
+    ['B','No dar ningún descuento sin pedir algo a cambio: plazo, volumen, forma de pago o quitar algo'],
+    ['C','Antes de dar el precio, preguntar cuánto le cuesta al cliente no tenerme, y empezar la propuesta por esa cifra']
+  ]
+};
+
+function calc(){
+  const desc = S.ventas*(S.conDesc/10)*S.ticket*(S.desc/100);
+  const perd = S.perdidas*S.ticket*(S.margen/100);
+  const regalo = S.horas*12*S.hora;
+  const subida = S.ventas*S.ticket*(S.subida/100);
+  const fugas = [['Bajar el precio',desc],['Perder la venta',perd],['Regalar trabajo',regalo]];
+  const mayor = fugas.reduce((a,b)=>b[1]>a[1]?b:a)[0];
+  return {desc, perd, regalo, subida, mayor, total:desc+perd+regalo};
+}
+function pick(key){
+  return `<div class="chips col" role="group">${OPC[key].map((v,i)=>`<button data-pick="${key}" data-i="${i}" aria-pressed="${S[key]===i}">${v}</button>`).join('')}</div>`;
+}
+function chips(key, vals, suf){
+  return `<div class="chips" role="group">${vals.map(v=>`<button data-chip="${key}" data-v="${v}" aria-pressed="${S[key]===v}">${v}${suf}</button>`).join('')}</div>`;
+}
+function stepper(key, min, max, unit){
+  return `<div class="stepper"><button data-dec="${key}" data-min="${min}" aria-label="Menos">−</button><output id="o-${key}">${S[key]} <small>${unit}</small></output><button data-inc="${key}" data-max="${max}" aria-label="Más">+</button></div>`;
+}
+function money(key, id){
+  return `<div class="field"><input id="${id}" inputmode="numeric" data-num="${key}" value="${S[key]?new Intl.NumberFormat('es-ES').format(S[key]):''}" placeholder="${key==='ticket'?'Ej. 3.000':'Ej. 60'}"><span>€</span></div>`;
+}
+const nav = (back, next) => `<div class="nav">${back?'<button class="btn ghost" data-go="-1">Atrás</button>':''}<button class="btn" data-go="1">${next}</button></div>`;
+const lock = `<div class="privacy"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Tus cifras no salen de este móvil. Nadie las ve, ni Juan.</span></div>`;
+
+function render(){
+  document.getElementById('prog').style.width = (S.step/(STEPS-1)*100)+'%';
+  const sala = S.mode==='sala';
+  const lbl = n => `<div class="step-lbl">${n} de 4</div>`;
+  let h='';
+  if(S.step===0){
+    h = `<div class="screen">
+      <h1>Sé que debería cobrar más, <mark>pero acabo haciendo descuentos.</mark></h1>
+      <p class="lead">Pongamos en euros lo que se te va al año por cómo pones el precio. Siete minutos y cifras que te sabes de memoria.</p>
+      ${sala?`<div class="q"><label for="nombre">Tu nombre</label><input class="txt" id="nombre" data-txt="nombre" value="${S.nombre}" autocomplete="name"></div>
+      <div class="q"><label for="empresa">Tu empresa</label><input class="txt" id="empresa" data-txt="empresa" value="${S.empresa}" autocomplete="organization"></div>
+      <div class="q"><span class="lbl">Cuántos sois vendiendo, contándote a ti?</span>${stepper('equipo',1,50,S.equipo===1?'solo yo':'personas')}</div>`:''}
+      ${nav(false,'Empezar')}
+      ${lock}</div>`;
+  }
+  if(S.step===1){
+    h = `<div class="screen">${lbl(1)}<h2>Tu venta</h2>
+      <p class="lead">A ojo vale. No es Hacienda.</p>
+      <div class="q"><label for="ticket">Cuánto cobras de media por una venta?</label>${money('ticket','ticket')}</div>
+      <div class="q"><label for="ventas">Cuántas ventas haces al año?</label><div class="field"><input id="ventas" inputmode="numeric" data-num="ventas" value="${S.ventas||''}" placeholder="Ej. 40"><span>ventas</span></div></div>
+      ${nav(true,'Siguiente')}</div>`;
+  }
+  if(S.step===2){
+    h = `<div class="screen">${lbl(2)}<h2>Cuando bajas el precio</h2>
+      <div class="q"><span class="lbl">De cada 10 ventas, cuántas cierras con descuento?</span>${stepper('conDesc',0,10,'de 10')}<div class="dots" id="dots">${dots()}</div></div>
+      <div class="q"><span class="lbl">De cuánto es el descuento, más o menos?</span>${chips('desc',[5,10,15,20,25,30],' %').replace('>30 %<','>Más del 25 %<')}
+      <small>Cuenta también lo que metes gratis para cerrar.</small></div>
+      ${nav(true,'Siguiente')}</div>`;
+  }
+  if(S.step===3){
+    h = `<div class="screen">${lbl(3)}<h2>Cuando pierdes la venta</h2>
+      <div class="q"><span class="lbl">El último año, cuántos clientes acabaron eligiendo a un competidor más barato que tú?</span>${stepper('perdidas',0,100,'ventas')}</div>
+      <div class="q"><span class="lbl">De cada 100 € que cobras, cuánto te queda limpio?</span>${chips('margen',[20,30,40,50,60],' €')}</div>
+      ${nav(true,'Siguiente')}</div>`;
+  }
+  if(S.step===4){
+    h = `<div class="screen">${lbl(4)}<h2>Cuando regalas trabajo</h2>
+      <div class="q"><span class="lbl">Cuántas horas al mes trabajas sin cobrar?</span><small>Cambios, urgencias, una reunión de más, un "ya que estás".</small>${stepper('horas',0,200,'h al mes')}</div>
+      <div class="q"><label for="hora">Cuánto vale una hora tuya?</label>${money('hora','hora')}</div>
+      <div class="q"><span class="lbl">Cuánto podrías subir tus precios sin perder a casi nadie?</span>${chips('subida',[0,5,10,15,20],' %')}</div>
+      ${nav(true,'Siguiente')}</div>`;
+  }
+  if(S.step===5){
+    h = `<div class="screen"><div class="step-lbl">Una pregunta y ves tu cifra</div>
+      <h2>La última vez que bajaste el precio o perdiste una venta, por qué fue?</h2>
+      <p class="lead">Elige la que más se parezca. Esta respuesta sí le llega a Juan. Tus cifras, no.</p>
+      ${pick('porque')}
+      <div class="nav"><button class="btn ghost" data-go="-1">Atrás</button><button class="btn" data-go="1" ${S.porque===null?'disabled aria-disabled="true"':''}>Ver mi cifra</button></div></div>`;
+  }
+  if(S.step===6){
+    const c = calc(), max = Math.max(c.desc,c.perd,c.regalo,1);
+    const leak = (t,v,s)=>`<div class="leak${t===c.mayor?' big':''}"><b>${t}${t===c.mayor?' · tu fuga más grande':''}</b><em>${fmt(v)}</em><div class="track"><i style="width:${v/max*100}%"></i></div><small>${s}</small></div>`;
+    h = `<div class="screen">
+      <div class="total"><span class="k">${S.nombre?S.nombre+', pierdes':'Pierdes'} cada año</span><span class="v">${fmt(c.total)}</span><span class="s">Es beneficio, no facturación.</span></div>
+      <div class="leaks">
+        ${leak('Bajar el precio',c.desc,`${S.conDesc} de cada 10 ventas con un ${S.desc} % menos`)}
+        ${leak('Perder la venta',c.perd,`${S.perdidas} clientes al año que se fueron con otro más barato`)}
+        ${leak('Regalar trabajo',c.regalo,`${S.horas} horas al mes sin cobrar`)}
+      </div>
+      ${S.subida>0?`<p class="note">Y además, si subieras tus precios un ${S.subida} % como crees que podrías, serían ${fmt(c.subida)} más al año.</p>`:''}
+      ${sala?`<div class="box pause">
+        <div class="step-lbl">Deja esta pantalla abierta</div>
+        <p class="lead" style="margin:0;color:var(--fg)">Al final del evento la terminamos juntos. Si se te cierra, vuelve a escanear el QR y sigues donde lo dejaste.</p>
+        <button class="btn" data-go="1">Ya es el final, seguir</button>
+      </div>`:`<button class="btn" data-go="1">Y ahora, qué hago?</button>`}
+      <button class="btn ghost" style="flex:1" data-sheet>Ver mi hoja para el socio</button>
+      <div id="sheet" hidden></div>
+    </div>`;
+  }
+  if(S.step===7){
+    const conMarca = S.seguir||S.quiere;
+    const letra = S.comp!==null ? OPC.comp[S.comp][0] : null;
+    h = `<div class="screen"><div class="step-lbl">Tu compromiso</div>
+      <h2>En tu próxima propuesta, qué vas a hacer?</h2>
+      <p class="lead">Mira la pantalla. Ahí están las tres opciones.</p>
+      <div class="abc" role="group">${OPC.comp.map((v,i)=>`<button data-pick="comp" data-i="${i}" aria-pressed="${S.comp===i}" aria-label="Opción ${v[0]}">${v[0]}</button>`).join('')}</div>
+      <div class="q"><span class="lbl">Qué te puede frenar a hacerlo?</span>${pick('freno')}</div>
+      <div class="box">
+        <label class="check"><input type="checkbox" id="seguir" ${S.seguir?'checked':''}>Escríbeme en dos semanas para ver cómo me ha ido${letra?' con la '+letra:''}</label>
+        <label class="check"><input type="checkbox" id="quiere" ${S.quiere?'checked':''}><span>Quiero repasar mi cuenta con Juan. Una hora, sin coste.<br><small style="color:var(--muted);font-weight:500">Si la marcas, Juan recibe tus cifras para preparar la sesión. Solo él.</small></span></label>
+        ${conMarca?`${sala?'':`<div class="q"><label for="wnombre">Nombre</label><input class="txt" id="wnombre" data-txt="nombre" value="${S.nombre}" autocomplete="name"></div>`}
+        <div class="q"><label for="email">Móvil o email</label><input class="txt" id="email" data-txt="email" value="${S.email}" autocomplete="email"></div>`:''}
+        <button class="btn" data-send>Enviar</button>
+        <div class="note" id="sent" hidden></div>
+      </div>
+      <div class="nav"><button class="btn ghost" data-go="-1">Volver a mi cifra</button><button class="btn ghost" style="flex:1" data-sheet>Ver mi hoja para el socio</button></div>
+      <div id="sheet" hidden></div>
+    </div>`;
+  }
+  app.innerHTML = h;
+  try{ localStorage.setItem('calc-precio', JSON.stringify(S)); }catch(e){}
+}
+try{ const saved = JSON.parse(localStorage.getItem('calc-precio')||'null'); if(saved) Object.assign(S, saved); }catch(e){}
+function dots(){ return Array.from({length:10},(_,i)=>`<b class="${i<S.conDesc?'on':''}"></b>`).join(''); }
+function sheet(){
+  const c = calc();
+  return `<div class="sheet">
+    <h3>Lo que se nos va por el precio</h3>
+    <div>${S.empresa||'Mi empresa'} · ${new Date().toLocaleDateString('es-ES')}</div>
+    <div class="row"><span>Bajar el precio</span><b>${fmt(c.desc)}</b></div>
+    <div class="row"><span>Perder la venta</span><b>${fmt(c.perd)}</b></div>
+    <div class="row"><span>Regalar trabajo</span><b>${fmt(c.regalo)}</b></div>
+    <div class="row tot"><span>Pierdes al año, en beneficio</span><span>${fmt(c.total)}</span></div>
+    ${S.comp!==null?`<div><b>Mi compromiso para la próxima propuesta</b><br>${OPC.comp[S.comp][0]}. ${OPC.comp[S.comp][1]}</div>`:''}
+    ${S.subida>0?`<div>Además, con una subida del ${S.subida} %: ${fmt(c.subida)} más al año.</div>`:''}
+    <div class="foot">Ticket ${fmt(S.ticket)} · ${S.ventas} ventas al año · ${S.conDesc} de 10 con un ${S.desc} % · ${S.perdidas} clientes perdidos · ${S.margen} € limpios de cada 100 · ${S.horas} h al mes a ${fmt(S.hora)}<br>Juan Abarca · Venta por valor · juanabarca.es</div>
+  </div>
+  <button class="btn" style="margin-top:10px;display:block;width:100%;box-sizing:border-box" data-print>Guardar en PDF</button>`;
+}
+
+app.addEventListener('click', e=>{
+  const t = e.target.closest('button');
+  if(!t) return;
+  if(t.dataset.go && S.step===5 && +t.dataset.go===1 && !S.enviado1){ S.enviado1=true; enviar('cifra'); }
+  if(t.dataset.go){ S.step = Math.max(0, Math.min(STEPS-1, S.step + (+t.dataset.go))); render(); window.scrollTo({top:0}); return; }
+  if(t.disabled) return;
+  if(t.dataset.chip){ S[t.dataset.chip] = +t.dataset.v; render(); return; }
+  if(t.dataset.pick){ S[t.dataset.pick] = +t.dataset.i; const y=window.scrollY; render(); window.scrollTo({top:y}); return; }
+  if(t.dataset.inc||t.dataset.dec){
+    const k = t.dataset.inc||t.dataset.dec;
+    S[k] = t.dataset.inc ? Math.min(+t.dataset.max, S[k]+1) : Math.max(+t.dataset.min, S[k]-1);
+    const unit = k==='equipo' ? (S.equipo===1?'solo yo':'personas') : k==='conDesc'?'de 10':k==='perdidas'?'ventas':'h al mes';
+    document.getElementById('o-'+k).innerHTML = `${S[k]} <small>${unit}</small>`;
+    const d = document.getElementById('dots'); if(d) d.innerHTML = dots();
+    return;
+  }
+  if('send' in t.dataset){
+    if(t.dataset.busy) return; t.dataset.busy='1'; t.textContent='Enviando…';
+    enviar('final').then(ok=>{ const n=document.getElementById('sent'); n.hidden=false;
+      n.textContent = ok ? 'Enviado. Gracias. '+(S.seguir||S.quiere?'Juan te escribirá.':'') : 'No se ha podido enviar. Revisa la conexión y pulsa otra vez.';
+      t.textContent = ok ? 'Enviado' : 'Enviar'; if(!ok) delete t.dataset.busy; });
+    return;
+  }
+  if('print' in t.dataset){ window.print(); return; }
+  if('sheet' in t.dataset){ const s=document.getElementById('sheet'); s.innerHTML = sheet(); s.hidden=false; s.scrollIntoView({behavior:'smooth',block:'start'}); }
+});
+app.addEventListener('input', e=>{
+  const el = e.target;
+  if(el.dataset.num){ const v = parseInt(el.value.replace(/\D/g,''),10); S[el.dataset.num] = isNaN(v)?0:v; }
+  if(el.dataset.txt){ S[el.dataset.txt] = el.value; }
+});
+app.addEventListener('change', e=>{
+  if(e.target.id==='quiere'||e.target.id==='seguir'){ S[e.target.id] = e.target.checked; const y=window.scrollY; render(); window.scrollTo({top:y}); }
+});
+
+render();
+</script>
+</body>
+</html>
