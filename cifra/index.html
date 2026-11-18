@@ -175,40 +175,40 @@ function render(){
       <p class="lead">Pongamos en euros lo que se te va al año por cómo pones el precio. Siete minutos y cifras que te sabes de memoria.</p>
       ${sala?`<div class="q"><label for="nombre">Tu nombre</label><input class="txt" id="nombre" data-txt="nombre" value="${S.nombre}" autocomplete="name"></div>
       <div class="q"><label for="empresa">Tu empresa</label><input class="txt" id="empresa" data-txt="empresa" value="${S.empresa}" autocomplete="organization"></div>
-      <div class="q"><span class="lbl">Cuántos sois vendiendo, contándote a ti?</span>${stepper('equipo',1,50,S.equipo===1?'solo yo':'personas')}</div>`:''}
+      <div class="q"><span class="lbl">¿Cuántos sois vendiendo, contándote a ti?</span>${stepper('equipo',1,50,S.equipo===1?'solo yo':'personas')}</div>`:''}
       ${nav(false,'Empezar')}
       ${lock}</div>`;
   }
   if(S.step===1){
     h = `<div class="screen">${lbl(1)}<h2>Tu venta</h2>
       <p class="lead">A ojo vale. No es Hacienda.</p>
-      <div class="q"><label for="ticket">Cuánto cobras de media por una venta?</label>${money('ticket','ticket')}</div>
-      <div class="q"><label for="ventas">Cuántas ventas haces al año?</label><div class="field"><input id="ventas" inputmode="numeric" data-num="ventas" value="${S.ventas||''}" placeholder="Ej. 40"><span>ventas</span></div></div>
+      <div class="q"><label for="ticket">¿Cuánto cobras de media por una venta?</label>${money('ticket','ticket')}</div>
+      <div class="q"><label for="ventas">¿Cuántas ventas haces al año?</label><div class="field"><input id="ventas" inputmode="numeric" data-num="ventas" value="${S.ventas||''}" placeholder="Ej. 40"><span>ventas</span></div></div>
       ${nav(true,'Siguiente')}</div>`;
   }
   if(S.step===2){
     h = `<div class="screen">${lbl(2)}<h2>Cuando bajas el precio</h2>
-      <div class="q"><span class="lbl">De cada 10 ventas, cuántas cierras con descuento?</span>${stepper('conDesc',0,10,'de 10')}<div class="dots" id="dots">${dots()}</div></div>
-      <div class="q"><span class="lbl">De cuánto es el descuento, más o menos?</span>${chips('desc',[5,10,15,20,25,30],' %').replace('>30 %<','>Más del 25 %<')}
+      <div class="q"><span class="lbl">De cada 10 ventas, ¿cuántas cierras con descuento?</span>${stepper('conDesc',0,10,'de 10')}<div class="dots" id="dots">${dots()}</div></div>
+      <div class="q"><span class="lbl">¿De cuánto es el descuento, más o menos?</span>${chips('desc',[5,10,15,20,25,30],' %').replace('>30 %<','>Más del 25 %<')}
       <small>Cuenta también lo que metes gratis para cerrar.</small></div>
       ${nav(true,'Siguiente')}</div>`;
   }
   if(S.step===3){
     h = `<div class="screen">${lbl(3)}<h2>Cuando pierdes la venta</h2>
-      <div class="q"><span class="lbl">El último año, cuántos clientes acabaron eligiendo a un competidor más barato que tú?</span>${stepper('perdidas',0,100,'ventas')}</div>
-      <div class="q"><span class="lbl">De cada 100 € que cobras, cuánto te queda limpio?</span>${chips('margen',[20,30,40,50,60],' €')}</div>
+      <div class="q"><span class="lbl">El último año, ¿cuántos clientes acabaron eligiendo a un competidor más barato que tú?</span>${stepper('perdidas',0,100,'ventas')}</div>
+      <div class="q"><span class="lbl">De cada 100 € que cobras, ¿cuánto te queda limpio?</span>${chips('margen',[20,30,40,50,60],' €')}</div>
       ${nav(true,'Siguiente')}</div>`;
   }
   if(S.step===4){
     h = `<div class="screen">${lbl(4)}<h2>Cuando regalas trabajo</h2>
-      <div class="q"><span class="lbl">Cuántas horas al mes trabajas sin cobrar?</span><small>Cambios, urgencias, una reunión de más, un "ya que estás".</small>${stepper('horas',0,200,'h al mes')}</div>
-      <div class="q"><label for="hora">Cuánto vale una hora tuya?</label>${money('hora','hora')}</div>
-      <div class="q"><span class="lbl">Cuánto podrías subir tus precios sin perder a casi nadie?</span>${chips('subida',[0,5,10,15,20],' %')}</div>
+      <div class="q"><span class="lbl">¿Cuántas horas al mes trabajas sin cobrar?</span><small>Cambios, urgencias, una reunión de más, un "ya que estás".</small>${stepper('horas',0,200,'h al mes')}</div>
+      <div class="q"><label for="hora">¿Cuánto vale una hora tuya?</label>${money('hora','hora')}</div>
+      <div class="q"><span class="lbl">¿Cuánto podrías subir tus precios sin perder a casi nadie?</span>${chips('subida',[0,5,10,15,20],' %')}</div>
       ${nav(true,'Siguiente')}</div>`;
   }
   if(S.step===5){
     h = `<div class="screen"><div class="step-lbl">Una pregunta y ves tu cifra</div>
-      <h2>La última vez que bajaste el precio o perdiste una venta, por qué fue?</h2>
+      <h2>La última vez que bajaste el precio o perdiste una venta, ¿por qué fue?</h2>
       <p class="lead">Elige la que más se parezca. Esta respuesta sí le llega a Juan. Tus cifras, no.</p>
       ${pick('porque')}
       <div class="nav"><button class="btn ghost" data-go="-1">Atrás</button><button class="btn" data-go="1" ${S.porque===null?'disabled aria-disabled="true"':''}>Ver mi cifra</button></div></div>`;
@@ -228,17 +228,17 @@ function render(){
         <div class="step-lbl">Deja esta pantalla abierta</div>
         <p class="lead" style="margin:0;color:var(--fg)">Al final del evento la terminamos juntos. Si se te cierra, vuelve a escanear el QR y sigues donde lo dejaste.</p>
         <button class="btn" data-go="1">Ya es el final, seguir</button>
-      </div>`:`<button class="btn" data-go="1">Y ahora, qué hago?</button>`}
+      </div>`:`<button class="btn" data-go="1">Y ahora, ¿qué hago?</button>`}
     </div>`;
   }
   if(S.step===7){
     const conMarca = S.seguir||S.quiere;
     const letra = S.comp!==null ? OPC.comp[S.comp][0] : null;
     h = `<div class="screen"><div class="step-lbl">Tu compromiso</div>
-      <h2>En tu próxima propuesta, qué vas a hacer?</h2>
+      <h2>En tu próxima propuesta, ¿qué vas a hacer?</h2>
       <p class="lead">Mira la pantalla. Ahí están las tres opciones.</p>
       <div class="abc" role="group">${OPC.comp.map((v,i)=>`<button data-pick="comp" data-i="${i}" aria-pressed="${S.comp===i}" aria-label="Opción ${v[0]}">${v[0]}</button>`).join('')}</div>
-      <div class="q"><span class="lbl">Qué te puede frenar a hacerlo?</span>${pick('freno')}</div>
+      <div class="q"><span class="lbl">¿Qué te puede frenar a hacerlo?</span>${pick('freno')}</div>
       <div class="box">
         <label class="check"><input type="checkbox" id="seguir" ${S.seguir?'checked':''}>Escríbeme en dos semanas para ver cómo me ha ido${letra?' con la '+letra:''}</label>
         <label class="check"><input type="checkbox" id="quiere" ${S.quiere?'checked':''}><span>Quiero repasar mi cuenta con Juan. Una hora, sin coste.<br><small style="color:var(--muted);font-weight:500">Si la marcas, Juan recibe tus cifras para preparar la sesión. Solo él.</small></span></label>
